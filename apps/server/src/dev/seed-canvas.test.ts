@@ -19,6 +19,7 @@ import {
   type ReviewNote,
   relativeTime,
   type SeriesResponse,
+  setHomeCurrencySymbol,
   statusDetail,
 } from '@studio/shared';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
@@ -247,6 +248,47 @@ describe('the canvas seed server', () => {
     // Its temp folder is its own and goes away with it.
     await expect(readFile(join(empty.dir, 'canvas.db'))).resolves.toBeDefined();
   });
+});
+
+describe('the demo (--demo, `pnpm demo`)', () => {
+  it('serves every mock set at once, on dates near today, with every page answering', async () => {
+    const server = await startCanvasServer({ demo: true });
+    try {
+      const get = async (path: string) => {
+        const answer = await fetch(`${server.url}${path}`);
+        expect(answer.status, path).toBe(200);
+        return answer.json();
+      };
+      const jobs = (await get('/api/jobs')) as Job[];
+      for (const id of ['j2', 'p4', 'm5', 'gn-pinewood', 'ig-granite']) {
+        expect(jobs.map((job) => job.id)).toContain(id);
+      }
+      // The Instagram set follows the last Monday, the others the clock: none is far from today.
+      const newest = (name: string) => jobs.find((job) => job.name === name)?.addedAt ?? '';
+      expect(Date.now() - Date.parse(newest('Granite'))).toBeLessThan(14 * 86_400_000);
+      expect(Date.now() - Date.parse(newest('Coach intro reel'))).toBeLessThan(86_400_000);
+
+      const health = (await get('/api/health')) as { currencySymbol?: string; instagram?: boolean };
+      expect(health).toMatchObject({ currencySymbol: '$', instagram: true });
+      const money = (await get('/api/money')) as { subscriptions: unknown[] };
+      expect(money.subscriptions).toHaveLength(3);
+      for (const path of [
+        '/api/clients',
+        '/api/analytics',
+        '/api/graphics',
+        '/api/luts',
+        '/api/fonts',
+        '/api/settings',
+        '/api/team',
+      ]) {
+        await get(path);
+      }
+      expect(await get('/api/clients')).toHaveLength(new Set(jobs.map((job) => job.client)).size);
+    } finally {
+      await server.stop();
+      setHomeCurrencySymbol('₪');
+    }
+  }, 30_000);
 });
 
 describe('the Phase 3 rows (--review)', () => {

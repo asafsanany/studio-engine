@@ -7,6 +7,7 @@
 //   pnpm seed:canvas                         # real clock: ages are relative to now
 //   pnpm seed:canvas --now canvas            # clock pinned to the canvas's "Tue 20 Oct 2026, 13:42" (UTC)
 //   pnpm seed:canvas --port 4390 --dir /tmp/canvas-seed
+//   pnpm seed:canvas --demo                  # every mock set at once on today's dates (`pnpm demo`)
 //   pnpm seed:canvas --empty                 # no jobs: the "Jobs · empty" board
 //   pnpm seed:canvas --review                # the Phase 3 rows: two jobs in Review with playable previews, a revise and a render run
 //   pnpm seed:canvas --series                # the Series boards: a client with two series, their episodes and series.md, Series on
@@ -164,7 +165,7 @@ import type {
   RunKind,
   StepId,
 } from '@studio/shared';
-import { DRAFT_PENDING_BRIEF_SUMMARY } from '@studio/shared';
+import { DRAFT_PENDING_BRIEF_SUMMARY, setHomeCurrencySymbol } from '@studio/shared';
 import { readLimits } from '../analytics/limits-log.js';
 import { NoteTopicStore } from '../analytics/note-topics.js';
 import { createApp, type GraphicsApiOptions, type LutsApiOptions } from '../app.js';
@@ -191,6 +192,7 @@ import {
 } from '../db/index.js';
 import { type StoredJob, storedToColumns } from '../db/mapping.js';
 import { deliveries, jobs } from '../db/schema.js';
+import { createRecordDelivery } from '../deliveries/deliveries.js';
 import { createEventBus, type EventBus } from '../events/bus.js';
 import { followQueuePlaces } from '../events/queue-places.js';
 import { FeedService } from '../feed/feed-service.js';
@@ -203,6 +205,7 @@ import { GraphicFolders } from '../graphics/graphic-folders.js';
 import { createGraphicService } from '../graphics/graphic-service.js';
 import { GraphicWorker } from '../graphics/graphic-worker.js';
 import { clientIdFor } from '../inbox/scan.js';
+import { BOARD_ANCHOR } from '../instagram/sample-accounts.js';
 import { createFakeLutPreviews } from '../luts/fake-lut-previews.js';
 import { createBuiltInLuts } from '../luts/lut-builtin.js';
 import { createRealLutPreviews } from '../luts/lut-previews.js';
@@ -220,6 +223,12 @@ import { createReviewService } from '../review/review-service.js';
 import type { ActionWorker } from '../routes/jobs.js';
 import { readUsageLog } from '../usage/usage-log.js';
 import { buildAnalyticsSeed, writeAnalyticsSeed } from './seed-analytics.js';
+import {
+  createDemoMoney,
+  createDemoSettings,
+  createDemoTeam,
+  lastScanMonday,
+} from './seed-demo.js';
 import { seedFontRequests, seedFonts } from './seed-fonts.js';
 import { GENERATE_JOB_SPECS, seedGenerate } from './seed-generate.js';
 import { seedGraphics } from './seed-graphics.js';
@@ -1057,6 +1066,12 @@ export interface CanvasServerOptions {
   /** Start with no jobs at all (the "Jobs · empty" board). */
   empty?: boolean;
   /**
+   * `pnpm demo`: every mock set at once, on today's dates: the Jobs rows, Review, Series, Generate,
+   * Analytics, Clients × Instagram, Graphics, LUTs, Fonts and Money. No key, no footage, nothing
+   * reaches the network.
+   */
+  demo?: boolean;
+  /**
    * Seed the Phase 3 rows ({@link REVIEW_JOB_SPECS}) instead of the twelve, with a playable
    * preview for each job in Review.
    */
@@ -1230,7 +1245,30 @@ function ffmpegRuns(): boolean {
   return spawnSync('ffmpeg', ['-version'], { stdio: 'ignore' }).status === 0;
 }
 
-export async function startCanvasServer(options: CanvasServerOptions = {}): Promise<CanvasServer> {
+/** A job's folder as the database compares it: two jobs of one folder cannot both be seeded. */
+const folderKey = (job: { client: string; name: string }): string =>
+  `${job.client}/${job.name}`.toLowerCase();
+
+/**
+ * `--demo`: the rows whose times follow the clock (the Instagram ones follow the last scan). The
+ * boards reuse a few folders: the first set to name one keeps it, Generate and Series first because
+ * their seeds look their jobs up by id.
+ */
+const DEMO_JOB_SPECS: readonly CanvasJobSpec[] = (() => {
+  const byFolder = new Map<string, CanvasJobSpec>();
+  for (const spec of [
+    ...GENERATE_JOB_SPECS,
+    ...SERIES_JOB_SPECS,
+    ...REVIEW_JOB_SPECS,
+    ...CANVAS_JOB_SPECS,
+  ]) {
+    if (!byFolder.has(folderKey(spec))) byFolder.set(folderKey(spec), spec);
+  }
+  return [...byFolder.values()];
+})();
+
+/** The row sets are drawn for one board each: only `--demo` takes them together. */
+function assertOneRowSet(options: CanvasServerOptions): void {
   const seeded = [options.review, options.series, options.sheet].filter(Boolean).length;
   if (seeded > 1) {
     throw new Error('--review, --series and --sheet seed different rows: pass one of them.');
@@ -1301,6 +1339,23 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
       '--instagram seeds its own rows: do not pass --series, --review, --sheet, --analytics, --music, --songs, --quick-fixes, --generate or --chat with it.',
     );
   }
+}
+
+export async function startCanvasServer(input: CanvasServerOptions = {}): Promise<CanvasServer> {
+  const options: CanvasServerOptions = input.demo
+    ? {
+        ...input,
+        series: true,
+        analytics: true,
+        instagram: true,
+        generate: true,
+        graphics: true,
+        luts: true,
+        fonts: true,
+        phone: true,
+      }
+    : input;
+  if (!options.demo) assertOneRowSet(options);
   const ownsDir = options.dir === undefined;
   const dir = options.dir ?? (await mkdtemp(join(tmpdir(), 'studio-canvas-seed-')));
   await mkdir(dir, { recursive: true });
@@ -1309,15 +1364,17 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
   // The Job sheet boards are drawn on their own day, which is where the clock starts without --now.
   const now =
     options.now ??
-    (options.sheet
-      ? 'sheet'
-      : options.music
-        ? 'music'
-        : options.songs
-          ? 'songs'
-          : options.instagram
-            ? 'instagram'
-            : undefined);
+    (options.demo
+      ? 'now'
+      : options.sheet
+        ? 'sheet'
+        : options.music
+          ? 'music'
+          : options.songs
+            ? 'songs'
+            : options.instagram
+              ? 'instagram'
+              : undefined);
   const nowAt =
     now === undefined || now === 'now'
       ? realStart
@@ -1338,15 +1395,17 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
   const shiftMs =
     nowAt -
     Date.parse(
-      options.sheet
-        ? SHEET_NOW
-        : options.music
-          ? MUSIC_NOW
-          : options.songs
-            ? SONGS_NOW
-            : options.instagram
-              ? INSTAGRAM_NOW
-              : CANVAS_NOW,
+      options.demo
+        ? CANVAS_NOW
+        : options.sheet
+          ? SHEET_NOW
+          : options.music
+            ? MUSIC_NOW
+            : options.songs
+              ? SONGS_NOW
+              : options.instagram
+                ? INSTAGRAM_NOW
+                : CANVAS_NOW,
     );
   // The server's clock starts at `nowAt` and keeps running, so a Hold or a Retry is stamped in the
   // same "today" as the jobs, even when the clock is pinned to the canvas's moment.
@@ -1355,29 +1414,40 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
   const db = openDatabase(join(dir, 'canvas.db'));
   const exportsDir = join(dir, 'exports');
   const inboxPath = join(dir, 'inbox');
-  const specs: readonly CanvasJobSpec[] = options.analytics
-    ? []
-    : options.review
-      ? REVIEW_JOB_SPECS
-      : options.series
-        ? SERIES_JOB_SPECS
-        : options.sheet
-          ? SHEET_JOB_SPECS
-          : options.music
-            ? MUSIC_JOB_SPECS
-            : options.songs
-              ? SONGS_JOB_SPECS
-              : options.quickFixes
-                ? QUICK_FIX_JOB_SPECS
-                : options.generate
-                  ? GENERATE_JOB_SPECS
-                  : options.chat
-                    ? CHAT_JOB_SPECS
-                    : options.instagram
-                      ? INSTAGRAM_JOB_SPECS
-                      : CANVAS_JOB_SPECS;
+  // --demo: the Instagram jobs' dates go with the scans', on the last Monday; the others with the clock.
+  const demoAnchor = lastScanMonday(nowAt);
+  const demoMoney = options.demo ? createDemoMoney(dir, nowAt) : null;
+  if (options.demo) setHomeCurrencySymbol('$');
+  const specs: readonly CanvasJobSpec[] = options.demo
+    ? [...DEMO_JOB_SPECS, ...INSTAGRAM_JOB_SPECS]
+    : options.analytics
+      ? []
+      : options.review
+        ? REVIEW_JOB_SPECS
+        : options.series
+          ? SERIES_JOB_SPECS
+          : options.sheet
+            ? SHEET_JOB_SPECS
+            : options.music
+              ? MUSIC_JOB_SPECS
+              : options.songs
+                ? SONGS_JOB_SPECS
+                : options.quickFixes
+                  ? QUICK_FIX_JOB_SPECS
+                  : options.generate
+                    ? GENERATE_JOB_SPECS
+                    : options.chat
+                      ? CHAT_JOB_SPECS
+                      : options.instagram
+                        ? INSTAGRAM_JOB_SPECS
+                        : CANVAS_JOB_SPECS;
   if (!options.empty) {
-    seedCanvasJobs(db, shiftMs, specs);
+    if (options.demo) {
+      seedCanvasJobs(db, shiftMs, DEMO_JOB_SPECS);
+      seedCanvasJobs(db, demoAnchor - Date.parse(BOARD_ANCHOR), INSTAGRAM_JOB_SPECS);
+    } else {
+      seedCanvasJobs(db, shiftMs, specs);
+    }
     await writeCanvasExports(exportsDir, specs);
     await writeReviewPreviews(inboxPath, specs);
     if (options.sheet) {
@@ -1392,7 +1462,12 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
         await mkdir(join(inboxPath, spec.client, spec.name), { recursive: true });
     }
     if (options.analytics) {
-      await writeAnalyticsSeed(db, dir, exportsDir, buildAnalyticsSeed(nowAt));
+      const seed = buildAnalyticsSeed(nowAt);
+      const taken = new Set(specs.map(folderKey));
+      await writeAnalyticsSeed(db, dir, exportsDir, {
+        ...seed,
+        jobs: seed.jobs.filter((job) => !taken.has(folderKey(job))),
+      });
     }
     if (options.chat) await writeChatLogs(dir, options.chatLog ?? DEFAULT_CHAT_LOG);
     if (options.songs) {
@@ -1441,6 +1516,19 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
         clock,
         scanSeconds: options.scanSeconds,
         empty: options.empty,
+        ...(options.demo
+          ? {
+              anchor: demoAnchor,
+              moreClients: repository.getAll().map((job) => job.client),
+              recordDelivery: createRecordDelivery({
+                deliveries: new DeliveryRepository(db),
+                jobs: repository,
+                priceFor: demoMoney?.priceFor ?? (() => ({ price: 0, currency: 'ILS' })),
+                clock,
+                onRecorded: () => bus.publish({ type: 'money.changed' }),
+              }),
+            }
+          : {}),
       })
     : null;
   // The review notes, as the engine builds them (engine.ts): a voice note gets the fake transcript
@@ -1862,6 +1950,29 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
         }
       : {}),
     ...(analyticsRoutes === undefined ? {} : { analytics: true, analyticsRoutes }),
+    ...(demoMoney === null
+      ? {}
+      : {
+          currencySymbol: '$',
+          settingsRoutes: { settings: createDemoSettings(dir), restart: null },
+          ...(instagramSeed === null
+            ? {}
+            : {
+                teamRoutes: {
+                  team: createDemoTeam(dir),
+                  clients: instagramSeed.instagramRoutes.clients,
+                  onChanged: () => bus.publish({ type: 'access.changed' }),
+                },
+              }),
+          money: {
+            deliveries: new DeliveryRepository(db),
+            jobs: repository,
+            money: demoMoney.loader,
+            clock,
+            archivedJobIds: () => repository.archivedIds(),
+            priceFor: demoMoney.priceFor,
+          },
+        }),
     ...(graphicsApi === undefined
       ? {}
       : { graphics: true, graphicsInEdits: true, graphicsRoutes: graphicsApi }),
@@ -1915,6 +2026,7 @@ export async function startCanvasServer(options: CanvasServerOptions = {}): Prom
     bus,
     finder,
     stop: async () => {
+      demoMoney?.loader.close();
       await instagramSeed?.queue.stop();
       stopNoSongListening?.();
       await noSong?.stop();
@@ -1947,6 +2059,7 @@ async function main(): Promise<void> {
       dir: { type: 'string' },
       'web-dist': { type: 'string' },
       empty: { type: 'boolean' },
+      demo: { type: 'boolean' },
       review: { type: 'boolean' },
       series: { type: 'boolean' },
       sheet: { type: 'boolean' },
@@ -1980,6 +2093,7 @@ async function main(): Promise<void> {
     dir: values.dir,
     webDist: values['web-dist'],
     empty: values.empty,
+    demo: values.demo,
     review: values.review,
     series: values.series,
     sheet: values.sheet,
@@ -2009,7 +2123,11 @@ async function main(): Promise<void> {
     instagram: values.instagram,
     scanSeconds: values['scan-seconds'] === undefined ? undefined : Number(values['scan-seconds']),
   });
-  console.log(`Canvas seed: ${server.url}  (data in ${server.dir}; Ctrl+C to stop and clean up)`);
+  console.log(
+    values.demo
+      ? `Studio Engine demo: ${server.url}  (made-up data, no keys needed; Ctrl+C to stop and clean up)`
+      : `Canvas seed: ${server.url}  (data in ${server.dir}; Ctrl+C to stop and clean up)`,
+  );
 
   const stop = (): void => {
     server

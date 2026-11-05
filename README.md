@@ -7,15 +7,18 @@ Studio Engine is a local app that watches `~/Studio Inbox/<Client>/<Job>` folder
 - Node 22 (see `.nvmrc`)
 - pnpm (the exact version is pinned in `package.json`; `corepack enable` picks it up)
 
-## Look around first
+## This is the demo branch
 
-The `demo` branch runs the whole app on made-up data, with no keys and no footage. See its README:
+Everything here runs on made-up data: invented clients, jobs, reels and money. It needs no API keys, no footage and no Claude login, and nothing reaches the network.
 
 ```bash
-git switch demo
 pnpm i
 pnpm demo
 ```
+
+Then open <http://127.0.0.1:4320>. Every page has something to look at: Jobs in every state, Review with a playable preview, Clients with Instagram numbers, Graphics, LUTs, Fonts, Money, Analytics, Settings and Team. Below 768 px wide you get the phone version.
+
+The data is made fresh in a temp folder at each start and removed when you press Ctrl+C. Nothing edits for real: a job you approve or send notes on stays queued, because no editor runs. To use the real thing, switch to `main` and follow Getting started.
 
 ## Getting started
 

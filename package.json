@@ -25,6 +25,7 @@
     "agent:restart": "launchctl kickstart -k gui/$(id -u)/com.studio-engine.server",
     "color-grade": "bash scripts/color-grade/run.sh",
     "color-grade:install": "bash scripts/color-grade/install.sh",
+    "demo": "VITE_DEMO=1 pnpm --filter @studio/web build && pnpm --filter @studio/server seed:canvas -- --demo --port 4320",
     "seed:canvas": "pnpm --filter @studio/server seed:canvas --"
   },
   "devDependencies": {

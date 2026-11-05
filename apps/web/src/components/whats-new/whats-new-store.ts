@@ -109,9 +109,10 @@ function newestFirst(releases: readonly Release[]): Release[] {
 export function createWhatsNewStore(options: WhatsNewOptions = {}) {
   const { storage = browserStorage(), releases = RELEASES, currentVersion = APP_VERSION } = options;
 
-  const unseen = newestFirst(
-    releasesToShow(releases, readLastSeenVersion(storage), currentVersion),
-  );
+  // `pnpm demo` builds with VITE_DEMO: a first look has no earlier version to catch up from.
+  const unseen = import.meta.env.VITE_DEMO
+    ? []
+    : newestFirst(releasesToShow(releases, readLastSeenVersion(storage), currentVersion));
   if (unseen.length === 0) rememberVersion(storage, currentVersion);
 
   return createStore<WhatsNewStore>()((set, get) => ({

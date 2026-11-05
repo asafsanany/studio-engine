@@ -101,10 +101,6 @@ function job(
   };
 }
 
-/** The Monday 06:00 UTC of the `week`th weekly scan of the board (0 is 3 Aug, 12 is 26 Oct). */
-const mondayOf = (week: number): number =>
-  Date.parse(BOARD_ANCHOR) - (FALCON_HISTORY_SCANS - 1 - week) * WEEK_MS;
-
 export interface InstagramSeedOptions {
   db: StudioDb;
   /** The seed's folder: the pictures go to <dir>/instagram/photos/. */
@@ -119,6 +115,12 @@ export interface InstagramSeedOptions {
   scanSeconds?: number;
   /** Seed no account and no link: the switch on with nothing read (`--empty`). */
   empty?: boolean;
+  /** The Monday 06:00 UTC of the last weekly scan. Default: the boards' (`BOARD_ANCHOR`). */
+  anchor?: number;
+  /** More client folders, for jobs seeded beside the Instagram ones (`--demo`). */
+  moreClients?: readonly string[];
+  /** What Mark delivered does. Default: nothing, the delivered jobs are there already. */
+  recordDelivery?: DeliveryRouteOptions['recordDelivery'];
 }
 
 /** What the app needs besides the jobs: the route options and the repository the job sheet reads. */
@@ -139,6 +141,9 @@ export interface InstagramSeed {
 export async function createInstagramSeed(options: InstagramSeedOptions): Promise<InstagramSeed> {
   const { db, dir, inboxPath, exportsDir, jobs, bus, clock } = options;
   const timeZone = 'UTC';
+  const anchor = options.anchor ?? Date.parse(BOARD_ANCHOR);
+  /** The Monday 06:00 UTC of the `week`th weekly scan (on the board 0 is 3 Aug, 12 is 26 Oct). */
+  const mondayOf = (week: number): number => anchor - (FALCON_HISTORY_SCANS - 1 - week) * WEEK_MS;
 
   // The history is written at the boards' Mondays, so the repository and the scanner follow `at`
   // until it is done and the seed's own clock after.
@@ -150,11 +155,13 @@ export async function createInstagramSeed(options: InstagramSeedOptions): Promis
     instagram: repo,
     dataDir: dir,
     clock: seedClock,
-    fixtures: sampleInstagramFixtures({ anchor: new Date(BOARD_ANCHOR), history: true }),
+    fixtures: sampleInstagramFixtures({ anchor: new Date(anchor), history: true }),
     delayMs: () => (seeding ? 0 : Math.round((options.scanSeconds ?? 4) * 1000)),
   });
 
-  const clients = [FALCON, FLAKY, PRIVATE_CLIENT, NO_ACCOUNT];
+  const clients = [
+    ...new Set([FALCON, FLAKY, PRIVATE_CLIENT, NO_ACCOUNT, ...(options.moreClients ?? [])]),
+  ];
   const folders = new ClientFolders(bus);
   folders.seed(clients);
   for (const client of clients) await mkdir(join(inboxPath, client), { recursive: true });
@@ -169,7 +176,13 @@ export async function createInstagramSeed(options: InstagramSeedOptions): Promis
     };
 
     // Falcon FPV: the board's sample, weekly since 3 Aug.
-    account(FALCON, 'falcon.fpv', '2026-08-01', mondayOf(0) - 3_600_000);
+    const since = anchor - (Date.parse(BOARD_ANCHOR) - Date.parse('2026-08-01'));
+    account(
+      FALCON,
+      'falcon.fpv',
+      new Date(since).toISOString().slice(0, 10),
+      mondayOf(0) - 3_600_000,
+    );
     for (let week = 0; week < FALCON_HISTORY_SCANS; week += 1) {
       await scan(FALCON, 'falcon.fpv', mondayOf(week));
     }
@@ -182,7 +195,7 @@ export async function createInstagramSeed(options: InstagramSeedOptions): Promis
     await scan(PRIVATE_CLIENT, 'venezia.studio', mondayOf(FALCON_HISTORY_SCANS - 1));
 
     // Two of Falcon's delivered videos are linked to the reels they became, by hand as on the board.
-    at = Date.parse(INSTAGRAM_NOW) - 3_600_000;
+    at = anchor + (Date.parse(INSTAGRAM_NOW) - Date.parse(BOARD_ANCHOR)) - 3_600_000;
     const falcon = clientIdFor(FALCON);
     const reelOf = (caption: string) => {
       const reel = repo.listReels(falcon).find((candidate) => candidate.caption === caption);
@@ -240,8 +253,8 @@ export async function createInstagramSeed(options: InstagramSeedOptions): Promis
     delivery: {
       jobs,
       deliveries: new DeliveryRepository(db),
-      // Mark delivered is not part of the seed: the delivered jobs are there already.
-      recordDelivery: () => false,
+      // Mark delivered is not part of the boards' seed: the delivered jobs are there already.
+      recordDelivery: options.recordDelivery ?? (() => false),
       onJobChanged: publishJob,
       onMoneyChanged: () => bus.publish({ type: 'money.changed' }),
     },
