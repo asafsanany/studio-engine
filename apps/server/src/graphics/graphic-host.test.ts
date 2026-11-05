@@ -118,7 +118,7 @@ describe('renderGraphicHost', () => {
     });
 
     it('keep Hebrew, emoji and empty text as they are', () => {
-      const values = { name: 'דנה לוי', role: '', note: 'שלום 👋' };
+      const values = { name: 'Dana Levy', role: '', note: 'שלום 👋' };
       expect(mountedValues(host({ values }))).toEqual(values);
     });
 

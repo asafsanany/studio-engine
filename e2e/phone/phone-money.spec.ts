@@ -29,11 +29,11 @@ import { stubMoney } from '../support/money-board.ts';
 test.use({ viewport: { width: 390, height: 844 } });
 test.describe.configure({ mode: 'serial' });
 
-const TAVO = 'עו״ד דוד לוי';
+const TAVO = 'Levy Law';
 const RGM = 'RGM';
 const JOB = {
-  owed: 'מיתוס או אמת 5',
-  paid: 'מיתוס או אמת 4',
+  owed: 'Myth or fact 5',
+  paid: 'Myth or fact 4',
   archived: 'ראיון עם השחקן',
 } as const;
 const WAIT = { timeout: 90_000 };
@@ -415,7 +415,7 @@ test('MMoney: ten rows and "Show all 26 videos", By client, the footer, the Expe
   // By client: three clients, the first one open with its newest videos and "and 9 more".
   await ledger(page).getByRole('button', { name: 'By client' }).tap();
   await expect(groups(page)).toHaveCount(3);
-  await expect(groups(page).nth(0)).toContainText('עו״ד דוד לוי');
+  await expect(groups(page).nth(0)).toContainText('Levy Law');
   await expect(groups(page).nth(0)).toContainText('12 videos');
   await expect(groups(page).nth(0)).toContainText('₪480');
   await expect(groups(page).nth(1)).toContainText('RGM');

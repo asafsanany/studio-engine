@@ -136,10 +136,10 @@ describe('the Clients × Instagram boards (--instagram)', () => {
     expect(none.account).toBeNull();
     const list = (await shared.send<ClientListResponse>('GET', '/clients')).json;
     expect(list.map((row) => [row.client, row.instagram?.handle ?? null])).toEqual([
+      [NO_ACCOUNT, null],
       [FALCON, 'falcon.fpv'],
       [FLAKY, 'flaky.studio'],
       [PRIVATE_CLIENT, 'venezia.studio'],
-      [NO_ACCOUNT, null],
     ]);
   });
 

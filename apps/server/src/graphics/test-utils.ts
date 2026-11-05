@@ -24,7 +24,7 @@ export interface CannedGraphic {
   reply?: string;
 }
 
-const DEFAULT_VARIABLES: GraphicVariable[] = [{ id: 'name', label: 'Name', default: 'דנה לוי' }];
+const DEFAULT_VARIABLES: GraphicVariable[] = [{ id: 'name', label: 'Name', default: 'Dana Levy' }];
 
 /** A composition that passes the engine's check for the graphic `id` with `variables`. */
 export function cannedComposition(

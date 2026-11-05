@@ -5,7 +5,7 @@
 
 import type { Page } from '@playwright/test';
 
-const TAVO = 'עו״ד דוד לוי';
+const TAVO = 'Levy Law';
 const RGM = 'RGM';
 
 /** One of the board's videos. */
@@ -44,12 +44,12 @@ export function boardAnswer(
   const v = (...args: [string, string, string, string, number, string | null, number]) =>
     video(args[0], args[1], args[2], args[3], month, args[4], args[5], args[6]);
   const ledger = [
-    v('j01', 'אדריכלות', 'LAKESHORE', 'lakeshore', 22, null, 9),
-    v('j02', 'מיתוס או אמת 5', TAVO, 'tavo', 21, null, 5),
+    v('j01', 'Architecture', 'LAKESHORE', 'lakeshore', 22, null, 9),
+    v('j02', 'Myth or fact 5', TAVO, 'tavo', 21, null, 5),
     v('j03', 'ראיון עם השחקן', RGM, 'rgm', 19, '20', 11),
-    v('j04', 'מיתוס או אמת 4', TAVO, 'tavo', 16, null, 4),
+    v('j04', 'Myth or fact 4', TAVO, 'tavo', 16, null, 4),
     v('j05', 'כללי', 'LAKESHORE', 'lakeshore', 13, 'archived', 7),
-    v('j06', 'שאלות נפוצות 5', TAVO, 'tavo', 12, null, 6),
+    v('j06', 'Common questions 5', TAVO, 'tavo', 12, null, 6),
   ];
   const fill = (client: string, clientId: string, count: number, prefix: string) => {
     for (let i = 0; i < count; i += 1) {

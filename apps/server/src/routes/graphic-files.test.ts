@@ -133,9 +133,9 @@ describe('GET /assets/:file', () => {
   it('draws the frame like the board’s footage: a person, a window and one yellow word', async () => {
     const svg = await (await files('assets/sample-9x16.svg')).text();
     expect(svg).toContain('viewBox="0 0 1080 1920"');
-    expect(svg).toContain('זה ');
-    expect(svg).toContain('שעשינו');
-    expect(svg).toMatch(/<tspan fill="#FACC15">מה<\/tspan>/);
+    expect(svg).toContain('This is ');
+    expect(svg).toContain(' we made');
+    expect(svg).toMatch(/<tspan fill="#FACC15">what<\/tspan>/);
     expect(svg).toContain('<circle'); // the head
     expect(await (await files('assets/sample-16x9.svg')).text()).toContain(
       'viewBox="0 0 1920 1080"',

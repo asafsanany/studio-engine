@@ -167,7 +167,7 @@ describe('the song the fake Brief reads off a picture attached to the note (Song
       original: null,
       wantsTrending: false,
     });
-    expect(FAKE_BRIEF_SONG).toMatchObject({ title: 'נתתי לך בית', version: 'sped up' });
+    expect(FAKE_BRIEF_SONG).toMatchObject({ title: 'A Home for You', version: 'sped up' });
   });
 
   it('asks for a trending song, a song that cannot be got, or "Original audio" by the picture’s name', () => {
@@ -191,7 +191,7 @@ describe('the song the fake Brief reads off a picture attached to the note (Song
     const draft = briefDraftSchema.parse(
       fakeBriefDraft({ client: 'Acme', name: 'Teaser' }, files, 'Yael wants this song.'),
     );
-    expect(draft.music?.song?.title).toBe('נתתי לך בית');
+    expect(draft.music?.song?.title).toBe('A Home for You');
     expect(draft.files).toEqual([
       {
         path: 'edit/brief/from-you/IMG_4412.PNG',
@@ -242,7 +242,7 @@ describe('the ask for music the fake Brief reads (music only when asked)', () =>
     // A picture names a song: the song is the ask, not `wanted`.
     expect(fakeBriefMusic([attached('IMG_4412.PNG')], true)).toMatchObject({
       wanted: false,
-      song: { title: 'נתתי לך בית' },
+      song: { title: 'A Home for You' },
     });
   });
 

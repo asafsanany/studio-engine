@@ -497,7 +497,7 @@ test.describe('the service worker', () => {
       registrationId: await registrationId,
       data: JSON.stringify({
         title: 'Ready to review',
-        body: 'סיור בפרויקט · LAKESHORE',
+        body: 'Project tour · LAKESHORE',
         url: '/jobs?job=j1&review=1',
         tag: 'j1',
         badge: 2,
@@ -514,7 +514,7 @@ test.describe('the service worker', () => {
       .toEqual([
         {
           title: 'Ready to review',
-          body: 'סיור בפרויקט · LAKESHORE',
+          body: 'Project tour · LAKESHORE',
           tag: 'j1',
           data: { url: '/jobs?job=j1&review=1' },
         },

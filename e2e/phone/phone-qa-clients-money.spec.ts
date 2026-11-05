@@ -28,15 +28,15 @@ import { stubMoney } from '../support/money-board.ts';
 
 test.describe.configure({ mode: 'serial' });
 
-const TAVO = 'עו״ד דוד לוי';
+const TAVO = 'Levy Law';
 const RGM = 'RGM';
 const LAKESHORE = 'LAKESHORE';
 const JOB = {
-  election: 'טורניר בחירות שש בש',
-  interview: 'ראיון עם המייסד',
+  election: 'Backgammon tournament',
+  interview: 'Founder interview',
   winners: 'הכרזת הזוכים',
   lakeshore: 'Lakeshore promo',
-  myth: 'מיתוס או אמת 6',
+  myth: 'Myth or fact 6',
 } as const;
 const WAIT = { timeout: 90_000 };
 

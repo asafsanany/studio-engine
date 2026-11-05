@@ -210,10 +210,10 @@ const DEMO_LINE =
   'Intense cinematic electronic, 120 BPM. Builds to a big drop at 0:18 and lands on the logo at 0:35.';
 const PLAN = plan(39, DEMO_LINE);
 
-/** The song of the boards: נתתי לך בית by Ofek Adanek, the studio track from YouTube Music, 3:12. */
+/** The song of the boards: A Home for You by Ofek Adanek, the studio track from YouTube Music, 3:12. */
 function song(fields: Partial<Song> = {}): Song {
   return {
-    title: 'נתתי לך בית',
+    title: 'A Home for You',
     artist: 'Ofek Adanek',
     version: null,
     asked: { from: 'screenshot', file: SONGS_SCREENSHOT, url: null, by: 'brief' },
@@ -228,7 +228,7 @@ function song(fields: Partial<Song> = {}): Song {
     trending: null,
     file: 'song.mp3',
     instagramLine:
-      'In Instagram tap Add audio, pick נתתי לך בית by Ofek Adanek and slide it to start at 0:42.',
+      'In Instagram tap Add audio, pick A Home for You by Ofek Adanek and slide it to start at 0:42.',
     gotAt: t('21:03'),
     ...fields,
   };
@@ -283,7 +283,7 @@ export const SONGS_RECORDS: Readonly<Record<string, MusicRecord>> = {
       asked: 'https://www.instagram.com/reel/DQx7mK2kF9a/',
       code: 'unavailable',
       message:
-        'נתתי לך בית, from the reel link Yael sent: the downloader didn’t answer. ElevenLabs made v1 instead.',
+        'A Home for You, from the reel link Yael sent: the downloader didn’t answer. ElevenLabs made v1 instead.',
       at: t('21:03'),
     },
   }),

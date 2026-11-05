@@ -10,5 +10,5 @@
   <rect x="108" y="129.6" width="367.2" height="324" rx="8" fill="#3A342F"/>
   <path d="M345.6 544.32A174.96 136.08 0 0 1 520.56 408.24H559.44A174.96 136.08 0 0 1 734.4 544.32V1164.24H345.6Z" fill="#463B34"/>
   <circle cx="540" cy="340.2" r="81" fill="#5B4E45"/>
-  <text x="540" y="942" text-anchor="middle" direction="rtl" font-family="Heebo, 'Noto Sans Hebrew', 'Arial Hebrew', Arial, sans-serif" font-size="81" font-weight="800" fill="#FFFFFF" filter="url(#shadow)"><tspan>זה </tspan><tspan fill="#FACC15">מה</tspan><tspan> שעשינו</tspan></text>
+  <text x="540" y="942" text-anchor="middle" font-family="Heebo, 'Noto Sans Hebrew', 'Arial Hebrew', Arial, sans-serif" font-size="81" font-weight="800" fill="#FFFFFF" filter="url(#shadow)"><tspan>This is </tspan><tspan fill="#FACC15">what</tspan><tspan> we made</tspan></text>
 </svg>

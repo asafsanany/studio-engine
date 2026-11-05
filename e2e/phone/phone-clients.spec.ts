@@ -2,7 +2,7 @@
 // at iPhone size (the `phone` project of playwright.config.ts), 390×844 like the design boards,
 // with Chrome's emulated notch (47 px) and home indicator (34 px) and the Phone switch on. One
 // engine, three clients: RGM (a job in Review, a failed one, one delivered, paid and archived),
-// LAKESHORE (one in Review) and עו״ד דוד לוי (one in Review), so Jobs carries a badge of 4.
+// LAKESHORE (one in Review) and Levy Law (one in Review), so Jobs carries a badge of 4.
 //
 //   the tab bar     61 px at the bottom (49 + the 34 px home bar) on Jobs, Clients, a client and its
 //                   Style; Jobs, Clients and Money (PH19); the active tab white and the others muted; the
@@ -31,15 +31,15 @@ import { type Engine, startEngine } from '../support/engine.ts';
 test.use({ viewport: { width: 390, height: 844 } });
 test.describe.configure({ mode: 'serial' });
 
-const TAVO = 'עו״ד דוד לוי';
+const TAVO = 'Levy Law';
 const RGM = 'RGM';
 const LAKESHORE = 'LAKESHORE';
 const JOB = {
-  election: 'טורניר בחירות שש בש',
-  interview: 'ראיון עם המייסד',
+  election: 'Backgammon tournament',
+  interview: 'Founder interview',
   winners: 'הכרזת הזוכים',
   lakeshore: 'Lakeshore promo',
-  myth: 'מיתוס או אמת 6',
+  myth: 'Myth or fact 6',
 } as const;
 const WAIT = { timeout: 90_000 };
 

@@ -61,9 +61,9 @@ export function at(time: string, day: string = YESTERDAY): string {
 
 const OFEK = 'Horizon FPV';
 const LAKESHORE = 'LAKESHORE';
-const LAW = 'עו״ד דוד לוי';
-const MYTH = 'מיתוס או אמת';
-const FAQ = 'שאלות נפוצות';
+const LAW = 'Levy Law';
+const MYTH = 'Myth or fact';
+const FAQ = 'Common questions';
 
 /** The jobs of the music seed, by what they show. */
 export const MUSIC_IDS = {
@@ -210,7 +210,7 @@ export const MUSIC_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: MUSIC_IDS.folderApproved,
     state: 'ready',
     client: LAKESHORE,
-    name: 'סיור בפרויקט',
+    name: 'Project tour',
     inputs: [6, 1, 0, 0],
     sizeBytes: 1.4 * GB,
     addedAt: at('09:40', TODAY),

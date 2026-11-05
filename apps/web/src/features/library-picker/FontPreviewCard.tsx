@@ -70,16 +70,18 @@ export function FontPreviewCard({ item, heebo, variant = 'pane' }: FontPreviewCa
         >
           {face.name}
         </div>
-        <div
-          lang="he"
-          dir="rtl"
-          data-slot="font-card-hebrew"
-          // The card is read left to right: a Hebrew line starts at the left edge too.
-          className="text-left text-[18px] leading-[1.3]"
-          style={{ ...style, fontFamily: fonts.hebrew }}
-        >
-          {FONT_SAMPLE_TEXT.captionHebrew}
-        </div>
+        {!import.meta.env.VITE_DEMO && (
+          <div
+            lang="he"
+            dir="rtl"
+            data-slot="font-card-hebrew"
+            // The card is read left to right: a Hebrew line starts at the left edge too.
+            className="text-left text-[18px] leading-[1.3]"
+            style={{ ...style, fontFamily: fonts.hebrew }}
+          >
+            {FONT_SAMPLE_TEXT.captionHebrew}
+          </div>
+        )}
         <div className="mt-1 text-xs text-muted-foreground">
           {`${family.style} · ${fontScriptLabel(family.he)}`}
         </div>
@@ -123,14 +125,16 @@ export function FontPreviewCard({ item, heebo, variant = 'pane' }: FontPreviewCa
           className="absolute right-1.5 bottom-3 left-1.5 flex flex-col items-center gap-0.5 text-white"
           style={{ ...style, textShadow: '0 1px 6px rgba(0,0,0,0.8)' }}
         >
-          <span
-            lang="he"
-            dir="rtl"
-            className="text-[17px] leading-[1.15]"
-            style={{ fontFamily: fonts.hebrew }}
-          >
-            {FONT_SAMPLE_TEXT.captionHebrew}
-          </span>
+          {!import.meta.env.VITE_DEMO && (
+            <span
+              lang="he"
+              dir="rtl"
+              className="text-[17px] leading-[1.15]"
+              style={{ fontFamily: fonts.hebrew }}
+            >
+              {FONT_SAMPLE_TEXT.captionHebrew}
+            </span>
+          )}
           <span
             lang="en"
             className="text-[9px] leading-tight"

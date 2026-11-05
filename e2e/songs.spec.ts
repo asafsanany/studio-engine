@@ -8,7 +8,7 @@
 //   Note            Add note… on an arriving job: the drop zone, a screenshot chosen (the hidden file
 //                   input), its row with the "brief reads the song" line, Save keeps it in
 //                   edit/brief/from-you/ (GET /note lists it)
-//   the brief       the fake Brief reads "נתתי לך בית" by Ofek Adanek (sped up) off IMG_4412.PNG: brief.json,
+//   the brief       the fake Brief reads "A Home for You" by Ofek Adanek (sped up) off IMG_4412.PNG: brief.json,
 //                   brief.md's "Song:" line
 //   the edit        the song command ran for real: music.json (source song, picked song, asked from the
 //                   screenshot by the brief, the part measured), song.mp3, and preview/music.mp3 is that file
@@ -52,7 +52,7 @@ const JOB_C = 'Song that fails';
 const JOB_D = 'Original audio screenshot';
 const JOB_E = 'Song asked for in Review';
 const NOTE_TEXT = 'Yael wants this song. Start it where the reel does.';
-const SONG = { title: 'נתתי לך בית', artist: 'Ofek Adanek' };
+const SONG = { title: 'A Home for You', artist: 'Ofek Adanek' };
 const TRENDING = { title: 'Skyline Run', artist: 'Dana Kahn' };
 
 /** The fake edit's own speed: a whole edit takes a few seconds. */
@@ -299,7 +299,7 @@ test('Yael’s screenshot gets its song into the edit, Review shows it, and Appr
       wantsTrending: false,
     });
     expect(await readFile(join(editDir(JOB_A), 'brief.md'), 'utf8')).toContain(
-      '- Song: נתתי לך בית by Ofek Adanek (sped up), from IMG_4412.PNG',
+      '- Song: A Home for You by Ofek Adanek (sped up), from IMG_4412.PNG',
     );
 
     const music = await musicOf(a.id);
@@ -315,7 +315,7 @@ test('Yael’s screenshot gets its song into the edit, Review shows it, and Appr
       trending: null,
     });
     expect(music.song?.instagramLine).toBe(
-      'In Instagram tap Add audio, pick נתתי לך בית by Ofek Adanek and slide it to start at 0:19.',
+      'In Instagram tap Add audio, pick A Home for You by Ofek Adanek and slide it to start at 0:19.',
     );
     // The part is the cut's length, and the composition plays it.
     const song = join(editDir(JOB_A), 'music', 'song.mp3');
@@ -453,7 +453,7 @@ test('Yael’s screenshot gets its song into the edit, Review shows it, and Appr
     }
 
     const post = sheet.locator('[data-slot="song-post"]');
-    const line = `Post “${JOB_A} · no song.mp4”. In Instagram tap Add audio, pick נתתי לך בית by Ofek Adanek and slide it to start at 0:19. That way the reel counts toward the song’s trend.`;
+    const line = `Post “${JOB_A} · no song.mp4”. In Instagram tap Add audio, pick A Home for You by Ofek Adanek and slide it to start at 0:19. That way the reel counts toward the song’s trend.`;
     await expect(post.locator('[data-slot="song-post-text"]')).toHaveText(line);
     await expect(post).toContainText('Copy it and send it to Yael with the file.');
     const copy = post.locator('[data-sheet-copy-line]');
@@ -464,7 +464,7 @@ test('Yael’s screenshot gets its song into the edit, Review shows it, and Appr
 
     // Details and History say where the song came from.
     const music = sheet.locator('[data-detail="Music"]');
-    await expect(music).toContainText('נתתי לך בית · Ofek Adanek');
+    await expect(music).toContainText('A Home for You · Ofek Adanek');
     await expect(music).toContainText('From Yael’s screenshot (IMG_4412.PNG)');
     await expect(music).toContainText('the part used, 0:19 to 0:25');
     await shoot(page, 'mac-sheet-two-files', testInfo);

@@ -236,8 +236,8 @@ test.describe('one push per event', () => {
   let good: JobOnServer;
 
   test('an edit that reaches Review: “Ready to review” to the phone, “Queue is empty” to the quiet one', async () => {
-    await engine.createJob({ client: 'LAKESHORE', job: 'סיור בפרויקט' });
-    good = await jobIn('סיור בפרויקט', 'review');
+    await engine.createJob({ client: 'LAKESHORE', job: 'Project tour' });
+    good = await jobIn('Project tour', 'review');
     await waitForPushes('phone', 2);
     await waitForPushes('quiet', 2);
     await expectQuiet({ phone: 2, quiet: 2 });
@@ -246,7 +246,7 @@ test.describe('one push per event', () => {
     expectDelivered(review);
     expect(review.payload).toEqual({
       title: 'Ready to review',
-      body: 'סיור בפרויקט · LAKESHORE',
+      body: 'Project tour · LAKESHORE',
       url: `/jobs?job=${good.id}&review=1`,
       tag: good.id,
       // The job in Review is the one that needs the phone's owner.
@@ -266,7 +266,7 @@ test.describe('one push per event', () => {
   test('Approve: “Approved · ready to send” to the phone once the render is done', async () => {
     const approve = await send('POST', `/api/jobs/${good.id}/approve`);
     expect(approve.status).toBe(200);
-    await jobIn('סיור בפרויקט', 'ready');
+    await jobIn('Project tour', 'ready');
     await waitForPushes('phone', 3);
     // The render is a job in the queue too: the quiet phone is told again when it is idle.
     await waitForPushes('quiet', 3);
@@ -276,7 +276,7 @@ test.describe('one push per event', () => {
     expectDelivered(approved);
     expect(approved.payload).toEqual({
       title: 'Approved · ready to send',
-      body: 'סיור בפרויקט · LAKESHORE',
+      body: 'Project tour · LAKESHORE',
       url: `/jobs?job=${good.id}`,
       tag: good.id,
       // Nothing is in Review or needs attention any more: the icon is cleared.
@@ -290,8 +290,8 @@ test.describe('one push per event', () => {
   });
 
   test('a failure: “Failed at <Step>” to the phone, not to the one with Failed off', async () => {
-    await engine.createJob({ client: 'RGM', job: 'ראיון עם המייסד', failAt: 'plan' });
-    const failed = await jobIn('ראיון עם המייסד', 'failed');
+    await engine.createJob({ client: 'RGM', job: 'Founder interview', failAt: 'plan' });
+    const failed = await jobIn('Founder interview', 'failed');
     await waitForPushes('phone', 4);
     await waitForPushes('quiet', 4);
     await expectQuiet({ phone: 4, quiet: 4 });
@@ -301,7 +301,7 @@ test.describe('one push per event', () => {
     expect(ping.payload?.title).toMatch(/^Failed at [A-Z]/);
     expect(ping.payload).toEqual({
       title: ping.payload?.title,
-      body: 'ראיון עם המייסד · RGM',
+      body: 'Founder interview · RGM',
       url: `/jobs?job=${failed.id}`,
       tag: failed.id,
       // One job needs attention.
@@ -317,8 +317,8 @@ test.describe('one push per event', () => {
     });
     expect(off.status).toBe(200);
 
-    await engine.createJob({ client: 'RGM', job: 'מיתוס או אמת 6', failAt: 'plan' });
-    await jobIn('מיתוס או אמת 6', 'failed');
+    await engine.createJob({ client: 'RGM', job: 'Myth or fact 6', failAt: 'plan' });
+    await jobIn('Myth or fact 6', 'failed');
     // The queue goes idle again: the quiet phone hears it, the other has Failed off.
     await waitForPushes('quiet', 5);
     await expectQuiet({ phone: 4, quiet: 5 });
@@ -329,8 +329,8 @@ test.describe('a tap', () => {
   test('on “Ready to review”, from the address the push carried, opens the job’s Review full screen', async ({
     page,
   }, testInfo) => {
-    await engine.createJob({ client: 'LAKESHORE', job: 'אדריכלות' });
-    const job = await jobIn('אדריכלות', 'review');
+    await engine.createJob({ client: 'LAKESHORE', job: 'Architecture' });
+    const job = await jobIn('Architecture', 'review');
     await waitForPushes('phone', 5);
     await waitForPushes('quiet', 6);
     const push = mock.received('phone')[4];

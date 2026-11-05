@@ -10,7 +10,7 @@
 // Songs (SG12): a picture attached to the note (edit/brief/from-you/, only listed while the Songs switch
 // is on) is a screenshot of a reel, so the canned draft "reads" a song off it, as the real run would,
 // for the fake music path (fake-music.ts) and the e2e specs to follow:
-//   IMG_4412.PNG          the song of the boards: נתתי לך בית by Ofek Adanek (sped up)
+//   IMG_4412.PNG          the song of the boards: A Home for You by Ofek Adanek (sped up)
 //   a name with "trend"   no song named: music.wantsTrending (the editor picks a rising one)
 //   a name with "fail"    a song the fake getter cannot get ("Fail Song"), so the fallback shows
 //   a name with "original"  the label says "Original audio": music.original, no song
@@ -87,7 +87,7 @@ async function writeAtomic(path: string, content: string): Promise<void> {
 
 /** The song on the boards' screenshot (IMG_4412.PNG): what the fake Brief reads off a picture. */
 export const FAKE_BRIEF_SONG = {
-  title: 'נתתי לך בית',
+  title: 'A Home for You',
   artist: 'Ofek Adanek',
   version: 'sped up',
 } as const;

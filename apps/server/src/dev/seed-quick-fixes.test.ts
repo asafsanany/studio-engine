@@ -193,12 +193,12 @@ describe('the Quick fixes boards (--quick-fixes)', () => {
     expect(await fixes(QUICK_FIX_IDS.manual)).toEqual([]);
   });
 
-  it('has three fixed notes, one in Hebrew, and the newest fix is the last one that ended', async () => {
+  it('has three fixed notes, all in English, and the newest fix is the last one that ended', async () => {
     const { notes, fixes } = shared;
     const list = await fixes(QUICK_FIX_IDS.allFixed);
     expect(list.map((fix) => fix.status)).toEqual(['fixed', 'fixed', 'fixed']);
     const all = await notes(QUICK_FIX_IDS.allFixed);
-    expect(all.some((note) => /[֐-׿]/.test(note.text ?? ''))).toBe(true);
+    expect(all.some((note) => /[֐-׿]/.test(note.text ?? ''))).toBe(false);
     expect(all.every((note) => note.fixId !== null)).toBe(true);
     const ends = list.map((fix) => Date.parse(fix.endedAt ?? ''));
     expect(ends).toEqual([...ends].sort((a, b) => a - b));

@@ -87,9 +87,9 @@ describe('the canvas seed', () => {
     expect(byId.get('j7')).toMatchObject({ failedAt: 1, note: null });
     expect(byId.get('j8')?.stoppedAt).toBe(1);
     // The one note on the board: the held job's, in Hebrew.
-    expect(byId.get('j3')?.note).toBe('לפתוח על הצוות, לא על המבנה. עד דקה.');
+    expect(byId.get('j3')?.note).toBe('Open on the team, not the building. Under a minute.');
     expect(byId.get('j6')?.output).toEqual({
-      fileName: 'Kova Coffee/השקת תפריט חדש.mp4',
+      fileName: 'Kova Coffee/New menu launch.mp4',
       durationSec: 45,
       width: 1080,
       height: 1920,
@@ -198,7 +198,7 @@ describe('the canvas seed server', () => {
     expect((await download.arrayBuffer()).byteLength).toBeGreaterThan(0);
 
     // The live preview reads from <dir>/inbox, which starts empty: j6 has one once it is put there.
-    const previewDir = join(server.inboxPath, 'Kova Coffee', 'השקת תפריט חדש', 'edit', 'preview');
+    const previewDir = join(server.inboxPath, 'Kova Coffee', 'New menu launch', 'edit', 'preview');
     await mkdir(previewDir, { recursive: true });
     await writeFile(join(previewDir, 'index.html'), '<!doctype html><p>שלום</p>');
     const preview = await fetch(`${server.url}/api/jobs/j6/preview/index.html`);
@@ -360,7 +360,7 @@ describe('the Phase 3 rows (--review)', () => {
       expect(p1.status).toBe(200);
       expect(p1.headers.get('content-type')).toBe('text/html; charset=utf-8');
       const html = await p1.text();
-      expect(html).toContain('פרומו לסוף השבוע');
+      expect(html).toContain('Weekend promo');
       expect(html).not.toContain('Sample preview');
       expect(html).toContain('data-width="1080" data-height="1920"');
 
@@ -425,8 +425,8 @@ describe('the Phase 3 rows (--review)', () => {
       });
       const roundFile = join(
         server.inboxPath,
-        'מאפיית הצפון',
-        'פרומו לסוף השבוע',
+        'North Bakery',
+        'Weekend promo',
         'edit',
         'review',
         'round-1.md',
@@ -517,8 +517,8 @@ describe('the Series boards (--series)', () => {
         spec.episodes.map((episode) => episode.episode),
       ]),
     ).toEqual([
-      ['מיתוס או אמת', 'm5', [5, 6, 7, 8]],
-      ['שאלות נפוצות', 'f5', [5, 6]],
+      ['Myth or fact', 'm5', [5, 6, 7, 8]],
+      ['Common questions', 'f5', [5, 6]],
     ]);
     for (const spec of CANVAS_SERIES_SPECS) {
       for (const episode of spec.episodes) {
@@ -547,14 +547,14 @@ describe('the Series boards (--series)', () => {
         await fetch(`${server.url}/api/clients/${clientId}/series`)
       ).json()) as ClientSeriesResponse;
       expect(listed.series.map((s) => [s.name, s.episodeCount, s.state, s.formatJob])).toEqual([
-        ['מיתוס או אמת', 4, 'ready', 'מיתוס או אמת 5'],
-        ['שאלות נפוצות', 2, 'ready', 'שאלות נפוצות 5'],
+        ['Common questions', 2, 'ready', 'Common questions 5'],
+        ['Myth or fact', 4, 'ready', 'Myth or fact 5'],
       ]);
 
       // Each series page reads its series.md from the seed inbox.
       for (const [name, formatJobId] of [
-        ['מיתוס או אמת', 'm5'],
-        ['שאלות נפוצות', 'f5'],
+        ['Myth or fact', 'm5'],
+        ['Common questions', 'f5'],
       ] as const) {
         const seriesId = listed.series.find((s) => s.name === name)?.id ?? '';
         const detail = (await (
@@ -564,14 +564,14 @@ describe('the Series boards (--series)', () => {
           name,
           state: 'ready',
           formatJobId,
-          client: 'עו״ד דוד לוי',
+          client: 'Levy Law',
         });
         expect(detail.markdown?.split('\n')[0]).toBe(`# Series: ${name}`);
       }
 
       // The episodes are in their series by the number of their names; the other two rows are not.
-      const mythId = listed.series.find((s) => s.name === 'מיתוס או אמת')?.id;
-      const faqId = listed.series.find((s) => s.name === 'שאלות נפוצות')?.id;
+      const mythId = listed.series.find((s) => s.name === 'Myth or fact')?.id;
+      const faqId = listed.series.find((s) => s.name === 'Common questions')?.id;
       expect(
         ['m5', 'm6', 'm7', 'm8'].map((id) => [byId.get(id)?.seriesId, byId.get(id)?.episode]),
       ).toEqual([
@@ -616,7 +616,7 @@ describe('the Series boards (--series)', () => {
   });
 });
 
-const LAW = 'עו״ד דוד לוי';
+const LAW = 'Levy Law';
 
 describe('the Job sheet boards (--sheet)', () => {
   const stops: Array<() => Promise<void>> = [];
@@ -746,9 +746,9 @@ describe('the Job sheet boards (--sheet)', () => {
     expect(await folder.json()).toEqual({ ok: true, revealed: 'folder' });
     // The folders are in the seed's own temp folder (macOS spells it /private/var).
     expect(server.finder.files).toHaveLength(1);
-    expect(server.finder.files[0]).toMatch(/\/exports\/RGM\/טורניר בחירות שש בש\.mp4$/);
+    expect(server.finder.files[0]).toMatch(/\/exports\/RGM\/Backgammon tournament\.mp4$/);
     expect(server.finder.folders).toHaveLength(1);
-    expect(server.finder.folders[0]?.endsWith(`/inbox/${LAW}/מיתוס או אמת 6`)).toBe(true);
+    expect(server.finder.folders[0]?.endsWith(`/inbox/${LAW}/Myth or fact 6`)).toBe(true);
     expect((await get('/jobs/nope/steps')).status).toBe(404);
   });
 
@@ -823,7 +823,7 @@ describe('the Graphics library (--graphics)', () => {
     'Hours saved counter',
     'Name on a white pill',
     'Name with the client’s logo',
-    'מיתוס או אמת – פתיחה',
+    'Myth or fact – opening',
     'Big number that counts up',
     'Follow card',
     'Follow card – first try',
@@ -883,7 +883,7 @@ describe('the Graphics library (--graphics)', () => {
       version: 2,
       kind: 'lower-third',
     });
-    expect(by.get('מיתוס או אמת – פתיחה')).toMatchObject({
+    expect(by.get('Myth or fact – opening')).toMatchObject({
       status: 'ready',
       version: 1,
       kind: 'title',
@@ -938,8 +938,8 @@ describe('the Graphics library (--graphics)', () => {
       folder: 'Name on a white pill',
       when: 'The first time a person is named on camera.',
       variables: [
-        { id: 'name', label: 'Name', default: 'דנה לוי' },
-        { id: 'role', label: 'Role', default: 'מייסדת, Kova Coffee' },
+        { id: 'name', label: 'Name', default: 'Dana Levy' },
+        { id: 'role', label: 'Role', default: 'Founder, Kova Coffee' },
       ],
     });
 
@@ -967,8 +967,8 @@ describe('the Graphics library (--graphics)', () => {
     });
     expect(hours.variables).toEqual([]);
 
-    const hebrew = await detail('מיתוס או אמת – פתיחה');
-    expect(hebrew.variables).toEqual([{ id: 'title', label: 'Title', default: 'מיתוס או אמת' }]);
+    const hebrew = await detail('Myth or fact – opening');
+    expect(hebrew.variables).toEqual([{ id: 'title', label: 'Title', default: 'Myth or fact' }]);
   });
 
   it('writes every made version as a whole project the player can load', async () => {
@@ -992,7 +992,14 @@ describe('the Graphics library (--graphics)', () => {
     // the Hebrew name is a folder too
     await expect(
       readFile(
-        join(server.inboxPath, '_Graphics', 'מיתוס או אמת – פתיחה', 'versions', 'v1', 'about.json'),
+        join(
+          server.inboxPath,
+          '_Graphics',
+          'Myth or fact – opening',
+          'versions',
+          'v1',
+          'about.json',
+        ),
       ),
     ).resolves.toBeDefined();
 
@@ -1252,7 +1259,7 @@ describe('the Soundtrack boards (--music)', () => {
     expect(
       await exists(join(server.inboxPath, 'LAKESHORE', 'Summer promo', 'Summer Vibes.mp3')),
     ).toBe(true);
-    const none = edit('עו״ד דוד לוי', 'שאלות נפוצות 5');
+    const none = edit('Levy Law', 'Common questions 5');
     expect(await exists(join(none, 'preview/music.mp3'))).toBe(false);
     expect(await readFile(join(none, 'preview/index.html'), 'utf8')).not.toContain('music.mp3');
     // A job being edited has its record and no composition yet.
@@ -1386,7 +1393,7 @@ describe('the Songs boards (--songs)', () => {
     const demo = await music(SONGS_IDS.song);
     expect(demo).toMatchObject({ source: 'song', picked: 'song', canMake: true });
     expect(demo?.song).toMatchObject({
-      title: 'נתתי לך בית',
+      title: 'A Home for You',
       artist: 'Ofek Adanek',
       fullMs: 192_000,
       part: { startMs: 42_000, endMs: 81_000, how: 'measured' },

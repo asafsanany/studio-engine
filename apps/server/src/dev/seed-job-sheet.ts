@@ -35,7 +35,7 @@ function at(time: string, day: string = TODAY): string {
 
 const LAKESHORE = 'LAKESHORE';
 const RGM = 'RGM';
-const LAW = 'עו״ד דוד לוי';
+const LAW = 'Levy Law';
 
 /** The ids the web fixtures give these jobs (sha1 of `Client/Job`, 12 hex characters). */
 export const SHEET_IDS = {
@@ -54,7 +54,7 @@ export const SHEET_IDS = {
   archived: 'f73c96263b11',
 } as const;
 
-/** The lawyer's shows: "מיתוס או אמת" (episodes 5 and 6) and "שאלות נפוצות" (episode 5). */
+/** The lawyer's shows: "Myth or fact" (episodes 5 and 6) and "Common questions" (episode 5). */
 export const SHEET_SERIES_JOBS = {
   myth: {
     formatJobId: SHEET_IDS.paid,
@@ -88,7 +88,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.arriving,
     state: 'arriving',
     client: LAKESHORE,
-    name: 'צילומי לקוחות – אוקטובר',
+    name: 'Client shoots – October',
     inputs: [3, 0, 0, 0],
     sizeBytes: 1.9 * GB,
     addedAt: at('15:02'),
@@ -96,11 +96,11 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     updatedAt: at('15:03'),
   },
   {
-    // "#1 in line. It starts when מיתוס או אמת 6 is done."
+    // "#1 in line. It starts when Myth or fact 6 is done."
     id: SHEET_IDS.queued,
     state: 'queued',
     client: RGM,
-    name: 'טורניר בחירות – הכרזה',
+    name: 'Tournament announcement',
     inputs: [3, 0, 2, 0],
     sizeBytes: 1.24 * GB,
     addedAt: at('14:47'),
@@ -114,7 +114,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.held,
     state: 'held',
     client: RGM,
-    name: 'ריל השקה',
+    name: 'Launch reel',
     inputs: [7, 1, 0, 0],
     sizeBytes: 2.65 * GB,
     addedAt: at('11:02'),
@@ -126,7 +126,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.editing,
     state: 'editing',
     client: LAW,
-    name: 'מיתוס או אמת 6',
+    name: 'Myth or fact 6',
     inputs: [5, 1, 0, 1],
     sizeBytes: 2.31 * GB,
     addedAt: at('14:29'),
@@ -142,7 +142,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.failed,
     state: 'failed',
     client: RGM,
-    name: 'ראיון עם המייסד',
+    name: 'Founder interview',
     inputs: [4, 1, 0, 0],
     sizeBytes: 1.48 * GB,
     addedAt: at('12:09'),
@@ -161,7 +161,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.cancelled,
     state: 'cancelled',
     client: LAKESHORE,
-    name: 'טיזר דירה לדוגמה',
+    name: 'Show flat teaser',
     inputs: [6, 0, 0, 0],
     sizeBytes: 3.02 * GB,
     addedAt: at('10:19'),
@@ -176,7 +176,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.review,
     state: 'review',
     client: LAKESHORE,
-    name: 'סיור בפרויקט',
+    name: 'Project tour',
     inputs: [8, 1, 3, 0],
     sizeBytes: 4.12 * GB,
     addedAt: at('13:01'),
@@ -192,7 +192,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.reviewRound2,
     state: 'review',
     client: LAW,
-    name: 'שאלות נפוצות 5',
+    name: 'Common questions 5',
     inputs: [4, 1, 0, 0],
     sizeBytes: 1.76 * GB,
     addedAt: at('11:20'),
@@ -210,7 +210,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.rendering,
     state: 'editing',
     client: RGM,
-    name: 'חנוכה 2026',
+    name: 'Holiday special 2026',
     inputs: [5, 1, 4, 0],
     sizeBytes: 2.94 * GB,
     addedAt: at('14:01'),
@@ -228,7 +228,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.approved,
     state: 'ready',
     client: RGM,
-    name: 'טורניר בחירות שש בש',
+    name: 'Backgammon tournament',
     inputs: [6, 1, 2, 0],
     sizeBytes: 2.18 * GB,
     addedAt: at('11:39'),
@@ -245,7 +245,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.delivered,
     state: 'ready',
     client: LAKESHORE,
-    name: 'אדריכלות',
+    name: 'Architecture',
     inputs: [9, 1, 0, 0],
     sizeBytes: 3.34 * GB,
     addedAt: at('10:01', '2026-10-21'),
@@ -263,7 +263,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.paid,
     state: 'ready',
     client: LAW,
-    name: 'מיתוס או אמת 5',
+    name: 'Myth or fact 5',
     inputs: [5, 1, 0, 0],
     sizeBytes: 1.95 * GB,
     addedAt: at('16:19', '2026-10-20'),
@@ -282,7 +282,7 @@ export const SHEET_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: SHEET_IDS.archived,
     state: 'ready',
     client: RGM,
-    name: 'קמפיין קיץ',
+    name: 'Summer campaign',
     inputs: [7, 1, 0, 0],
     sizeBytes: 2.72 * GB,
     addedAt: at('09:12', '2026-09-10'),
@@ -489,7 +489,7 @@ export const SHEET_NOTES: readonly SentNoteSpec[] = [
     atSec: 19,
     kind: 'voice',
     audioSec: 7,
-    text: 'תוריד פה את המוזיקה, היא חזקה מדי על הדיבור',
+    text: 'Turn the music down here, it is too loud over the voice',
     addToStyle: true,
   },
   {
@@ -498,7 +498,7 @@ export const SHEET_NOTES: readonly SentNoteSpec[] = [
     round: 1,
     sentAt: at('12:10'),
     atSec: 33,
-    text: 'Cut the second “אממ”',
+    text: 'Cut the second “um”',
   },
   {
     id: 'paid-n1',

@@ -5,7 +5,7 @@
 //   Hours saved counter           Callout     making v1 (the Making box, step "Building")
 //   Name on a white pill          Lower third ready, v2 (a note with a file, then "slower and higher"), used in 4 videos
 //   Name with the client’s logo   Lower third couldn’t finish v3 (v2 is what edits use)
-//   מיתוס או אמת – פתיחה          Title       ready, v1 (Hebrew)
+//   Myth or fact – opening          Title       ready, v1 (Hebrew)
 //   Big number that counts up     Callout     ready, v1
 //   Follow card                   End card    ready, v1
 //   Follow card – first try       End card    ready, v1, off for edits
@@ -153,7 +153,7 @@ export const GRAPHIC_SEED_SPECS: readonly GraphicSeedSpec[] = [
     ],
   },
   {
-    name: 'מיתוס או אמת – פתיחה',
+    name: 'Myth or fact – opening',
     look: 'title',
     updated: { daysAgo: 1, hour: 15 },
     turns: [{ ask: STARTERS.title, answer: { status: 'done', tookSec: 112 } }],

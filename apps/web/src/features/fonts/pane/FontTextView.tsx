@@ -68,9 +68,11 @@ export function FontTextView({
           <span lang="en" style={{ fontFamily: fonts.english }}>
             {FONT_SAMPLE_TEXT.glyphsEnglish}
           </span>
-          <span lang="he" dir="rtl" style={hebrewStyle}>
-            {FONT_SAMPLE_TEXT.glyphsHebrew}
-          </span>
+          {!import.meta.env.VITE_DEMO && (
+            <span lang="he" dir="rtl" style={hebrewStyle}>
+              {FONT_SAMPLE_TEXT.glyphsHebrew}
+            </span>
+          )}
         </div>
         {own === '' ? (
           <div
@@ -81,9 +83,11 @@ export function FontTextView({
             <span lang="en" style={{ fontFamily: fonts.english }}>
               {FONT_SAMPLE_TEXT.lineEnglish}
             </span>
-            <span lang="he" dir="rtl" className="text-right" style={hebrewStyle}>
-              {FONT_SAMPLE_TEXT.lineHebrew}
-            </span>
+            {!import.meta.env.VITE_DEMO && (
+              <span lang="he" dir="rtl" className="text-right" style={hebrewStyle}>
+                {FONT_SAMPLE_TEXT.lineHebrew}
+              </span>
+            )}
           </div>
         ) : (
           <div

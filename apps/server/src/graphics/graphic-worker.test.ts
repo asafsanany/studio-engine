@@ -99,7 +99,7 @@ describe('a run that makes a version', () => {
       version: 1,
       kind: 'lower-third',
       lengthSec: 3,
-      variables: [{ id: 'name', label: 'Name', default: 'דנה לוי' }],
+      variables: [{ id: 'name', label: 'Name', default: 'Dana Levy' }],
       when: 'The first time a person is named on camera.',
       whenEdited: false,
     });

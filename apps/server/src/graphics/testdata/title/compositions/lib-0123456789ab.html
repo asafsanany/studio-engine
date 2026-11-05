@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="he" data-composition-variables='[{"id":"title","type":"string","label":"Title","default":"מיתוס או אמת"}]'>
+<html lang="en" data-composition-variables='[{"id":"title","type":"string","label":"Title","default":"Myth or fact"}]'>
   <head>
     <meta charset="UTF-8" />
   </head>
@@ -51,13 +51,13 @@
       </style>
       <div id="root" data-composition-id="lib-0123456789ab">
         <div id="lib-0123456789ab-clip" class="clip" data-start="0" data-duration="2.4">
-          <div id="lib-0123456789ab-title" dir="auto">מיתוס או אמת</div>
+          <div id="lib-0123456789ab-title" dir="auto">Myth or fact</div>
         </div>
       </div>
       <script>
         (() => {
           const vars = window.__hyperframes?.getVariables?.() ?? {};
-          const text = (typeof vars.title === "string" ? vars.title : "מיתוס או אמת").trim();
+          const text = (typeof vars.title === "string" ? vars.title : "Myth or fact").trim();
           const title = document.querySelector("#lib-0123456789ab-title");
           title.textContent = "";
           // A title with no words hides its box, so nothing is left behind.

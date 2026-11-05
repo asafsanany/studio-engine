@@ -54,8 +54,8 @@
 // a second. Nothing runs after Send or Approve, so the job just stays queued.
 //
 // --series turns the Series switch on for this app only (the default app stays as it is): the
-// eight rows of the SeriesJobs board replace the twelve, and the client עו״ד דוד לוי has two series
-// (מיתוס או אמת, episodes 5 to 8; שאלות נפוצות, episodes 5 and 6), each with its series.md in
+// eight rows of the SeriesJobs board replace the twelve, and the client Levy Law has two series
+// (Myth or fact, episodes 5 to 8; Common questions, episodes 5 and 6), each with its series.md in
 // _Series/<name>/ of the seed inbox. The series routes are the real ones over the seed's database,
 // with the real series service and the fake style runner. Its worker is never started, so nothing
 // runs by itself; Start a series stores its series and then waits there.
@@ -342,8 +342,8 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'j1',
     state: 'arriving',
-    name: 'פרומו לסוף השבוע',
-    client: 'מאפיית הצפון',
+    name: 'Weekend promo',
+    client: 'North Bakery',
     inputs: [14, 3, 1, 1],
     sizeBytes: 3.1 * GB,
     addedAt: '2026-10-20T13:41:00.000Z',
@@ -364,19 +364,19 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'j3',
     state: 'held',
-    name: 'סרטון גיוס – Hiring video',
-    client: 'מאפיית הצפון',
+    name: 'Hiring video',
+    client: 'North Bakery',
     inputs: [6, 2, 1, 0],
     sizeBytes: 1.1 * GB,
     addedAt: '2026-10-20T13:17:00.000Z',
     updatedAt: '2026-10-20T13:22:00.000Z',
-    note: 'לפתוח על הצוות, לא על המבנה. עד דקה.',
+    note: 'Open on the team, not the building. Under a minute.',
   },
   {
     id: 'j4',
     state: 'queued',
     name: 'Patient testimonial',
-    client: 'מרפאת מירה',
+    client: 'Mira Clinic',
     inputs: [2, 1, 4, 0],
     sizeBytes: 1.4 * GB,
     addedAt: '2026-10-20T13:11:00.000Z',
@@ -399,7 +399,7 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'j6',
     state: 'ready',
-    name: 'השקת תפריט חדש',
+    name: 'New menu launch',
     client: 'Kova Coffee',
     inputs: [11, 0, 7, 0],
     sizeBytes: 2.8 * GB,
@@ -415,7 +415,7 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: 'j7',
     state: 'failed',
     name: 'Open house tour',
-    client: 'טל נכסים',
+    client: 'Tal Properties',
     inputs: [22, 0, 0, 1],
     sizeBytes: 7.9 * GB,
     addedAt: '2026-10-20T10:42:00.000Z',
@@ -442,8 +442,8 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'j9',
     state: 'ready',
-    name: 'טיפים להלבנת שיניים',
-    client: 'מרפאת מירה',
+    name: 'Whitening tips',
+    client: 'Mira Clinic',
     inputs: [4, 2, 0, 0],
     sizeBytes: 1.6 * GB,
     addedAt: '2026-10-19T13:20:00.000Z',
@@ -470,7 +470,7 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
     id: 'j11',
     state: 'ready',
     name: 'Apartment 4B walkthrough',
-    client: 'טל נכסים',
+    client: 'Tal Properties',
     inputs: [12, 0, 0, 1],
     sizeBytes: 3.3 * GB,
     addedAt: '2026-10-18T15:10:00.000Z',
@@ -481,8 +481,8 @@ export const CANVAS_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'j12',
     state: 'ready',
-    name: 'מאפים של בוקר',
-    client: 'מאפיית הצפון',
+    name: 'Morning pastries',
+    client: 'North Bakery',
     inputs: [6, 1, 0, 0],
     sizeBytes: 640 * MB,
     addedAt: '2026-10-17T10:15:00.000Z',
@@ -566,8 +566,8 @@ export const REVIEW_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'p1',
     state: 'review',
-    name: 'פרומו לסוף השבוע',
-    client: 'מאפיית הצפון',
+    name: 'Weekend promo',
+    client: 'North Bakery',
     inputs: [14, 3, 1, 1],
     sizeBytes: 3.1 * GB,
     addedAt: '2026-10-20T12:10:00.000Z',
@@ -640,12 +640,12 @@ export const REVIEW_JOB_SPECS: readonly CanvasJobSpec[] = [
   },
 ];
 
-const LAW = 'עו״ד דוד לוי';
-const MYTH = 'מיתוס או אמת';
-const FAQ = 'שאלות נפוצות';
+const LAW = 'Levy Law';
+const MYTH = 'Myth or fact';
+const FAQ = 'Common questions';
 
 /**
- * The rows of the Series boards (`--series`, board SeriesJobs): the client עו״ד דוד לוי with its
+ * The rows of the Series boards (`--series`, board SeriesJobs): the client Levy Law with its
  * two series, and two other jobs. The states, ages and queue places are the board's at the
  * canvas's moment; the sizes and inputs are plausible. Episodes 5 are the formats (`ready`).
  */
@@ -702,7 +702,7 @@ export const SERIES_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'rgm',
     state: 'queued',
-    name: 'טורניר בחירות – הכרזה',
+    name: 'Tournament announcement',
     client: 'RGM',
     inputs: [2, 1, 0, 0],
     sizeBytes: 420 * MB,
@@ -736,7 +736,7 @@ export const SERIES_JOB_SPECS: readonly CanvasJobSpec[] = [
   {
     id: 'dk',
     state: 'ready',
-    name: 'סיור בפרויקט',
+    name: 'Project tour',
     client: 'LAKESHORE',
     inputs: [9, 1, 0, 0],
     sizeBytes: 2.1 * GB,
@@ -758,7 +758,7 @@ export interface CanvasSeriesSpec {
   markdown: string;
 }
 
-/** `series.md` of מיתוס או אמת: the text of the SeriesFormat board, one line per entry. */
+/** `series.md` of Myth or fact: the text of the SeriesFormat board, one line per entry. */
 const MYTH_SERIES_MD = [
   `# Series: ${MYTH}`,
   `Format from ${MYTH} 5 (21 Oct 2026). Fonts, colours and captions come from the style of ${LAW}.`,
@@ -775,7 +775,7 @@ const MYTH_SERIES_MD = [
   '- Canvas: 1080×1920 at 29.97 fps, about 35 s',
   '## New in each episode',
   '- Title: from the client’s brief, word for word',
-  '- Stamp: the verdict word from the brief (מיתוס in episode 5)',
+  '- Stamp: the verdict word from the brief (Myth in episode 5)',
   '- Footage: the clips in the episode’s folder',
   '- Captions: from the speech',
   '## Kit',
@@ -785,7 +785,7 @@ const MYTH_SERIES_MD = [
   .concat('\n');
 
 /**
- * `series.md` of שאלות נפוצות. A short stand-in: the design has no format text for this series.
+ * `series.md` of Common questions. A short stand-in: the design has no format text for this series.
  */
 const FAQ_SERIES_MD = [
   `# Series: ${FAQ}`,
@@ -864,8 +864,8 @@ export async function seedCanvasSeries(
 }
 
 /**
- * The two series of the Job sheet boards (`--sheet`): the lawyer's "מיתוס או אמת" (the format is
- * episode 5, the paid job; episode 6 is the one being edited) and "שאלות נפוצות" (episode 5, the
+ * The two series of the Job sheet boards (`--sheet`): the lawyer's "Myth or fact" (the format is
+ * episode 5, the paid job; episode 6 is the one being edited) and "Common questions" (episode 5, the
  * job in Review on its second cut). The series.md files are the Series boards' own.
  */
 export const SHEET_SERIES_SPECS: readonly CanvasSeriesSpec[] = [
@@ -873,7 +873,7 @@ export const SHEET_SERIES_SPECS: readonly CanvasSeriesSpec[] = [
   { ...(CANVAS_SERIES_SPECS[1] as CanvasSeriesSpec), ...SHEET_SERIES_JOBS.faq },
 ];
 
-/** The lawyer's "מיתוס או אמת" of the Soundtrack boards (`--music`): episode 5 is the format, episode 6 is in Review. */
+/** The lawyer's "Myth or fact" of the Soundtrack boards (`--music`): episode 5 is the format, episode 6 is in Review. */
 export const MUSIC_SERIES_SPECS: readonly CanvasSeriesSpec[] = [
   { ...(CANVAS_SERIES_SPECS[0] as CanvasSeriesSpec), ...MUSIC_SERIES_JOBS },
 ];

@@ -86,12 +86,12 @@ describe('buildAnalyticsSeed', () => {
     }
   });
 
-  it('has the notes of the rounds, a topic for all but the newest three, and Hebrew among them', () => {
+  it('has the notes of the rounds, a topic for all but the newest three, all in English', () => {
     const notes = seed.jobs.flatMap((job) => job.notes);
     expect(notes.length).toBeGreaterThanOrEqual(30);
     expect(Object.keys(seed.topics)).toHaveLength(notes.length - 3);
     expect(new Set(Object.values(seed.topics)).size).toBeGreaterThanOrEqual(10);
-    expect(notes.some((note) => /[֐-׿]/.test(note.text))).toBe(true);
+    expect(notes.some((note) => /[֐-׿]/.test(note.text))).toBe(false);
     for (const job of seed.jobs) {
       // A round of notes is sent before its revise run, and as many rounds as the job has.
       expect(new Set(job.notes.map((note) => note.round)).size).toBe(job.round);

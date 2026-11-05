@@ -81,14 +81,16 @@ export function FontFrameView({
             textShadow: FONT_FRAME_CAPTION_SHADOW,
           }}
         >
-          <span
-            lang="he"
-            dir="rtl"
-            className="text-[32px] leading-[1.15]"
-            style={{ fontFamily: fonts.hebrew }}
-          >
-            {FONT_SAMPLE_TEXT.captionHebrew}
-          </span>
+          {!import.meta.env.VITE_DEMO && (
+            <span
+              lang="he"
+              dir="rtl"
+              className="text-[32px] leading-[1.15]"
+              style={{ fontFamily: fonts.hebrew }}
+            >
+              {FONT_SAMPLE_TEXT.captionHebrew}
+            </span>
+          )}
           <span
             lang="en"
             className="text-[17px] leading-tight"

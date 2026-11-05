@@ -189,8 +189,8 @@ test.describe('the walk, with the switch at its default', () => {
   const JOB = {
     spring: 'Spring promo',
     broken: 'Broken render',
-    six: 'מיתוס או אמת 6',
-    five: 'מיתוס או אמת 5',
+    six: 'Myth or fact 6',
+    five: 'Myth or fact 5',
   } as const;
 
   test.beforeAll(async () => {
@@ -289,7 +289,7 @@ test.describe('the walk, with the switch at its default', () => {
     await test.step('search: Hebrew names, and the archived line', async () => {
       await page.getByRole('button', { name: 'Search jobs and clients' }).tap();
       const field = page.getByRole('searchbox', { name: 'Search jobs and clients' });
-      await field.fill('מיתוס');
+      await field.fill('Myth');
       await expect(rows(page)).toHaveCount(1);
       await expect(rowOf(page, JOB.six)).toBeVisible();
       await expect(page.getByText('1 more archived ·')).toBeVisible();

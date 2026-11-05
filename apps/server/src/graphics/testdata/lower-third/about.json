@@ -3,8 +3,8 @@
   "kind": "lower-third",
   "lengthSec": 3,
   "variables": [
-    { "id": "name", "label": "Name", "default": "דנה לוי" },
-    { "id": "role", "label": "Role", "default": "מייסדת, Kova Coffee" }
+    { "id": "name", "label": "Name", "default": "Dana Levy" },
+    { "id": "role", "label": "Role", "default": "Founder, Kova Coffee" }
   ],
   "when": "The first time a person is named on camera.",
   "reply": "Made v1. A white pill with the name in Heebo Bold and the role under it on a dark pill. It slides in from the right in 0.4 s, holds, and slides out. The text sets its own direction, so Hebrew and English both work."

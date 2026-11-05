@@ -37,7 +37,7 @@ import { sharesOf, stubShare } from '../support/share-stub.ts';
 test.use({ viewport: { width: 390, height: 844 } });
 
 const CLIENT = 'RGM';
-const NEW_JOB = 'טורניר בחירות שש בש';
+const NEW_JOB = 'Backgammon tournament';
 const OLD_JOB = 'ראיון עם השחקן';
 /** The board's file: 27 MB. */
 const SIZE = 27_000_000;

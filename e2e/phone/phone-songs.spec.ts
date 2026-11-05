@@ -221,7 +221,7 @@ test('a phone: Add photo, the Music sheet with the song, and the sheet’s two f
     const music = await musicOf(id);
     expect(music.picked).toBe('song');
     expect(music.song).toMatchObject({
-      title: 'נתתי לך בית',
+      title: 'A Home for You',
       artist: 'Ofek Adanek',
       part: { startMs: 19_100, endMs: 25_100 },
     });
@@ -244,7 +244,7 @@ test('a phone: Add photo, the Music sheet with the song, and the sheet’s two f
     );
     const song = row(sheet, 'song');
     await expect(song).toHaveAttribute('aria-checked', 'true');
-    await expect(song).toContainText('נתתי לך בית');
+    await expect(song).toContainText('A Home for You');
     await expect(song.locator('[data-slot="music-artist"]')).toHaveText('Ofek Adanek');
     await expect(song).toContainText('in the preview');
     await expect(song).toContainText('the part used · 0:19 to 0:25');
@@ -366,7 +366,7 @@ test('a phone: Add photo, the Music sheet with the song, and the sheet’s two f
     expect(await heightOf(withSong)).toBeGreaterThanOrEqual(44);
     expect(await heightOf(withoutSong)).toBeGreaterThanOrEqual(44);
 
-    const line = `Post “${JOB} · no song.mp4”. In Instagram tap Add audio, pick נתתי לך בית by Ofek Adanek and slide it to start at 0:19. That way the reel counts toward the song’s trend.`;
+    const line = `Post “${JOB} · no song.mp4”. In Instagram tap Add audio, pick A Home for You by Ofek Adanek and slide it to start at 0:19. That way the reel counts toward the song’s trend.`;
     const post = sheet.locator('[data-slot="song-post"]');
     await post.scrollIntoViewIfNeeded();
     await expect(post.locator('[data-slot="song-post-text"]')).toHaveText(line);

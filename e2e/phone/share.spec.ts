@@ -2,7 +2,7 @@
 // size (the `phone` project of playwright.config.ts), 390×844 like the design boards, with the
 // Phone switch on. Chrome has no iPhone share sheet, so `navigator.share` and `canShare` are a
 // stand-in that records the file it is given and whether it came inside the tap
-// (support/share-stub.ts). One Approved job, RGM / טורניר בחירות שש בש, whose MP4 is made 27 MB
+// (support/share-stub.ts). One Approved job, RGM / Backgammon tournament, whose MP4 is made 27 MB
 // (the board's), and money.json gives RGM ₪40:
 //
 //   the row        an Approved row's next step is Share; it opens the job's sheet
@@ -37,7 +37,7 @@ test.use({ viewport: { width: 390, height: 844 } });
 test.describe.configure({ mode: 'serial' });
 
 const CLIENT = 'RGM';
-const JOB = 'טורניר בחירות שש בש';
+const JOB = 'Backgammon tournament';
 /** The board's file: 27 MB. */
 const SIZE = 27_000_000;
 const WAIT = { timeout: 90_000 };

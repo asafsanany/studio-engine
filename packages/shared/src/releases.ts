@@ -132,7 +132,7 @@ export const RELEASES: readonly Release[] = [
     version: '0.67.2',
     date: '2026-11-01',
     items: [
-      'On the phone, a short client name in the By client list (like שירה) is no longer split across two lines; the name and its job count now sit on one line.',
+      'On the phone, a short client name in the By client list (like Shira) is no longer split across two lines; the name and its job count now sit on one line.',
     ],
   },
   {
@@ -196,7 +196,7 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-31',
     items: [
       'A job with no footage of its own whose brief names clips that are in the client’s _Shared folder is now edited from those clips, instead of being made as a Generated video that stops for want of a voice-over script.',
-      'Press Retry on such a job (like בוקר טוב) and its brief is read again with the client’s shared files; it stops showing as Generated.',
+      'Press Retry on such a job (like Good Morning) and its brief is read again with the client’s shared files; it stops showing as Generated.',
     ],
   },
   {
@@ -2511,7 +2511,7 @@ export const RELEASES: readonly Release[] = [
     version: '0.13.2',
     date: '2026-10-22',
     items: [
-      'Behind the scenes: a new folder named after a series plus a number, like “מיתוס או אמת 6”, will join that series by itself. Series stay switched off for now.',
+      'Behind the scenes: a new folder named after a series plus a number, like “Myth or fact 6”, will join that series by itself. Series stay switched off for now.',
     ],
   },
   {

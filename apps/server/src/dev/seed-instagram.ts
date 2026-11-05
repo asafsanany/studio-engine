@@ -9,8 +9,8 @@
 //                   they are Uploaded), Orchard crunch is Delivered and not linked
 //   Flaky Studio    an account whose scan of Mon 19 Oct worked and whose scan of Mon 26 Oct failed:
 //                   S3's "The scan of Mon 26 Oct failed. The numbers are from Mon 19 Oct."
-//   ונציה         a private account (S3: "The account is private"), one job
-//   שיקוי           no Instagram yet (S8, and L1's "No Instagram yet" row), one job
+//   Venezia         a private account (S3: "The account is private"), one job
+//   Elixir           no Instagram yet (S8, and L1's "No Instagram yet" row), one job
 //
 // The routes are the real ones (clients, Instagram, link, delivery) over the seed's database. Scan
 // now, Save and scan and a handle typed into the dialog all work, answered by the fake scanner with
@@ -57,8 +57,8 @@ const WEEK_MS = 7 * 86_400_000;
 
 export const FALCON = 'Falcon FPV';
 export const FLAKY = 'Flaky Studio';
-export const PRIVATE_CLIENT = 'ונציה';
-export const NO_ACCOUNT = 'שיקוי';
+export const PRIVATE_CLIENT = 'Venezia';
+export const NO_ACCOUNT = 'Elixir';
 
 /** The seed's jobs: all finished (Approved), the delivered ones with the day the boards give. */
 export const INSTAGRAM_JOB_SPECS: readonly CanvasJobSpec[] = [
@@ -72,7 +72,7 @@ export const INSTAGRAM_JOB_SPECS: readonly CanvasJobSpec[] = [
   job('ig-flaky', FLAKY, 'Launch teaser', '2026-10-17', {
     deliveredAt: '2026-10-18T09:00:00.000Z',
   }),
-  job('ig-private', PRIVATE_CLIENT, 'ערב טעימות', '2026-10-14', {
+  job('ig-private', PRIVATE_CLIENT, 'Tasting night', '2026-10-14', {
     deliveredAt: '2026-10-15T09:00:00.000Z',
     paidOn: '2026-10-20T09:00:00.000Z',
   }),

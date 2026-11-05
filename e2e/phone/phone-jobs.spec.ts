@@ -3,8 +3,8 @@
 // once, in two clients (one with Hebrew names):
 //
 //   Acme              Spring promo, Autumn reel (Approved), Broken render (Failed)
-//   דוד לוי           מיתוס או אמת 6 (Delivered, not paid),
-//                     מיתוס או אמת 5 (Paid and archived)
+//   דוד לוי           Myth or fact 6 (Delivered, not paid),
+//                     Myth or fact 5 (Paid and archived)
 //
 //   By client         on at first: a header per client (avatar, name, count), the jobs one step in
 //                     with tree lines, the clients in order of their latest activity
@@ -40,8 +40,8 @@ const JOB = {
   spring: 'Spring promo',
   autumn: 'Autumn reel',
   broken: 'Broken render',
-  six: 'מיתוס או אמת 6',
-  five: 'מיתוס או אמת 5',
+  six: 'Myth or fact 6',
+  five: 'Myth or fact 5',
 } as const;
 
 const WAIT = { timeout: 90_000 };
@@ -490,7 +490,7 @@ test('Search: a 40 px field with 16 px text, the Mac’s matching, "N more archi
   });
 
   await test.step('Hebrew finds the client’s videos; the archived one is "1 more archived"', async () => {
-    await field.fill('מיתוס');
+    await field.fill('Myth');
     await expect(rows(page)).toHaveCount(1);
     await expect(rowNamed(page, JOB.six)).toBeVisible();
     await expect(page.getByText('1 more archived ·')).toBeVisible();
@@ -505,7 +505,7 @@ test('Search: a 40 px field with 16 px text, the Mac’s matching, "N more archi
   });
 
   await test.step('Show brings the archived video in and turns Show archived on', async () => {
-    await field.fill('מיתוס');
+    await field.fill('Myth');
     await page.getByRole('button', { name: 'Show', exact: true }).tap();
     await expect(rows(page)).toHaveCount(2);
     await expect(rowNamed(page, JOB.five)).toHaveAttribute('data-archived', '');
@@ -611,7 +611,7 @@ test('the phone jobs list at 390×844, for the design check', async ({ browser }
   await shoot(browser, testInfo, 'phone-jobs-search', {
     setup: async (page) => {
       await searchButton(page).tap();
-      await page.getByRole('searchbox', { name: 'Search jobs and clients' }).fill('מיתוס');
+      await page.getByRole('searchbox', { name: 'Search jobs and clients' }).fill('Myth');
       await expect(page.getByText('1 more archived ·')).toBeVisible();
     },
   });

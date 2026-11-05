@@ -338,8 +338,8 @@ test('a new graphic: a starter, a file, Send, the steps, v1 plays and names it',
   await test.step('what only the run knows reaches the page without a reload', async () => {
     // Text fields, "when edits use it" and the folder are not in the event; the page asked again
     const about = page.getByRole('complementary', { name: 'About this graphic' });
-    await expect(about.getByLabel('Name', { exact: true })).toHaveValue('דנה לוי');
-    await expect(about.getByLabel('Role', { exact: true })).toHaveValue('מייסדת, Kova Coffee');
+    await expect(about.getByLabel('Name', { exact: true })).toHaveValue('Dana Levy');
+    await expect(about.getByLabel('Role', { exact: true })).toHaveValue('Founder, Kova Coffee');
     await expect(about.getByLabel('When edits use it')).toHaveValue(
       'The first time a person is named on camera.',
     );

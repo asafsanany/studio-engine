@@ -1,8 +1,8 @@
 // PH16: Mark paid as a bottom sheet, and phone-sized messages with Undo, on the built server with
 // the fake runner, in Chrome at iPhone size (the `phone` project of playwright.config.ts), 390×844
 // like the design boards, with Chrome's emulated notch (47 px) and home indicator (34 px) and the
-// Phone switch on. One engine, Levi's three videos delivered (newest first: מיתוס או אמת 5,
-// מיתוס או אמת 4, שאלות נפוצות 5), one more of their delivered and archived, and one of RGM's:
+// Phone switch on. One engine, Levi's three videos delivered (newest first: Myth or fact 5,
+// Myth or fact 4, Common questions 5), one more of their delivered and archived, and one of RGM's:
 //
 //   the Delivered sheet   MJobSheetDelivered: Mark paid… is the big 48 px button; the list is
 //                         Share video, Not delivered yet and Archive, 48 px rows
@@ -36,14 +36,14 @@ import { stubShare } from '../support/share-stub.ts';
 test.use({ viewport: { width: 390, height: 844 } });
 test.describe.configure({ mode: 'serial' });
 
-const TAVO = 'עו״ד דוד לוי';
+const TAVO = 'Levy Law';
 const RGM = 'RGM';
 const JOB = {
-  five: 'מיתוס או אמת 5',
-  four: 'מיתוס או אמת 4',
-  faq: 'שאלות נפוצות 5',
-  archived: 'מיתוס או אמת 3',
-  rgm: 'טורניר בחירות שש בש',
+  five: 'Myth or fact 5',
+  four: 'Myth or fact 4',
+  faq: 'Common questions 5',
+  archived: 'Myth or fact 3',
+  rgm: 'Backgammon tournament',
 } as const;
 const WAIT = { timeout: 90_000 };
 
@@ -149,7 +149,7 @@ test.beforeAll(async () => {
   for (const key of Object.keys(JOB) as (keyof typeof JOB)[]) {
     ids[key] = (await jobNamed(JOB[key])).id;
   }
-  // Delivered oldest first, so that the list shows מיתוס או אמת 5 first; the archived one is
+  // Delivered oldest first, so that the list shows Myth or fact 5 first; the archived one is
   // delivered and put away without being paid.
   for (const key of ['archived', 'faq', 'four', 'five', 'rgm'] as const) {
     await post(`/api/jobs/${ids[key]}/deliver`);
@@ -402,7 +402,7 @@ test('Mark paid… opens the bottom sheet over the job sheet; paying 2 of 3 work
     const undo = await boxOf(message.getByRole('button', { name: 'Undo' }));
     expect(undo.height).toBe(36);
 
-    // The job sheet behind it shows the change: מיתוס או אמת 5 is paid.
+    // The job sheet behind it shows the change: Myth or fact 5 is paid.
     await expect(pillOf(page)).toHaveText('Paid');
     await expect(bigButton(page)).toHaveCount(0);
     // Two videos of the client are paid now, so the shared menu also offers to archive them all.

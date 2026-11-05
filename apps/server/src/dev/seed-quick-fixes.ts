@@ -66,8 +66,7 @@ const SWAP = 'Swap this shot for the drone shot from the beach';
 const MUSIC = 'The music should come in at 0:05, not at the start';
 const PACING = 'The middle drags. Tighten the pacing and cut on the beat';
 const SIGN = 'Change the sign behind her to English';
-const YELLOW_HE = 'תעשה את הכתוביות צהובות';
-const YELLOW = 'Make the captions yellow';
+const YELLOW_NOTE = 'Make the captions yellow';
 const NO_TITLE = 'Remove the title';
 
 /** The cut's length on the boards: the player says 0:39. */
@@ -202,7 +201,7 @@ const SEEDS: readonly SeedJob[] = [
       {
         id: 'qn-queue-2',
         atSec: 12,
-        text: YELLOW,
+        text: YELLOW_NOTE,
         route: QUICK('Changing the caption colour'),
         fix: { id: 'qx-queue-2', status: 'queued' },
       },
@@ -267,7 +266,7 @@ const SEEDS: readonly SeedJob[] = [
       {
         id: 'qn-all-2',
         atSec: 12,
-        text: YELLOW_HE,
+        text: YELLOW_NOTE,
         route: QUICK('Changing the caption colour'),
         fix: { id: 'qx-all-2', status: 'fixed', durationSec: 39 },
       },
