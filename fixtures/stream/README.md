@@ -2,15 +2,15 @@
 
 Real `claude -p --output-format stream-json --verbose` output from headless video-use runs, for the
 runner (E3) and the progress tracker (E4). Captured on 2026-10-20 with Claude Code 2.1.299 (the
-binary bundled with the desktop app), macOS 26.6, arm64. The command is the one in the root
-README, "Running edits". Media files are not committed.
+binary bundled with the desktop app), macOS 26.6, arm64. The command is the one in
+docs/reference.md, "Running edits". Media files are not committed.
 
 | File | What it is |
 | --- | --- |
 | `blocked-run.jsonl` | Opus, the full engine command, on a job with one 5 s voice note while ffmpeg and the ElevenLabs key were missing. The skill loads, checks its setup, writes `edit/project.md` and ends on the blocker. 41 s, exit 0. |
 | `blocked-run-tree.txt` | The job folder after that run: created and modified times (UTC), bytes, path. |
 | `subagent-probe.jsonl` | Haiku probe with the same flags and a scripted prompt: Bash outside the job folder, Write, loading `video-use` with the Skill tool, and one sub-agent (Task). Shows how a background sub-agent appears in the stream. |
-| `sample-run.jsonl` | **The full edit.** Opus, the engine command (with `CLAUDE_CODE_SHELL=/bin/bash` and the PATH from the README), on `Acme Studio/Launch teaser`: one 1080p30 test-pattern clip with ~15 s of macOS `say` speech and a false start. 249 events, 41 turns, 470 s, exit 0, no permission denials. Result: `edit/final.mp4`, 11.3 s, 1920×1080 H.264/AAC, −14.1 LUFS. The false start is cut, there are 3 HyperFrames graphics and word-highlight captions, and a critic sub-agent pass ran. The 20 base64 image blobs (frames the model looked at) are replaced by `<base64 elided by E1: N chars>`; everything else is byte-for-byte. The real log has lines up to ~1 MB. |
+| `sample-run.jsonl` | **The full edit.** Opus, the engine command (with `CLAUDE_CODE_SHELL=/bin/bash` and the PATH from docs/reference.md), on `Acme Studio/Launch teaser`: one 1080p30 test-pattern clip with ~15 s of macOS `say` speech and a false start. 249 events, 41 turns, 470 s, exit 0, no permission denials. Result: `edit/final.mp4`, 11.3 s, 1920×1080 H.264/AAC, −14.1 LUFS. The false start is cut, there are 3 HyperFrames graphics and word-highlight captions, and a critic sub-agent pass ran. The 20 base64 image blobs (frames the model looked at) are replaced by `<base64 elided by E1: N chars>`; everything else is byte-for-byte. The real log has lines up to ~1 MB. |
 | `sample-run-tree.txt` | (1) When each file appeared in `edit/`, polled every 500 ms during that run (`+` appeared, `~` size settled, `-` removed), with HyperFrames' per-render temp folders collapsed to one line each. (2) The job folder's final tree. The finished job itself is kept in `~/.studio-engine/e1-sample-run/` (not committed). |
 
 ## What the stream shows

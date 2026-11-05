@@ -74,7 +74,7 @@ describe('Falcon FPV', () => {
     expect(result.scan).toMatchObject({ followers: FALCON_FOLLOWERS, reelsRead: 22 });
     expect(instagram.getAccount('falcon')).toMatchObject({
       fullName: 'Falcon FPV',
-      biography: 'FPV drone pilot. Italy and Israel. Bookings in DM.',
+      biography: 'FPV drone pilot. Bookings in DM.',
       private: false,
       photoSavedAt: expect.any(Number),
     });

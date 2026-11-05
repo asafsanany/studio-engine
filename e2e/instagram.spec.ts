@@ -257,9 +257,7 @@ test('Add Instagram: the dialog, the first scan reads, and the page fills in wit
   });
 
   await test.step('the page has the account’s facts and the sample’s numbers', async () => {
-    await expect(
-      page.getByText('FPV drone pilot. Italy and Israel. Bookings in DM.'),
-    ).toBeVisible();
+    await expect(page.getByText('FPV drone pilot. Bookings in DM.')).toBeVisible();
     await expect(page.getByRole('link', { name: '@falcon.fpv on Instagram' })).toHaveAttribute(
       'href',
       'https://www.instagram.com/falcon.fpv/',

@@ -56,7 +56,7 @@ describe('what the page header adds', () => {
       handle: 'falcon.fpv',
       url: 'https://www.instagram.com/falcon.fpv/',
       followers: '12,480 followers',
-      bio: 'FPV drone pilot. Italy and Israel. Bookings in DM.',
+      bio: 'FPV drone pilot. Bookings in DM.',
     });
   });
 

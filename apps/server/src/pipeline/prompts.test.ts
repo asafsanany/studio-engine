@@ -39,7 +39,7 @@ const job = { client: 'Acme Studio', job: 'Launch teaser' };
 const EIGHT_STEPS =
   'steps are: 1 Brief, 2 Transcribe, 3 Scan, 4 Plan, 5 Cut, 6 Preview, 7 Check, 8 Render.';
 
-const README = fileURLToPath(new URL('../../../../README.md', import.meta.url));
+const REFERENCE = fileURLToPath(new URL('../../../../docs/reference.md', import.meta.url));
 
 // The two checks preview-finish.md carries for the snapshots. A revise run reads them through
 // `{{> preview-finish}}` only, so revise.md has no copy of its own.
@@ -3216,17 +3216,17 @@ describe('the Brief prompt’s file list', () => {
   });
 });
 
-describe('README', () => {
-  // P9 (CVP-90): the README showed a start prompt that was several rules behind the one the engine
+describe('docs/reference.md', () => {
+  // P9 (CVP-90): the reference showed a start prompt that was several rules behind the one the engine
   // sends. Its "The command" section keeps the first ```text block as a copy of the start prompt,
   // with <Client> and <Job> for the names; editing prompts/*.md means updating that block too.
   // Since W15 Review is on by default, so the block is the start prompt with the switch on.
   it('shows the start prompt the engine sends with Review on, word for word', async () => {
-    const readme = readFileSync(README, 'utf8');
+    const readme = readFileSync(REFERENCE, 'utf8');
     const section = readme.indexOf('### The command');
-    expect(section, 'README.md has no "### The command" section').toBeGreaterThan(-1);
+    expect(section, 'docs/reference.md has no "### The command" section').toBeGreaterThan(-1);
     const block = /```text\n([\s\S]*?)\n```/.exec(readme.slice(section));
-    expect(block, 'README.md "The command" has no ```text block').not.toBeNull();
+    expect(block, 'docs/reference.md "The command" has no ```text block').not.toBeNull();
     const sent = await buildPrompt('start', { client: '<Client>', job: '<Job>', review: true });
     expect(block?.[1]).toBe(
       sent.trimEnd().replaceAll(COLOR_GRADE_SCRIPT, '<Studio Engine>/scripts/color-grade/run.sh'),
