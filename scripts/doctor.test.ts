@@ -206,7 +206,7 @@ describe('checkEditVideoSkill', () => {
 
 describe('checkSkill', () => {
   const installed = () => join(home, '.claude/skills/video-use/SKILL.md');
-  const handoff = () => join(home, '.studio-engine/handoff/video-use/SKILL.md');
+  const bundled = () => join(home, 'repo/skills/video-use/SKILL.md');
   const skillText = (body = '') =>
     `---\nname: video-use\n---\nOperating mode: judgment, not questions\n${body}`;
 
@@ -215,61 +215,57 @@ describe('checkSkill', () => {
     writeFileSync(file, text);
   }
 
-  it('passes with a plain ✓ when the installed skill matches the handoff copy', () => {
+  it('passes with a plain ✓ when the installed skill matches the repo copy', () => {
     write(installed(), skillText('same'));
-    write(handoff(), skillText('same'));
-    const check = checkSkill(home);
+    write(bundled(), skillText('same'));
+    const check = checkSkill(home, bundled());
     expect(check).toMatchObject({ ok: true, detail: '~/.claude/skills/video-use/SKILL.md' });
     expect(check.warn).toBeUndefined();
     expect(check.notes).toBeUndefined();
     expect(check.fix).toBeUndefined();
   });
 
-  it('warns, without failing, when the handoff copy differs from the installed one', () => {
+  it('warns, without failing, when the repo copy differs from the installed one', () => {
     write(installed(), skillText('old'));
-    write(handoff(), skillText('new'));
-    const check = checkSkill(home);
+    write(bundled(), skillText('new'));
+    const check = checkSkill(home, bundled());
     expect(check).toMatchObject({ ok: true, warn: true });
     expect(check.detail).toContain('older copy of the skill');
     expect(check.notes).toEqual([
-      '~/.claude/skills/video-use/SKILL.md differs from ~/.studio-engine/handoff/video-use/SKILL.md',
+      '~/.claude/skills/video-use/SKILL.md differs from skills/video-use/SKILL.md',
     ]);
-    expect(check.fix).toBe(
-      'cp ~/.studio-engine/handoff/video-use/SKILL.md ~/.claude/skills/video-use/',
-    );
+    expect(check.fix).toBe('cp skills/video-use/SKILL.md ~/.claude/skills/video-use/');
   });
 
   it('shows the warning as a ! line with its fix, and the run still counts as passing', () => {
     write(installed(), skillText('old'));
-    write(handoff(), skillText('new'));
-    const checks = [checkSkill(home)];
+    write(bundled(), skillText('new'));
+    const checks = [checkSkill(home, bundled())];
     const report = formatReport(checks);
     expect(report).toContain('! video-use skill');
-    expect(report).toContain(
-      'fix: cp ~/.studio-engine/handoff/video-use/SKILL.md ~/.claude/skills/video-use/',
-    );
+    expect(report).toContain('fix: cp skills/video-use/SKILL.md ~/.claude/skills/video-use/');
     expect(report).toContain('1 of 1 checks passed (1 with a warning).');
     // The CLI exits 1 only when some check is not ok.
     expect(checks.every((c) => c.ok)).toBe(true);
   });
 
-  it('behaves as before when there is no handoff copy', () => {
+  it('behaves as before when there is no repo copy', () => {
     write(installed(), skillText('old'));
-    const check = checkSkill(home);
+    const check = checkSkill(home, bundled());
     expect(check).toMatchObject({ ok: true, detail: '~/.claude/skills/video-use/SKILL.md' });
     expect(check.warn).toBeUndefined();
     expect(check.fix).toBeUndefined();
   });
 
   it('still fails when the installed skill is missing or is not the Studio Engine one', () => {
-    write(handoff(), skillText('new'));
-    expect(checkSkill(home)).toMatchObject({
+    write(bundled(), skillText('new'));
+    expect(checkSkill(home, bundled())).toMatchObject({
       ok: false,
       detail: expect.stringContaining('missing'),
     });
 
     write(installed(), '---\nname: video-use\n---\nUpstream text that asks questions.\n');
-    expect(checkSkill(home)).toMatchObject({
+    expect(checkSkill(home, bundled())).toMatchObject({
       ok: false,
       detail: expect.stringContaining('asks questions'),
     });
@@ -277,9 +273,17 @@ describe('checkSkill', () => {
 
   it('shows the warning in the full run too, and leaves it passing', () => {
     write(installed(), skillText('old'));
-    write(handoff(), skillText('new'));
+    write(bundled(), skillText('new'));
     const check = runChecks(home, { PATH: '' }, '22.0.0').find((c) => c.name === 'video-use skill');
     expect(check).toMatchObject({ ok: true, warn: true });
+  });
+
+  it('accepts the skill this repo ships, unchanged', () => {
+    const shipped = new URL('../skills/video-use/SKILL.md', import.meta.url);
+    write(installed(), readFileSync(shipped, 'utf8'));
+    const check = checkSkill(home);
+    expect(check).toMatchObject({ ok: true, detail: '~/.claude/skills/video-use/SKILL.md' });
+    expect(check.warn).toBeUndefined();
   });
 });
 
