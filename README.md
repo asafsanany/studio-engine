@@ -4,7 +4,7 @@
 
 Studio Engine runs on your own computer and edits every job with [Claude Code](https://claude.com/claude-code). It cuts, captions and grades the video, then waits for your notes before it renders.
 
-![The Jobs list, with jobs editing, queued and ready to review](docs/images/jobs.png)
+![The Jobs list, with jobs editing, queued and ready to review](https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/jobs.png)
 
 ## How it works
 
@@ -14,10 +14,10 @@ Studio Engine runs on your own computer and edits every job with [Claude Code](h
 4. **Approve,** and the final video lands in `_Exports/<Client>/<Job>.mp4`.
 
 <p align="center">
-  <img src="docs/images/review.png" width="620" alt="The Review player, with two notes pinned to moments in the video">
+  <img src="https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/review.png" width="620" alt="The Review player, with two notes pinned to moments in the video">
 </p>
 
-![A job opened under its row, showing its steps, notes and details](docs/images/job.png)
+![A job opened under its row, showing its steps, notes and details](https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/job.png)
 
 ## What else it does
 
@@ -31,15 +31,15 @@ Studio Engine runs on your own computer and edits every job with [Claude Code](h
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/images/analytics.png" alt="Analytics: jobs finished, editing time and footage per week"></td>
-    <td width="50%"><img src="docs/images/instagram.png" alt="A client's Instagram: followers and the plays of every reel"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/analytics.png" alt="Analytics: jobs finished, editing time and footage per week"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/instagram.png" alt="A client's Instagram: followers and the plays of every reel"></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="docs/images/money.png" alt="The month's income, expenses and profit"></td>
+    <td colspan="2"><img src="https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/money.png" alt="The month's income, expenses and profit"></td>
   </tr>
   <tr>
-    <td><img src="docs/images/luts.png" alt="A LUT as a before and after on a test photo"></td>
-    <td><img src="docs/images/phone.png" alt="The Jobs list on a phone, grouped by client"></td>
+    <td><img src="https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/luts.png" alt="A LUT as a before and after on a test photo"></td>
+    <td><img src="https://raw.githubusercontent.com/asafsanany/studio-engine/main/docs/images/phone.png" alt="The Jobs list on a phone, grouped by client"></td>
   </tr>
 </table>
 
