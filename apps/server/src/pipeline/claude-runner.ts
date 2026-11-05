@@ -25,7 +25,7 @@
 // 10 minutes (a clip waits for Higgsfield for up to about 9), and the key files are denied to its
 // Read tool as they are to the Generate run. Every other run's command and environment are unchanged.
 //
-// How a run ends (README "Running edits" → "When is a run finished?"):
+// How a run ends (docs/reference.md "Running edits" → "When is a run finished?"):
 //   - success: the process exited 0 AND edit/final.mp4 exists. Only after the exit: final.mp4
 //     appears minutes before the end and can be deleted and rendered again after the self-check.
 //     A run that ends in Review (a revise run, or an edit run with the Review switch on,

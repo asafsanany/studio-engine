@@ -32,7 +32,7 @@ describe('RENDER_MODEL', () => {
 });
 
 describe('claudeArgs', () => {
-  it('is the command E1 verified (README "Running edits")', () => {
+  it('is the command E1 verified (docs/reference.md "Running edits")', () => {
     expect(claudeArgs({ prompt: 'P', model: 'opus' })).toEqual([
       '-p',
       'P',

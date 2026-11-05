@@ -1,4 +1,4 @@
-// The exact `claude -p` command and environment E1 verified (README "Running edits": why each flag,
+// The exact `claude -p` command and environment E1 verified (docs/reference.md "Running edits": why each flag,
 // what the child's environment needs).
 
 import { readdirSync, realpathSync } from 'node:fs';

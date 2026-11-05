@@ -4,8 +4,8 @@
  * the results as JSON instead. A warning (`!`) is a check that passed with something worth
  * knowing: it prints its fix but doesn't change the exit code.
  *
- * Runs on plain Node 22 (built-in type stripping), so it has no dependencies. The README
- * section "Running edits" explains each prerequisite.
+ * Runs on plain Node 22 (built-in type stripping), so it has no dependencies. The
+ * section "Running edits" of docs/reference.md explains each prerequisite.
  */
 import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -1969,7 +1969,7 @@ export function proxiesToEngine(proxy: string | undefined, port: number): boolea
 /**
  * The Vite dev server (`pnpm dev`). It serves the pages, which the tsx-watch engine does not, and
  * hands `/api` on to the engine, which still checks the tailnet login. Serve may point at it while
- * the app is being developed (README › Open it on your phone).
+ * the app is being developed (docs/reference.md › Open it on your phone).
  */
 export const DEV_WEB_PORT = 5173;
 
@@ -2142,7 +2142,7 @@ export function checkMoney(home: string, env: NodeJS.ProcessEnv): Check {
     ok: false,
     detail: `invalid – ${first}`,
     notes: rest.map((issue) => `also: ${issue}`),
-    fix: `Correct ${tilde(file, home)} (see "Money" in the README). ${
+    fix: `Correct ${tilde(file, home)} (see "Money" in docs/reference.md). ${
       hasCopy
         ? 'Until then the engine uses the last good copy it saved (money.last-good.json)'
         : 'There is no good copy saved, so until then the engine uses the defaults and Mark delivered is refused'

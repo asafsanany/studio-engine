@@ -1,6 +1,6 @@
 // Turns how a `claude -p` run ended into the one line the Jobs page shows for a failed job.
 //
-// The rules, in order (README "Running edits" → "When is a run finished?"):
+// The rules, in order (docs/reference.md "Running edits" → "When is a run finished?"):
 //   1. It could not start: the binary is missing or not executable.
 //   2. It ran too long: "Timed out ...".
 //   3. It exited 0 without edit/final.mp4: the run stopped on a blocker it could not fix. The

@@ -1,4 +1,4 @@
-# Studio Engine
+# Studio Engine reference
 
 Studio Engine is a local app that watches `~/Studio Inbox/<Client>/<Job>` folders, edits each job with the video-use skill through headless Claude Code and shows live progress on a Jobs web page. Each edit waits in [Review](#review) as a live preview, where the owner leaves typed or voice notes or approves it. After Approve the engine renders the final video and exports it to `_Exports/<Client>/<Job>.mp4`.
 
@@ -6,16 +6,6 @@ Studio Engine is a local app that watches `~/Studio Inbox/<Client>/<Job>` folder
 
 - Node 22 (see `.nvmrc`)
 - pnpm (the exact version is pinned in `package.json`; `corepack enable` picks it up)
-
-## Look around first
-
-The `demo` branch runs the whole app on made-up data, with no keys and no footage. See its README:
-
-```bash
-git switch demo
-pnpm i
-pnpm demo
-```
 
 ## Getting started
 
@@ -210,7 +200,7 @@ Then open http://localhost:4311. The server runs in this terminal; press Ctrl+C 
 - The phone layout is on too: a browser window narrower than 768 px shows the phone's Jobs list, job sheet and Settings instead of the sidebar app (see [Open it on your phone](#open-it-on-your-phone)). `STUDIO_PHONE=0` (or `"phone": false` in `config.json`) keeps the Mac layout at every width.
 - The Graphics page is on too: it sits under Clients in the sidebar, and each graphic is made by a Claude run (with `STUDIO_RUNNER=fake`, a canned one). `STUDIO_GRAPHICS=0` (or `"graphics": false` in `config.json`) turns it off: no Graphics page, and the graphics routes answer 404.
 - Graphics in edits is on too: every edit can use the library (see [Graphics in edits](#graphics-in-edits)). `STUDIO_GRAPHICS_IN_EDITS=0` (or `"graphicsInEdits": false` in `config.json`) turns it off.
-- The LUTs page is on too: it sits under Graphics in the sidebar, shows every LUT as a before/after on a test frame and imports your own `.cube` and `.3dl` files into `<inbox>/_LUTs`. `STUDIO_LUTS=0` (or `"luts": false` in `config.json`) turns it off: no LUTs page, and the LUTs routes answer 404. Notes naming a LUT (`@luts/name`) are on too (see [Naming a LUT in a note](docs/color-grade.md#naming-a-lut-in-a-note)): type `@` in a Review note or the job note and pick one, and the edit's colour grade uses it. `STUDIO_LUTS_IN_EDITS=0` (or `"lutsInEdits": false` in `config.json`) turns that off; it still does nothing while `STUDIO_LUTS` is off.
+- The LUTs page is on too: it sits under Graphics in the sidebar, shows every LUT as a before/after on a test frame and imports your own `.cube` and `.3dl` files into `<inbox>/_LUTs`. `STUDIO_LUTS=0` (or `"luts": false` in `config.json`) turns it off: no LUTs page, and the LUTs routes answer 404. Notes naming a LUT (`@luts/name`) are on too (see [Naming a LUT in a note](color-grade.md#naming-a-lut-in-a-note)): type `@` in a Review note or the job note and pick one, and the edit's colour grade uses it. `STUDIO_LUTS_IN_EDITS=0` (or `"lutsInEdits": false` in `config.json`) turns that off; it still does nothing while `STUDIO_LUTS` is off.
 - The Fonts page is on too: it sits under LUTs in the sidebar, shows every font family in `<inbox>/_Fonts` set in English and Hebrew in every weight, and imports your own `.ttf`, `.otf`, `.woff` and `.woff2` files into it (see [Shared fonts](#shared-fonts)). `STUDIO_FONTS=0` (or `"fonts": false` in `config.json`) turns it off: no Fonts page, and the Fonts routes answer 404. Notes naming a font (`@Heebo Bold`) are on too (see [Shared fonts](#shared-fonts)): `STUDIO_FONTS_IN_NOTES=0` (or `"fontsInNotes": false` in `config.json`) turns them off.
 - The Settings page (bottom of the sidebar, admin only) turns the Graphics, Fonts and LUTs switches on and off: it writes `graphics`, `fonts` and `luts` to `~/.studio-engine/config.json` (Music and Songs are not on it: they act only when a job asks for music, so turn them off with `STUDIO_MUSIC=0` and `STUDIO_SONGS=0`, or `"music": false` and `"songs": false` in `config.json`), and **Restart engine** on the page makes them count (the engine must run as the launchd agent to restart itself; an environment variable such as `STUDIO_FONTS` beats `config.json`, and then its switch is locked on the page).
 - Quick fixes are on too (`STUDIO_QUICK_FIXES=0`, or `"quickFixes": false` in `config.json`, turns the switch off: Review is exactly as it was before Auto, and the fix routes answer 404): with Auto effort in Review, a note that only changes the layer on top of the cut (a font, a caption's words, a colour, a title) is sorted by a small pass and fixed in Review at once, in about a minute, and the bigger ones wait for Send. The engine sorts each new note of a job on Auto in the background (a small Haiku run, logged in `logs/fix-route.log`) and fix the quick ones (a Sonnet run, one at a time per job and two jobs at once, that changes only `edit/preview/` and `edit/project.md`, kept as a copy in `edit/review/fixes/<id>/before/` so Undo can put them back; `GET /api/jobs/:id/fixes`, `POST /api/jobs/:id/fixes/:fixId/undo` and the before/after stills at `GET /api/jobs/:id/fixes/:fixId/compare/before.png`). While a fix is queued or running, Approve, Send, Export MP4, going back to an earlier cut and the music's Make another and Pick wait. A note fixed this way stays in the list as unsent until the round ends: Send puts it in `edit/review/round-N.md` under "Already changed in Review (keep these)" (its time, its words and what the fix said) and needs at least one note that still waits; with Auto, Send also waits while a note is being sorted and saves the tier of the revise run (`jobs.revise_tier`: Revise is Sonnet at High with a slim self-check, Full is the configured model at Extra high with today's check; a level chosen in `PUT /api/jobs/:id/review-effort`, `auto` or Medium/High/Extra high, makes every note wait and run at that level, as before Auto). Approve works when every unsent note was fixed here; those notes are stamped sent with round `job.round + 1`. Both clear the round's `edit/review/fixes/` files. On screen, each note gets a line under it ("Reading the note…", "Fixing it now · Changing the caption font", "Fixed in 48 s" with Undo on the newest fix, or "Goes with Send" and why), the video gets a pill ("Fixing at 0:12…", then "Changed at 0:12" with a Compare button that shows the moment as it was before while it is held), the footer says what Send or Approve will do, and the Effort menu starts with Auto (Medium, High and Extra high are the levels as before: every note waits for Send and runs at that level). Two kinds of job never take a quick fix (`review/generated-route.ts`, a guard in front of whichever router the engine uses): on a generated video a note about what is in a clip or about how the voice says a line is sorted `full` (it needs a new take of a clip or the line made again, which only a revise run can make) by the same word lists and the same clock as the hint under the note in Review, before the Haiku router is even asked, and the router's prompt has one more section for the notes the words miss (`prompts/fix-generated.md`); on a job with two formats a note the router calls quick is raised to `revise` and waits for Send, because a quick fix changes only `edit/preview/` and would leave the second format as it was.
@@ -259,11 +249,11 @@ Two warnings:
 
 `pnpm e2e` is not part of `pnpm check`, because it needs Chrome. Set `E2E_KEEP=1` to keep the run's temp folder for a look. The Quick fixes switch is on in every engine of the specs, as it is in the app (the engine's fake router and fake fix serve it); `E2E_QUICK_FIXES=0` turns it off for the engines that do not say (the review, music, fonts-preview and phone review specs pass both ways). Music and Songs are on in the app but pinned off in every engine of the specs that does not say (they make nothing unasked, but the specs are not about them): the music, songs, versions and phone music specs set them on, and `e2e/music-default.spec.ts` starts an engine with neither setting and checks the app's own default (on, and no music made for a job that did not ask). With music on, Review's footer says "without music" and the player's address carries the music's `&m=`, which the other specs' exact texts do not expect.
 
-Agents: read [CLAUDE.md](CLAUDE.md) first.
+Agents: read [CLAUDE.md](../CLAUDE.md) first.
 
 ## Running edits
 
-An edit is one headless Claude Code run with the job folder as its working directory. The run loads the video-use skill and writes everything to `<job>/edit/`, ending as a live HyperFrames composition in `edit/preview/`, and the job waits in [Review](#review). Send notes runs a revise run, and Approve runs a short render run (Sonnet) that writes `edit/final.mp4`; then the engine exports it. With Review off (`STUDIO_REVIEW=0`) the edit run renders `edit/final.mp4` itself and the job is ready. Before it, every edit run (start, resume and retry) goes through [the Brief step](#the-brief-step), which writes `edit/brief.md` for the edit run to read first. This was verified on 2026-10-20 with Claude Code 2.1.299 on macOS 26.6 (E1 · CVP-57). Sample streams and notes for the runner are in [`fixtures/stream/`](fixtures/stream/README.md).
+An edit is one headless Claude Code run with the job folder as its working directory. The run loads the video-use skill and writes everything to `<job>/edit/`, ending as a live HyperFrames composition in `edit/preview/`, and the job waits in [Review](#review). Send notes runs a revise run, and Approve runs a short render run (Sonnet) that writes `edit/final.mp4`; then the engine exports it. With Review off (`STUDIO_REVIEW=0`) the edit run renders `edit/final.mp4` itself and the job is ready. Before it, every edit run (start, resume and retry) goes through [the Brief step](#the-brief-step), which writes `edit/brief.md` for the edit run to read first. This was verified on 2026-10-20 with Claude Code 2.1.299 on macOS 26.6 (E1 · CVP-57). Sample streams and notes for the runner are in [`fixtures/stream/`](../fixtures/stream/README.md).
 
 ### Prerequisites
 
@@ -281,9 +271,9 @@ Run `pnpm run doctor`. It checks everything below and prints the fix for anythin
 | Node 22 | nvm | `nvm install 22` |
 | ElevenLabs key (transcription) | `~/Developer/video-use/.env`, mode 600 | see "ElevenLabs key" below |
 
-**edit-video** is in [`skills/edit-video`](skills/edit-video/README.md). video-use looks for it only at `~/.claude/skills/edit-video`, and takes the captions builder and Mode B from it.
+**edit-video** is in [`skills/edit-video`](../skills/edit-video/README.md). video-use looks for it only at `~/.claude/skills/edit-video`, and takes the captions builder and Mode B from it.
 
-Only the Studio Engine version of the skill works unattended. It is in [`skills/video-use`](skills/video-use/README.md), whose README lists what it changes from the original, right-to-left captions included. Upstream's own `SKILL.md` (which its installer symlinks into `~/.claude/skills/video-use`) stops to ask for approval before cutting, so the doctor rejects it.
+Only the Studio Engine version of the skill works unattended. It is in [`skills/video-use`](../skills/video-use/README.md), whose README lists what it changes from the original, right-to-left captions included. Upstream's own `SKILL.md` (which its installer symlinks into `~/.claude/skills/video-use`) stops to ask for approval before cutting, so the doctor rejects it.
 
 **Which `claude`.** There's nothing to install. The engine and the doctor take the first of these:
 1. `claudeBin` in `~/.studio-engine/config.json`.
@@ -366,7 +356,7 @@ Finish the edit as a live preview, not a rendered video. The owner watches it in
 - The job is done when edit/preview/index.html passes lint and you have checked the snapshots. Do not leave anything running in the background when you finish.
 ```
 
-`<Studio Engine>` in the grading command stands for this repository's absolute path, computed by the server; the [grading workflow](docs/color-grade.md) covers installation, manifests and verification.
+`<Studio Engine>` in the grading command stands for this repository's absolute path, computed by the server; the [grading workflow](color-grade.md) covers installation, manifests and verification.
 
 With the switch off (`STUDIO_REVIEW=0`), the first line says “deliver edit/final.mp4” instead, and the finish is `final-finish.md`'s one line. A round of notes sends `revise.md`, and Approve sends `render.md`.
 
@@ -649,7 +639,3 @@ Everything you pay, and the price you charge, live in one file you edit by hand:
 - **`pnpm run doctor`** reads the file the same way and prints one line: `money.json  not found (200 per job, no expenses yet)`, `money.json  2 subscriptions, 1 charge`, or `money.json  invalid – <the first problem>` (a failure, with the other problems under it).
 
 The schema and the money maths (`priceForClient`, `toIls`, `subscriptionCharges`, `chargesBetween`, the month helpers and the shape of the `GET /api/money` answer) are in `packages/shared/src/domain/money.ts`, and `computeMoney`, which works a month out, is in `money-compute.ts` next to it; the loader, the only code that reads the file, is `apps/server/src/money/money-file.ts`, and the route is `apps/server/src/routes/money.ts`.
-
-## License
-
-[MIT](LICENSE). A few bundled files keep their own terms, including GSAP, which isn't open source. They're listed in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

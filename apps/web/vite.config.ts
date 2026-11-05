@@ -43,7 +43,7 @@ export default defineConfig({
   ],
   define: { __APP_VERSION__: JSON.stringify(rootPackage.version) },
   resolve: { tsconfigPaths: true },
-  // `.ts.net`: the phone opens the dev server through Tailscale Serve (README › Open it on your
+  // `.ts.net`: the phone opens the dev server through Tailscale Serve (docs/reference.md › Open it on your
   // phone). Vite still listens on localhost only, and the engine behind /api checks the tailnet
   // login itself.
   server: { port: 5173, strictPort: true, proxy: apiProxy, allowedHosts: ['.ts.net'] },

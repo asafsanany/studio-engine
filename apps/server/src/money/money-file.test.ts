@@ -148,8 +148,8 @@ describe('readMoneyFile', () => {
   });
 });
 
-describe('the README example', () => {
-  const readme = readFileSync(new URL('../../../../README.md', import.meta.url), 'utf8');
+describe('the reference example', () => {
+  const readme = readFileSync(new URL('../../../../docs/reference.md', import.meta.url), 'utf8');
   const section = readme.slice(readme.indexOf('\n## Money\n'));
   const blocks = [...section.matchAll(/```json\n([\s\S]*?)\n\s*```/g)].map(
     (match) => match[1] ?? '',
@@ -158,7 +158,7 @@ describe('the README example', () => {
   it('is a valid money.json with the subscriptions and charge it describes', () => {
     write(blocks[0] ?? '');
     const read = readMoneyFile(path);
-    if (read.status !== 'ok') throw new Error(`README example: ${JSON.stringify(read)}`);
+    if (read.status !== 'ok') throw new Error(`Reference example: ${JSON.stringify(read)}`);
     expect(read.money.subscriptions.map((s) => [s.id, s.currency, s.day])).toEqual([
       ['claude', 'USD', 12],
       ['elevenlabs', 'USD', 3],
