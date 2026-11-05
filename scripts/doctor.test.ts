@@ -171,36 +171,71 @@ describe('parseDotenv', () => {
 });
 
 describe('checkEditVideoSkill', () => {
-  const link = () => join(home, '.claude/skills/edit-video');
-  const synced = () => join(home, '.claude/skills/synced/org_user/edit-video');
+  const installedDir = () => join(home, '.claude/skills/edit-video');
+  const installed = () => join(installedDir(), 'SKILL.md');
+  const bundled = () => join(home, 'repo/skills/edit-video/SKILL.md');
+  const other = () => join(home, 'elsewhere/edit-video');
+  const skillText = (body = '') => `---\nname: "edit-video"\n---\n${body}`;
+  const install =
+    'mkdir -p ~/.claude/skills/edit-video && cp skills/edit-video/SKILL.md ~/.claude/skills/edit-video/';
 
-  function syncSkill() {
-    mkdirSync(synced(), { recursive: true });
-    writeFileSync(join(synced(), 'SKILL.md'), '---\nname: "edit-video"\n---\n');
+  function write(file: string, text: string) {
+    mkdirSync(join(file, '..'), { recursive: true });
+    writeFileSync(file, text);
   }
 
-  it('fails with a link command when only the synced copy exists', () => {
-    syncSkill();
-    const check = checkEditVideoSkill(home);
-    expect(check.ok).toBe(false);
-    expect(check.fix).toBe(
-      'ln -sfn "$HOME/.claude/skills/synced/org_user/edit-video" "$HOME/.claude/skills/edit-video"',
-    );
+  it('fails with the install command when nothing is there', () => {
+    const check = checkEditVideoSkill(home, bundled());
+    expect(check).toMatchObject({ ok: false, fix: install });
+    expect(check.detail).toContain('missing');
   });
 
-  it('passes through a link to the synced copy, and fails once the link breaks', () => {
-    syncSkill();
-    symlinkSync(synced(), link());
-    expect(checkEditVideoSkill(home)).toMatchObject({ ok: true });
-    rmSync(synced(), { recursive: true });
-    expect(checkEditVideoSkill(home)).toMatchObject({
+  it('passes with a plain ✓ when the installed skill matches the repo copy', () => {
+    write(installed(), skillText('same'));
+    write(bundled(), skillText('same'));
+    const check = checkEditVideoSkill(home, bundled());
+    expect(check).toMatchObject({ ok: true, detail: '~/.claude/skills/edit-video/SKILL.md' });
+    expect(check.warn).toBeUndefined();
+  });
+
+  it('warns, without failing, when the repo copy differs from the installed one', () => {
+    write(installed(), skillText('old'));
+    write(bundled(), skillText('new'));
+    const check = checkEditVideoSkill(home, bundled());
+    expect(check).toMatchObject({
+      ok: true,
+      warn: true,
+      fix: 'cp skills/edit-video/SKILL.md ~/.claude/skills/edit-video/',
+    });
+    expect(check.notes).toEqual([
+      '~/.claude/skills/edit-video/SKILL.md differs from skills/edit-video/SKILL.md',
+    ]);
+  });
+
+  it('passes through a link to another copy, and fails once the link breaks', () => {
+    write(join(other(), 'SKILL.md'), skillText());
+    mkdirSync(join(installedDir(), '..'), { recursive: true });
+    symlinkSync(other(), installedDir());
+    expect(checkEditVideoSkill(home, bundled())).toMatchObject({ ok: true });
+    rmSync(other(), { recursive: true });
+    expect(checkEditVideoSkill(home, bundled())).toMatchObject({
       ok: false,
       detail: expect.stringContaining('broken'),
+      fix: `rm ~/.claude/skills/edit-video && ${install}`,
     });
   });
 
-  it('asks for a claude.ai sync when there is no copy at all', () => {
-    expect(checkEditVideoSkill(home).fix).toContain('claude.ai');
+  it('fails when that folder holds a different skill', () => {
+    write(installed(), '---\nname: something-else\n---\n');
+    expect(checkEditVideoSkill(home, bundled())).toMatchObject({ ok: false, fix: install });
+  });
+
+  it('accepts the skill this repo ships, unchanged', () => {
+    const shipped = new URL('../skills/edit-video/SKILL.md', import.meta.url);
+    write(installed(), readFileSync(shipped, 'utf8'));
+    const check = checkEditVideoSkill(home);
+    expect(check).toMatchObject({ ok: true, detail: '~/.claude/skills/edit-video/SKILL.md' });
+    expect(check.warn).toBeUndefined();
   });
 });
 
