@@ -244,7 +244,7 @@ export function falconInstagram(range: InstagramRange = 'since'): ClientInstagra
       since: '2026-08-01',
       addedAt: '2026-10-26T03:50:00.000Z',
       fullName: 'Falcon FPV',
-      bio: 'FPV drone pilot. Italy and Israel. Bookings in DM.',
+      bio: 'FPV drone pilot. Bookings in DM.',
       private: false,
       photoSavedAt: null,
     },

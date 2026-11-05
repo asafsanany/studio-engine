@@ -1175,7 +1175,7 @@ describe('instagramReelRows', () => {
         reel('new', { postedAt: ms('2026-10-20T10:00:00.000Z'), plays: 1_500, jobId: 'job-new' }),
       ],
       usual,
-      new Map([['job-mid', 'Italy']]),
+      new Map([['job-mid', 'Coastline']]),
     );
     expect(rows.map((row) => row.shortcode)).toEqual(['new', 'mid', 'old']);
     expect(rows[1]).toEqual({
@@ -1193,7 +1193,7 @@ describe('instagramReelRows', () => {
       hashtags: ['fpv'],
       pinned: true,
       paidPartnership: true,
-      job: { id: 'job-mid', name: 'Italy' },
+      job: { id: 'job-mid', name: 'Coastline' },
       timesUsual: 4,
     });
     // A linked job whose name is not known is shown by its id; theirs has no job.

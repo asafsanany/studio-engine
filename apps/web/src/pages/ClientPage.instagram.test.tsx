@@ -74,11 +74,11 @@ describe("a client's page: the header with an Instagram account", () => {
   it('puts the bio under the line, in its own direction', async () => {
     const markup = await page({ on: true, data: falconInstagram() });
     const line = markup.indexOf('12,480 followers');
-    const bio = markup.indexOf('FPV drone pilot. Italy and Israel. Bookings in DM.');
+    const bio = markup.indexOf('FPV drone pilot. Bookings in DM.');
     expect(line).toBeGreaterThan(-1);
     expect(bio).toBeGreaterThan(line);
     expect(markup).toMatch(
-      /<p dir="auto"[^>]*title="FPV drone pilot[^"]*"[^>]*>FPV drone pilot\. Italy and Israel\. Bookings in DM\.<\/p>/,
+      /<p dir="auto"[^>]*title="FPV drone pilot[^"]*"[^>]*>FPV drone pilot\. Bookings in DM\.<\/p>/,
     );
   });
 

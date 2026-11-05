@@ -108,8 +108,8 @@ function falcon() {
   deliver('Rooftop Run', '2026-10-02T09:00:00.000Z');
   deliver('Granite', '2026-10-23T09:00:00.000Z');
   deliver('Orchard crunch', '2026-10-21T09:00:00.000Z');
-  deliver('Italy', '2026-10-19T09:00:00.000Z');
-  kit.deliveries.markPaid([jobId('Italy'), jobId('Rooftop Run')], '2026-10-24');
+  deliver('Coastline', '2026-10-19T09:00:00.000Z');
+  kit.deliveries.markPaid([jobId('Coastline'), jobId('Rooftop Run')], '2026-10-24');
 
   const first = okScan('2026-10-12T06:00:00.000Z', 12_000);
   const second = okScan('2026-10-19T06:00:00.000Z', 12_168);
@@ -338,7 +338,7 @@ describe('readClientInstagram', () => {
 
     const { linkableJobs: jobs } = readClientInstagram(instagram, FALCON, 'since', ADMIN);
 
-    // Rooftop Run is linked to BBB, so it is not offered; Italy is paid.
+    // Rooftop Run is linked to BBB, so it is not offered; Coastline is paid.
     expect(jobs).toEqual([
       {
         jobId: jobId('Granite'),
@@ -353,8 +353,8 @@ describe('readClientInstagram', () => {
         stage: 'delivered',
       },
       {
-        jobId: jobId('Italy'),
-        name: 'Italy',
+        jobId: jobId('Coastline'),
+        name: 'Coastline',
         deliveredAt: '2026-10-19T09:00:00.000Z',
         stage: 'paid',
       },

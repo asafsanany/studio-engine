@@ -376,7 +376,7 @@ function falconFpv(options: Required<SampleInstagramOptions>): FakeInstagramAcco
           handle,
           {
             fullName: 'Falcon FPV',
-            biography: 'FPV drone pilot. Italy and Israel. Bookings in DM.',
+            biography: 'FPV drone pilot. Bookings in DM.',
             followersCount: followers,
             followsCount: 412,
             postsCount: 187,
