@@ -260,16 +260,7 @@ export function checkSkill(
       fix: linked ? `rm ~/.claude/skills/video-use && ${install}` : install,
     };
   }
-  // Live edits read the installed copy, but fixes to the skill land in this repo's copy first
-  // (~/.claude is protected, so a person copies it over). A difference means edits are running an
-  // older skill. No repo copy means there is nothing to compare, so the check is as before.
-  let bundled: string | null = null;
-  try {
-    bundled = readFileSync(bundledFile, 'utf8');
-  } catch {
-    // No repo copy to compare with.
-  }
-  if (bundled !== null && bundled !== text) {
+  if (differsFromRepoCopy(text, bundledFile)) {
     return {
       name,
       ok: true,
@@ -280,6 +271,19 @@ export function checkSkill(
     };
   }
   return { name, ok: true, detail: tilde(file, home) };
+}
+
+/**
+ * Live edits read the installed copy, but fixes to a skill land in this repo's copy first
+ * (~/.claude is protected, so a person copies it over). A difference means edits are running an
+ * older skill. No repo copy means there is nothing to compare.
+ */
+function differsFromRepoCopy(installedText: string, bundledFile: string): boolean {
+  try {
+    return readFileSync(bundledFile, 'utf8') !== installedText;
+  } catch {
+    return false;
+  }
 }
 
 function checkHyperframesSkills(home: string): Check {
@@ -297,54 +301,57 @@ function checkHyperframesSkills(home: string): Check {
       };
 }
 
-/** Skill folders the desktop app syncs from claude.ai: ~/.claude/skills/synced/<account>/<name>. */
-export function syncedSkillDirs(skillsDir: string, name: string): string[] {
-  const root = join(skillsDir, 'synced');
-  return listDir(root)
-    .map((account) => join(root, account, name))
-    .filter((dir) => existsSync(join(dir, 'SKILL.md')));
-}
+/** The other skill this repo ships. */
+const BUNDLED_EDIT_VIDEO = 'skills/edit-video/SKILL.md';
 
-/**
- * edit-video is a claude.ai skill the desktop app syncs into ~/.claude/skills/synced/. video-use
- * looks for it only at ~/.claude/skills/edit-video (HyperFrames captions builder, Mode B), so that
- * path is a link to the synced folder: it follows re-syncs, and nothing inside synced/ is touched.
- */
-export function checkEditVideoSkill(home: string): Check {
-  const loc = locations(home);
+/** video-use looks for edit-video only at ~/.claude/skills/edit-video (HyperFrames captions builder, Mode B). */
+export function checkEditVideoSkill(
+  home: string,
+  bundledFile = fileURLToPath(new URL(`../${BUNDLED_EDIT_VIDEO}`, import.meta.url)),
+): Check {
   const name = 'edit-video skill';
-  const link = join(loc.skillsDir, 'edit-video');
-  const synced = syncedSkillDirs(loc.skillsDir, 'edit-video')[0];
-  const fix = synced
-    ? `ln -sfn "${synced.replace(home, '$HOME')}" "$HOME/.claude/skills/edit-video"`
-    : 'Add the edit-video skill to your claude.ai account and open the Claude desktop app so it syncs, then run this again';
+  const dir = join(locations(home).skillsDir, 'edit-video');
+  const file = join(dir, 'SKILL.md');
+  const copy = `cp ${BUNDLED_EDIT_VIDEO} ~/.claude/skills/edit-video/`;
+  const install = `mkdir -p ~/.claude/skills/edit-video && ${copy}`;
   let text = '';
   try {
-    text = readFileSync(join(link, 'SKILL.md'), 'utf8');
+    text = readFileSync(file, 'utf8');
   } catch {
     let broken = false;
     try {
-      broken = lstatSync(link).isSymbolicLink();
+      broken = lstatSync(dir).isSymbolicLink();
     } catch {
       // Nothing at that path.
     }
+    return broken
+      ? {
+          name,
+          ok: false,
+          detail: 'broken link: ~/.claude/skills/edit-video',
+          fix: `rm ~/.claude/skills/edit-video && ${install}`,
+        }
+      : { name, ok: false, detail: `missing: ${tilde(file, home)}`, fix: install };
+  }
+  if (!/^name:\s*["']?edit-video["']?\s*$/m.test(text)) {
     return {
       name,
       ok: false,
-      detail: broken ? 'broken link: ~/.claude/skills/edit-video' : 'missing',
-      fix,
+      detail: `${tilde(file, home)} is not named edit-video`,
+      fix: install,
     };
   }
-  if (!/^name:\s*["']?edit-video["']?\s*$/m.test(text)) {
-    return { name, ok: false, detail: '~/.claude/skills/edit-video is not named edit-video', fix };
+  if (differsFromRepoCopy(text, bundledFile)) {
+    return {
+      name,
+      ok: true,
+      warn: true,
+      detail: `live edits use an older copy of the skill than ${BUNDLED_EDIT_VIDEO}`,
+      notes: [`${tilde(file, home)} differs from ${BUNDLED_EDIT_VIDEO}`],
+      fix: copy,
+    };
   }
-  return lstatSync(link).isSymbolicLink()
-    ? { name, ok: true, detail: '~/.claude/skills/edit-video → synced claude.ai copy' }
-    : {
-        name,
-        ok: true,
-        detail: "~/.claude/skills/edit-video (a copy: won't follow claude.ai updates)",
-      };
+  return { name, ok: true, detail: tilde(file, home) };
 }
 
 function checkVideoUseRepo(home: string): Check {

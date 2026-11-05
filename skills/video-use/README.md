@@ -70,17 +70,18 @@ Needs Node 22+, ffmpeg, Python with `uv` or `pip`, and an ElevenLabs key for tra
 From the root of this repo:
 
 ```bash
-mkdir -p ~/.claude/skills/video-use
+mkdir -p ~/.claude/skills/video-use ~/.claude/skills/edit-video
 cp skills/video-use/SKILL.md ~/.claude/skills/video-use/
+cp skills/edit-video/SKILL.md ~/.claude/skills/edit-video/
 ```
 
-Copy the file, don't symlink it. §1 of `SKILL.md` links the original to that same path, which would replace a symlink.
+Copy the video-use file, don't symlink it. §1 of `SKILL.md` links the original to that same path, which would replace a symlink.
 
 The first run clones the original to `~/Developer/video-use`. Put your key in `~/Developer/video-use/.env` as `ELEVENLABS_API_KEY=...`.
 
 ## Limits
 
-- **The `edit-video` skill is not included.** The HyperFrames caption builder (`build-captions.mjs`, §3.4) and Mode B (§3.5) come from it. Without it, captions fall back to `render.py`'s burned subtitles with a Hebrew-capable font, so right-to-left captions are much weaker, and Mode B isn't available.
+- **It needs the [`edit-video`](../edit-video/README.md) skill for its best captions.** The HyperFrames caption builder (`build-captions.mjs`, §3.4) and Mode B (§3.5) come from it. Without it, captions fall back to `render.py`'s burned subtitles with a Hebrew-capable font, so right-to-left captions are much weaker, and Mode B isn't available.
 - **§2, §3.2 and §4 are partly written for Claude's cloud workspace.** On your own machine the blocked-host notes don't apply, and neither does the part of §4 about copying files back.
 - **The HyperFrames steps were checked with CLI 0.8.180 (October 2026).** The CLI changes often. If a flag disagrees with `npx hyperframes <command> --help`, trust `--help`.
 
