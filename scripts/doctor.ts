@@ -11,6 +11,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { dirname, isAbsolute, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { DEFAULT_VOICE_ID } from '../apps/server/assets/generate/make-voice.mjs';
 import {
   APIFY,
@@ -97,7 +98,6 @@ export function locations(home: string) {
     config: join(home, '.studio-engine', 'config.json'),
     skillsDir: join(home, '.claude', 'skills'),
     skill: join(home, '.claude', 'skills', 'video-use'),
-    handoffSkill: join(home, '.studio-engine', 'handoff', 'video-use', 'SKILL.md'),
     videoUse: join(home, 'Developer', 'video-use'),
     ...claudeLocations(home),
     hyperframesChrome: join(home, '.cache', 'hyperframes', 'chrome'),
@@ -228,11 +228,17 @@ function checkClaude(bin: ClaudeBin | null, home: string): Check[] {
   return [cli, loginCheck];
 }
 
-export function checkSkill(home: string): Check {
+/** The skill this repo ships. `pnpm run doctor` runs at the repo root, so a fix can name it like this. */
+const BUNDLED_SKILL = 'skills/video-use/SKILL.md';
+
+export function checkSkill(
+  home: string,
+  bundledFile = fileURLToPath(new URL(`../${BUNDLED_SKILL}`, import.meta.url)),
+): Check {
   const loc = locations(home);
   const name = 'video-use skill';
   const file = join(loc.skill, 'SKILL.md');
-  const copy = `cp ${tilde(loc.handoffSkill, home)} ~/.claude/skills/video-use/`;
+  const copy = `cp ${BUNDLED_SKILL} ~/.claude/skills/video-use/`;
   const install = `mkdir -p ~/.claude/skills/video-use && ${copy}`;
   let text = '';
   try {
@@ -254,22 +260,22 @@ export function checkSkill(home: string): Check {
       fix: linked ? `rm ~/.claude/skills/video-use && ${install}` : install,
     };
   }
-  // Live edits read the installed copy, but fixes to the skill land in the handoff copy first
+  // Live edits read the installed copy, but fixes to the skill land in this repo's copy first
   // (~/.claude is protected, so a person copies it over). A difference means edits are running an
-  // older skill. No handoff copy means there is nothing to compare, so the check is as before.
-  let handoff: string | null = null;
+  // older skill. No repo copy means there is nothing to compare, so the check is as before.
+  let bundled: string | null = null;
   try {
-    handoff = readFileSync(loc.handoffSkill, 'utf8');
+    bundled = readFileSync(bundledFile, 'utf8');
   } catch {
-    // No handoff copy to compare with.
+    // No repo copy to compare with.
   }
-  if (handoff !== null && handoff !== text) {
+  if (bundled !== null && bundled !== text) {
     return {
       name,
       ok: true,
       warn: true,
-      detail: 'live edits use an older copy of the skill than the handoff copy',
-      notes: [`${tilde(file, home)} differs from ${tilde(loc.handoffSkill, home)}`],
+      detail: `live edits use an older copy of the skill than ${BUNDLED_SKILL}`,
+      notes: [`${tilde(file, home)} differs from ${BUNDLED_SKILL}`],
       fix: copy,
     };
   }

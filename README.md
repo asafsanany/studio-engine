@@ -267,12 +267,12 @@ An edit is one headless Claude Code run with the job folder as its working direc
 
 ### Prerequisites
 
-Run `pnpm run doctor`. It checks everything below and prints the fix for anything missing (exit code 1 if something fails, `--json` for machine-readable output). A `!` line is a warning: the check passed but something is worth knowing, and the exit code stays 0. There are three: ffmpeg's missing filters, described under "Known gap" below; "video-use skill … older copy", shown when `~/.claude/skills/video-use/SKILL.md` differs from `~/.studio-engine/handoff/video-use/SKILL.md`; and "HyperFrames CLI", shown only with Review off (`STUDIO_REVIEW=0`) when `npx hyperframes --version` fails (the first run downloads it, so it needs the network). With Review on, the default, the same failure is a `✗` and the exit code is 1, because every edit checks its live preview with the CLI and every Approve renders with it. For the video-use skill warning, run the `cp` command the doctor prints (`cp ~/.studio-engine/handoff/video-use/SKILL.md ~/.claude/skills/video-use/`); the warning goes away once the two files match. Note that bare `pnpm doctor` runs pnpm's own built-in health check, not this script.
+Run `pnpm run doctor`. It checks everything below and prints the fix for anything missing (exit code 1 if something fails, `--json` for machine-readable output). A `!` line is a warning: the check passed but something is worth knowing, and the exit code stays 0. There are three: ffmpeg's missing filters, described under "Known gap" below; "video-use skill … older copy", shown when `~/.claude/skills/video-use/SKILL.md` differs from `skills/video-use/SKILL.md`; and "HyperFrames CLI", shown only with Review off (`STUDIO_REVIEW=0`) when `npx hyperframes --version` fails (the first run downloads it, so it needs the network). With Review on, the default, the same failure is a `✗` and the exit code is 1, because every edit checks its live preview with the CLI and every Approve renders with it. For the video-use skill warning, run the `cp` command the doctor prints (`cp skills/video-use/SKILL.md ~/.claude/skills/video-use/`); the warning goes away once the two files match. Note that bare `pnpm doctor` runs pnpm's own built-in health check, not this script.
 
 | Needs | Where it lives | How to set it up |
 | --- | --- | --- |
 | Claude CLI, logged in | see "Which `claude`" below | `"<claude>" auth login` |
-| video-use skill, Studio Engine version | `~/.claude/skills/video-use/SKILL.md` | `mkdir -p ~/.claude/skills/video-use && cp ~/.studio-engine/handoff/video-use/SKILL.md ~/.claude/skills/video-use/` |
+| video-use skill, Studio Engine version | `~/.claude/skills/video-use/SKILL.md` | `mkdir -p ~/.claude/skills/video-use && cp skills/video-use/SKILL.md ~/.claude/skills/video-use/` |
 | edit-video skill (HyperFrames captions, reframing) | `~/.claude/skills/edit-video`: a link to the copy the desktop app syncs from claude.ai | `ln -sfn "$(ls -d ~/.claude/skills/synced/*/edit-video \| head -1)" ~/.claude/skills/edit-video` |
 | video-use repo and its Python env | `~/Developer/video-use` (+ `.venv`) | `git clone --depth 1 https://github.com/browser-use/video-use ~/Developer/video-use && cd ~/Developer/video-use && uv sync` |
 | HyperFrames skills and Chrome (graphics) | `~/.claude/skills/hyperframes*`, `~/.cache/hyperframes/chrome` | `npx --yes hyperframes skills`, `npx --yes hyperframes browser ensure` |
@@ -283,7 +283,7 @@ Run `pnpm run doctor`. It checks everything below and prints the fix for anythin
 
 **edit-video** is a claude.ai skill. The desktop app syncs it to `~/.claude/skills/synced/<account>/edit-video` and headless runs load it from there, but video-use looks for it only at `~/.claude/skills/edit-video` (for the captions builder and Mode B). The link points at the synced folder, so it follows every re-sync, and nothing inside `synced/` is edited.
 
-Only the Studio Engine version of the skill works unattended. Upstream's own `SKILL.md` (which its installer symlinks into `~/.claude/skills/video-use`) stops to ask for approval before cutting, so the doctor rejects it.
+Only the Studio Engine version of the skill works unattended. It is in [`skills/video-use`](skills/video-use/README.md), whose README lists what it changes from the original, right-to-left captions included. Upstream's own `SKILL.md` (which its installer symlinks into `~/.claude/skills/video-use`) stops to ask for approval before cutting, so the doctor rejects it.
 
 **Which `claude`.** There's nothing to install. The engine and the doctor take the first of these:
 1. `claudeBin` in `~/.studio-engine/config.json`.
