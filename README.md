@@ -652,3 +652,7 @@ Everything you pay, and the price you charge, live in one file you edit by hand:
 - **`pnpm run doctor`** reads the file the same way and prints one line: `money.json  not found (200 per job, no expenses yet)`, `money.json  2 subscriptions, 1 charge`, or `money.json  invalid – <the first problem>` (a failure, with the other problems under it).
 
 The schema and the money maths (`priceForClient`, `toIls`, `subscriptionCharges`, `chargesBetween`, the month helpers and the shape of the `GET /api/money` answer) are in `packages/shared/src/domain/money.ts`, and `computeMoney`, which works a month out, is in `money-compute.ts` next to it; the loader, the only code that reads the file, is `apps/server/src/money/money-file.ts`, and the route is `apps/server/src/routes/money.ts`.
+
+## License
+
+[MIT](LICENSE). A few bundled files keep their own terms, including GSAP, which isn't open source. They're listed in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
