@@ -87,4 +87,4 @@ The first run clones the original to `~/Developer/video-use`. Put your key in `~
 
 ## License
 
-The original is MIT licensed by Browser Use, and its license is kept in [`LICENSE`](LICENSE). HyperFrames (Apache-2.0, by HeyGen) is fetched with `npx` and not included here.
+MIT. The original is by Browser Use and the changes here are by Asaf Sanany, and [`LICENSE`](LICENSE) holds both notices. HyperFrames (Apache-2.0, by HeyGen) is fetched with `npx` and not included here.

@@ -87,4 +87,4 @@ No API key is needed. Transcription runs locally with Whisper, and rendering run
 
 ## License
 
-This skill is under the same terms as the rest of this repo. HyperFrames (Apache-2.0, by HeyGen) is fetched with `npx` and cloned at run time, and is not included here.
+MIT, see [`LICENSE`](LICENSE). HyperFrames (Apache-2.0, by HeyGen) is fetched with `npx` and cloned at run time, and is not included here.
