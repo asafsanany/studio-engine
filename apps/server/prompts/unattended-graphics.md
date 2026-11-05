@@ -1,0 +1,1 @@
+- The Graphics library is already copied into edit/graphics/ (one folder per graphic), so use the graphics from there and don't open _Graphics in the inbox.

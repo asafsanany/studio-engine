@@ -1,0 +1,38 @@
+{
+  "name": "studio-engine",
+  "version": "0.67.2",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel --if-present dev",
+    "build": "pnpm --filter @studio/web build && pnpm --filter @studio/server build",
+    "start": "pnpm --filter @studio/server start",
+    "test": "vitest run",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "tsc --noEmit && pnpm -r --if-present typecheck",
+    "e2e": "pnpm build && playwright test",
+    "release:check": "node scripts/release-check.ts",
+    "check": "pnpm lint && pnpm typecheck && pnpm release:check && pnpm test",
+    "doctor": "node scripts/doctor.ts",
+    "usage": "pnpm --silent --filter @studio/server exec tsx src/usage/usage-cli.ts",
+    "agent:install": "bash scripts/install-agent.sh",
+    "agent:uninstall": "bash scripts/uninstall-agent.sh",
+    "agent:restart": "launchctl kickstart -k gui/$(id -u)/com.studio-engine.server",
+    "color-grade": "bash scripts/color-grade/run.sh",
+    "color-grade:install": "bash scripts/color-grade/install.sh",
+    "seed:canvas": "pnpm --filter @studio/server seed:canvas --"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.20.5",
+    "@vitest/coverage-v8": "^5.0.5",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

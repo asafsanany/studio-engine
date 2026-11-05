@@ -1,0 +1,8 @@
+{
+  "name": "Opening title, word by word",
+  "kind": "title",
+  "lengthSec": 2.4,
+  "variables": [{ "id": "title", "label": "Title", "default": "מיתוס או אמת" }],
+  "when": "At the start, when the first line doesn’t hook on its own.",
+  "reply": "Made v1. Each word rises into place 0.15 s after the one before, centred, in Heebo ExtraBold. A long title wraps to a second line."
+}

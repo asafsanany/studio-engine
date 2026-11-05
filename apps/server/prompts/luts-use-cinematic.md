@@ -1,0 +1,1 @@
+  - Cinematic is not a file but the wrapper's own look: use its existing `--look cinematic` (and "look": "cinematic" in color_grade in edit/edl.json).

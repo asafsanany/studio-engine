@@ -1,0 +1,1 @@
+- Self-eval on the composition instead of a render: npx hyperframes lint with 0 errors, snapshots at every cut and at each graphic's payoff (npx hyperframes snapshot), the caption gate (§3.4 step 5) on those snapshots, and the loudness of cut.mp4 with the music under it.

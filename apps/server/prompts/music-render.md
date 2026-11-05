@@ -1,0 +1,1 @@
+- Music: render it as it is. edit/preview/music.mp3 is the music the owner picked (or the silence of No music), and the composition plays it under its volume lane. Never run the music script, and never change, move or re-encode anything in edit/music/ or edit/preview/music.mp3. If the loudness is off, fix it on the render, as the next line says.

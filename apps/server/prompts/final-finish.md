@@ -1,0 +1,1 @@
+- The job is done when edit/final.mp4 exists and you have checked it. Do not leave anything running in the background when you finish.

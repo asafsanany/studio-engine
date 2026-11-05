@@ -1,0 +1,1 @@
+ALTER TABLE `review_notes` ADD `format` text;

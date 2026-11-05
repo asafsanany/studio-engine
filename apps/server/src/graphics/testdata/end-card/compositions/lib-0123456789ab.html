@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-composition-variables='[{"id":"handle","type":"string","label":"Handle","default":"@rgm.israel"},{"id":"button","type":"string","label":"Button","default":"Follow"}]'>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Heebo";
+          src: url("lib/0123456789ab/fonts/Heebo-Bold.ttf") format("truetype");
+          font-weight: 700;
+          font-display: block;
+        }
+        @font-face {
+          font-family: "Heebo";
+          src: url("lib/0123456789ab/fonts/Heebo-ExtraBold.ttf") format("truetype");
+          font-weight: 800;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          container-type: size;
+          font-family: "Heebo", sans-serif;
+        }
+        #lib-0123456789ab-clip {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #lib-0123456789ab-card {
+          min-width: 50cqmin;
+          max-width: 88%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 3cqmin;
+          padding: 6cqmin 9cqmin;
+          border-radius: 5cqmin;
+          background: #ffffff;
+          color: #0a0a0a;
+          box-shadow: 0 1cqmin 3cqmin rgba(0, 0, 0, 0.35);
+        }
+        #lib-0123456789ab-logo {
+          width: 20cqmin;
+          height: 20cqmin;
+          border-radius: 50%;
+          background: #0a0a0a;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 6.5cqmin;
+          font-weight: 800;
+        }
+        #lib-0123456789ab-handle {
+          max-width: 100%;
+          font-size: 7cqmin;
+          font-weight: 700;
+          line-height: 1.2;
+          white-space: nowrap;
+          unicode-bidi: plaintext;
+        }
+        #lib-0123456789ab-button {
+          padding: 0.4em 1.3em;
+          border-radius: 999px;
+          background: #2563eb;
+          color: #ffffff;
+          font-size: 5.5cqmin;
+          font-weight: 700;
+          line-height: 1.2;
+          white-space: nowrap;
+          unicode-bidi: plaintext;
+        }
+      </style>
+      <div id="root" data-composition-id="lib-0123456789ab">
+        <div id="lib-0123456789ab-clip" class="clip" data-start="0" data-duration="3.5">
+          <div id="lib-0123456789ab-card">
+            <div id="lib-0123456789ab-logo">RGM</div>
+            <div id="lib-0123456789ab-handle" dir="auto" data-var-text="handle">@rgm.israel</div>
+            <div id="lib-0123456789ab-button" dir="auto" data-var-text="button">Follow</div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const vars = window.__hyperframes?.getVariables?.() ?? {};
+          const handle = (typeof vars.handle === "string" ? vars.handle : "@rgm.israel").trim();
+          const initials = handle.replace(/^@/, "").split(".")[0].slice(0, 3).toUpperCase();
+          document.querySelector("#lib-0123456789ab-logo").textContent = initials || "@";
+          // A field with no words hides its own element (the logo is the handle's too), and the card
+          // hides when nothing is left in it.
+          const noButton = typeof vars.button === "string" && vars.button.trim() === "";
+          if (handle === "") {
+            document.querySelector("#lib-0123456789ab-handle").style.display = "none";
+            document.querySelector("#lib-0123456789ab-logo").style.display = "none";
+          }
+          if (noButton) document.querySelector("#lib-0123456789ab-button").style.display = "none";
+          if (handle === "" && noButton) document.querySelector("#lib-0123456789ab-card").style.display = "none";
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#lib-0123456789ab-card", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.6)" }, 0);
+          tl.fromTo("#lib-0123456789ab-button", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 0.45);
+          tl.to("#lib-0123456789ab-card", { opacity: 0, duration: 0.25, ease: "power1.in" }, 3.25);
+          window.__timelines["lib-0123456789ab"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

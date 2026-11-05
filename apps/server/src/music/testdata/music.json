@@ -1,0 +1,50 @@
+{
+  "v": 1,
+  "source": "made",
+  "reason": null,
+  "file": null,
+  "plan": {
+    "lengthMs": 39000,
+    "styles": ["intense cinematic electronic", "120 BPM", "big drop", "instrumental"],
+    "avoid": ["vocals", "singing", "lyrics"],
+    "sections": [
+      { "name": "Build", "ms": 10000, "styles": ["sparse pulse", "rising"], "avoid": [] },
+      { "name": "Rise", "ms": 8000, "styles": ["risers", "snare roll"], "avoid": [] },
+      { "name": "Drop", "ms": 6000, "styles": ["full drop", "sub bass"], "avoid": [] },
+      { "name": "Golden", "ms": 10000, "styles": ["wide pads", "steady beat"], "avoid": [] },
+      { "name": "Logo", "ms": 5000, "styles": ["hit", "tail"], "avoid": [] }
+    ],
+    "describe": "Intense cinematic electronic, 120 BPM. Builds to a big drop at 0:18 and lands on the logo at 0:35."
+  },
+  "picked": "v2",
+  "versions": [
+    {
+      "id": "v1",
+      "file": "v1.mp3",
+      "describe": "Intense cinematic electronic, 120 BPM. Builds to a big drop at 0:18 and lands on the logo at 0:35.",
+      "ask": null,
+      "seed": 4711,
+      "model": "music_v2_5",
+      "lengthMs": 39000,
+      "by": "edit",
+      "madeAt": "2026-10-23T09:01:00.000Z"
+    },
+    {
+      "id": "v2",
+      "file": "v2.mp3",
+      "describe": "You asked: darker, more drums. Same shape: Intense cinematic electronic, 120 BPM. Builds to a big drop at 0:18 and lands on the logo at 0:35.",
+      "ask": "darker, more drums",
+      "seed": 90210,
+      "model": "music_v2_5",
+      "lengthMs": 39000,
+      "by": "you",
+      "madeAt": "2026-10-23T09:12:00.000Z"
+    }
+  ],
+  "picks": [
+    { "id": "v1", "at": "2026-10-23T09:01:00.000Z" },
+    { "id": "v2", "at": "2026-10-23T09:12:00.000Z" }
+  ],
+  "making": null,
+  "failure": null
+}

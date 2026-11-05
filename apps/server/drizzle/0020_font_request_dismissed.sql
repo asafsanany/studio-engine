@@ -1,0 +1,1 @@
+ALTER TABLE `font_requests` ADD `dismissed_at` integer;

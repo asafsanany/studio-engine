@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="he" data-composition-variables='[{"id":"title","type":"string","label":"Title","default":"מיתוס או אמת"}]'>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Heebo";
+          src: url("lib/0123456789ab/fonts/Heebo-ExtraBold.ttf") format("truetype");
+          font-weight: 800;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          container-type: size;
+          font-family: "Heebo", sans-serif;
+        }
+        #lib-0123456789ab-clip {
+          position: absolute;
+          inset: 0;
+        }
+        #lib-0123456789ab-title {
+          position: absolute;
+          left: 8%;
+          right: 8%;
+          top: 34%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0 0.26em;
+          color: #ffffff;
+          font-size: 15cqmin;
+          font-weight: 800;
+          line-height: 1.12;
+          text-align: center;
+          unicode-bidi: plaintext;
+          text-shadow: 0 0.2cqmin 1.4cqmin rgba(0, 0, 0, 0.5);
+        }
+        .lib-0123456789ab-word {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 0.06em;
+        }
+        .lib-0123456789ab-inner {
+          display: block;
+        }
+      </style>
+      <div id="root" data-composition-id="lib-0123456789ab">
+        <div id="lib-0123456789ab-clip" class="clip" data-start="0" data-duration="2.4">
+          <div id="lib-0123456789ab-title" dir="auto">מיתוס או אמת</div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const vars = window.__hyperframes?.getVariables?.() ?? {};
+          const text = (typeof vars.title === "string" ? vars.title : "מיתוס או אמת").trim();
+          const title = document.querySelector("#lib-0123456789ab-title");
+          title.textContent = "";
+          // A title with no words hides its box, so nothing is left behind.
+          if (text === "") title.style.display = "none";
+          const inners = [];
+          for (const word of text === "" ? [] : text.split(/\s+/)) {
+            const outer = document.createElement("span");
+            outer.className = "lib-0123456789ab-word";
+            const inner = document.createElement("span");
+            inner.className = "lib-0123456789ab-inner";
+            inner.textContent = word;
+            outer.appendChild(inner);
+            title.appendChild(outer);
+            inners.push(inner);
+          }
+          const tl = gsap.timeline({ paused: true });
+          inners.forEach((inner, i) => {
+            tl.fromTo(inner, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.15 * i);
+          });
+          tl.to("#lib-0123456789ab-title", { opacity: 0, duration: 0.3, ease: "power1.in" }, 2.1);
+          window.__timelines["lib-0123456789ab"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

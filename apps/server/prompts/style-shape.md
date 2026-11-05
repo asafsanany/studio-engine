@@ -1,0 +1,26 @@
+# Style: {{client}}
+<the line saying where the style came from>
+## Look
+- Colours: <name> <hex> (<role>), …
+- Fonts: <family weight> for <use> (<file>), …
+- Titles: …
+- Lower thirds: …
+- Captions: …
+- Logo: <file>, <where it goes>
+## Editing
+- Format: <width×height>, <length>
+- Pacing: …
+- Graphics: minimal, light or rich, and which ones
+- Music: …
+- Sound effects: …
+- Reels niche: <2 to 4 #hashtags, and @accounts if the files name them, that Reels like these are posted under; only if the files or the video show what they are about> (a guess; edit it if it is wrong)
+## Do
+- <one rule per line>
+## Don’t
+- <one rule per line>
+## Kit
+<which graphics are in kit/>
+## Reference
+- <file>: <what to match>
+
+Leave out any section or line you have nothing for. Short plain lines in English; quotes and names word for word; file names exactly as they are.

@@ -1,0 +1,19 @@
+{
+  "usdToIls": 1,
+  "pricePerJob": 100,
+  "clientPrices": {
+    "Example Client": 150
+  },
+  "subscriptions": [
+    {
+      "id": "claude",
+      "name": "Claude plan",
+      "amount": 200,
+      "currency": "USD",
+      "every": "month",
+      "day": 1,
+      "since": "2026-01-01"
+    }
+  ],
+  "charges": []
+}

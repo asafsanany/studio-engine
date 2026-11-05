@@ -1,0 +1,1 @@
+ALTER TABLE `jobs` ADD `held_settled_at` integer;

@@ -1,0 +1,223 @@
+{
+  "instagram-song": [
+    {
+      "shortCode": "DX7lzTOJ1p6",
+      "url": "https://www.instagram.com/reel/DX7lzTOJ1p6/",
+      "type": "Video",
+      "caption": "late night drive",
+      "ownerUsername": "someaccount",
+      "videoDuration": 12.4,
+      "videoUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/video.mp4?_nc_ht=scontent&oh=00_signed",
+      "audioUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/audio.mp4?_nc_ht=scontent&oh=00_signed",
+      "musicInfo": {
+        "artist_name": "The Weeknd",
+        "song_name": "Blinding Lights",
+        "uses_original_audio": false,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "1234567890"
+      }
+    }
+  ],
+  "instagram-unknown-song": [
+    {
+      "shortCode": "DY1abcDEF23",
+      "url": "https://www.instagram.com/reel/DY1abcDEF23/",
+      "videoDuration": 9.5,
+      "audioUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/audio2.mp4?oh=00_signed",
+      "musicInfo": {
+        "artist_name": "Nobody Known",
+        "song_name": "A Song Nobody Has Heard",
+        "uses_original_audio": false,
+        "audio_id": "99"
+      }
+    }
+  ],
+  "instagram-original": [
+    {
+      "shortCode": "DZ9originAL1",
+      "url": "https://www.instagram.com/reel/DZ9originAL1/",
+      "videoDuration": 21,
+      "audioUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/audio3.mp4?oh=00_signed",
+      "musicInfo": {
+        "artist_name": "someaccount",
+        "song_name": "Original audio",
+        "uses_original_audio": true,
+        "audio_id": "5"
+      }
+    }
+  ],
+  "instagram-hebrew-original": [
+    {
+      "shortCode": "DZ9hebrewOR1",
+      "url": "https://www.instagram.com/reel/DZ9hebrewOR1/",
+      "videoDuration": 21,
+      "musicInfo": {
+        "artist_name": "someaccount",
+        "song_name": "אודיו מקורי",
+        "uses_original_audio": false
+      }
+    }
+  ],
+  "instagram-error": [
+    {
+      "url": "https://www.instagram.com/reel/DX7lzTOJ1p6/",
+      "error": "not_found",
+      "errorDescription": "Restricted page"
+    }
+  ],
+  "tiktok-song": [
+    {
+      "id": "7333300000000000001",
+      "text": "dance",
+      "webVideoUrl": "https://www.tiktok.com/@dancer/video/7333300000000000001",
+      "videoMeta": {
+        "duration": 15,
+        "height": 1024,
+        "width": 576
+      },
+      "musicMeta": {
+        "musicName": "Blinding Lights",
+        "musicAuthor": "The Weeknd",
+        "musicOriginal": false,
+        "playUrl": "https://sf16-ies-music.tiktokcdn.com/obj/ies-music/blinding.mp3",
+        "musicId": "6810000000000000001"
+      },
+      "mediaUrls": []
+    }
+  ],
+  "tiktok-original": [
+    {
+      "id": "7333300000000000002",
+      "webVideoUrl": "https://www.tiktok.com/@dancer/video/7333300000000000002",
+      "videoMeta": {
+        "duration": 30
+      },
+      "musicMeta": {
+        "musicName": "original sound - dancer",
+        "musicAuthor": "dancer",
+        "musicOriginal": true,
+        "playUrl": "https://sf16-ies-music.tiktokcdn.com/obj/ies-music/own.mp3"
+      }
+    }
+  ],
+  "tiktok-song-as-sound": [
+    {
+      "id": "7700258159444643092",
+      "webVideoUrl": "https://www.tiktok.com/@nrkdnk/video/7700258159444643092",
+      "authorMeta": {
+        "name": "nrkdnk"
+      },
+      "videoMeta": {
+        "duration": 15
+      },
+      "musicMeta": {
+        "musicName": "КРУЖИТЬ",
+        "musicAuthor": "Dmytro Monatik",
+        "musicOriginal": true,
+        "playUrl": "https://sf16-ies-music.tiktokcdn.com/obj/ies-music/kruzhit.mp3"
+      }
+    }
+  ],
+  "tiktok-car-music": [
+    {
+      "id": "7699877818225757454",
+      "webVideoUrl": "https://www.tiktok.com/@mgdtop/video/7699877818225757454",
+      "authorMeta": {
+        "name": "mgdtop"
+      },
+      "videoMeta": {
+        "duration": 12
+      },
+      "musicMeta": {
+        "musicName": "Car Music 37",
+        "musicAuthor": "Fabrício Cesar",
+        "musicOriginal": false,
+        "playUrl": "https://sf16-ies-music.tiktokcdn.com/obj/ies-music/car-music.mp3"
+      }
+    }
+  ],
+  "tiktok-own-named-sound": [
+    {
+      "id": "7333300000000000003",
+      "webVideoUrl": "https://www.tiktok.com/@dancer/video/7333300000000000003",
+      "authorMeta": {
+        "name": "dancer_dan",
+        "nickName": "Dan the Dancer"
+      },
+      "videoMeta": {
+        "duration": 20
+      },
+      "musicMeta": {
+        "musicName": "my beat",
+        "musicAuthor": "Dan the Dancer",
+        "musicOriginal": true,
+        "playUrl": "https://sf16-ies-music.tiktokcdn.com/obj/ies-music/own-beat.mp3"
+      }
+    }
+  ],
+  "instagram-song-as-sound": [
+    {
+      "shortCode": "DKeaneSound1",
+      "url": "https://www.instagram.com/reel/DKeaneSound1/",
+      "ownerUsername": "zianlutfiana",
+      "videoDuration": 14,
+      "audioUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/keane.mp4?oh=00_signed",
+      "musicInfo": {
+        "artist_name": "sofia.peters",
+        "song_name": "Somewhere only we know - Keane",
+        "uses_original_audio": true,
+        "audio_id": "8800"
+      }
+    }
+  ],
+  "instagram-own-named-sound": [
+    {
+      "shortCode": "DOwnNamed01",
+      "url": "https://www.instagram.com/reel/DOwnNamed01/",
+      "ownerUsername": "mibellyuseche",
+      "videoDuration": 9,
+      "audioUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/own.mp4?oh=00_signed",
+      "musicInfo": {
+        "artist_name": "mibellyuseche",
+        "song_name": "Mibellyuseche💋",
+        "uses_original_audio": true,
+        "audio_id": "8801"
+      }
+    }
+  ],
+  "empty": [],
+  "tiktok-song-as-sound-dash": [
+    {
+      "id": "7700258159444643999",
+      "webVideoUrl": "https://www.tiktok.com/@nrkdnk/video/7700258159444643999",
+      "authorMeta": {
+        "name": "nrkdnk"
+      },
+      "videoMeta": {
+        "duration": 15
+      },
+      "musicMeta": {
+        "musicName": "Somewhere only we know - Keane",
+        "musicAuthor": "keane_fan_7",
+        "musicOriginal": true,
+        "playUrl": "https://sf16-ies-music.tiktokcdn.com/obj/ies-music/keane.mp3"
+      }
+    }
+  ],
+  "instagram-song-with-version": [
+    {
+      "shortCode": "DRemixSound1",
+      "url": "https://www.instagram.com/reel/DRemixSound1/",
+      "ownerUsername": "dj_remixer",
+      "videoDuration": 14,
+      "audioUrl": "https://scontent-fra5-1.cdninstagram.com/o1/v/t2/f2/m86/remix.mp4?oh=00_signed",
+      "musicInfo": {
+        "artist_name": "The Weeknd",
+        "song_name": "Blinding Lights - Remix",
+        "uses_original_audio": false,
+        "audio_id": "8804"
+      }
+    }
+  ]
+}

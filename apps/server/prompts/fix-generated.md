@@ -1,0 +1,2 @@
+## About this video
+This is a generated video: its footage was made by an image-to-video model and its voice by a voice model. A note about what a shot shows (a hand, a face, the logo, the water, a thing that bends or melts) or about how the voice says a line (stress, a pause, louder, slower) needs a new take of a clip or of a line, which only the editor can make when the owner sends their notes: sort it as full, never quick and never revise. Captions, titles, cards and other graphics the edit added stay as the index says.

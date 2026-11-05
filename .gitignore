@@ -1,0 +1,23 @@
+node_modules
+dist
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
+*.log
+
+.env
+.env.*
+!.env.example
+
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+.DS_Store
+
+# Local media QA, Python environments and helper bytecode.
+.local/
+__pycache__/
+*.pyc

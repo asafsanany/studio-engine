@@ -1,0 +1,1 @@
+  - Graphics are placed at a time, unlike a LUT: use the library graphic the note names at the moment the note says, mounted as the Graphics library section of edit/brief.md describes, instead of building a new one.

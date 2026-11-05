@@ -1,0 +1,1 @@
+ALTER TABLE `jobs` ADD `review_sec` integer DEFAULT 0 NOT NULL;

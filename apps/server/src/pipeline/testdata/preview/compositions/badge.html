@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        #badge-root { position: absolute; inset: 0; }
+        #badge {
+          position: absolute; top: 120px; right: 80px; opacity: 0; padding: 18px 36px;
+          border-radius: 999px; background: rgba(9, 9, 11, 0.72); color: #fff;
+          font: 700 48px/1 sans-serif; letter-spacing: 0.08em;
+        }
+      </style>
+      <div id="badge-root" data-composition-id="badge" data-width="1080" data-height="1920">
+        <div id="badge">SAMPLE</div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#badge", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 0);
+          tl.to("#badge", { opacity: 0, duration: 0.3, ease: "power2.in" }, 2.7);
+          window.__timelines["badge"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

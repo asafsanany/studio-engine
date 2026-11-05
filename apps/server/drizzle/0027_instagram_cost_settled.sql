@@ -1,0 +1,1 @@
+ALTER TABLE `instagram_scans` ADD `cost_settled_at` integer;

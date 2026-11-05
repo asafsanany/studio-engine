@@ -1,0 +1,321 @@
+[
+  {
+    "name": "a screenshot of a reel names the song",
+    "client": "Falcon FPV",
+    "job": "Demo 2",
+    "note": "Yael sent a screenshot of the reel she likes: cut it to that song. 30 seconds, vertical.",
+    "folder": ["clip-01.mp4", "clip-02.mp4", "IMG_4412.PNG"],
+    "draft": {
+      "summary": "A 30-second vertical FPV reel for Falcon’s Instagram. The song is the one on Yael’s reel screenshot, Ofek Adanek’s נתתי לך בית, so the editor gets the song and cuts to it. Use both clips as footage.",
+      "goal": null,
+      "audience": null,
+      "platform": ["Instagram Reel"],
+      "canvas": "1080x1920",
+      "length": null,
+      "language": null,
+      "captions": null,
+      "tone": null,
+      "pacing": null,
+      "hook": null,
+      "mustInclude": [],
+      "mustAvoid": [],
+      "onScreenText": {
+        "title": null,
+        "lowerThirds": [],
+        "cta": null,
+        "endCard": null
+      },
+      "look": {
+        "logo": null,
+        "colors": [],
+        "fonts": []
+      },
+      "music": {
+        "file": null,
+        "note": null,
+        "wanted": false,
+        "song": {
+          "title": "נתתי לך בית",
+          "artist": "Ofek Adanek",
+          "version": null,
+          "link": null,
+          "fromFile": "IMG_4412.PNG"
+        },
+        "original": null,
+        "wantsTrending": false
+      },
+      "references": [],
+      "files": [
+        {
+          "path": "clip-01.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "clip-02.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "IMG_4412.PNG",
+          "role": "instructions",
+          "note": "Reel screenshot; its audio label reads “Ofek Adanek · נתתי לך בית”"
+        }
+      ],
+      "assumptions": ["A reel is 1080x1920."],
+      "assumed": ["canvas"]
+    },
+    "decisions": ["- Song: נתתי לך בית by Ofek Adanek, from IMG_4412.PNG"]
+  },
+  {
+    "name": "an Original audio label has no song",
+    "client": "Falcon FPV",
+    "job": "Demo 2",
+    "note": "Yael’s reel is attached: make ours feel like it.",
+    "folder": ["clip-01.mp4", "clip-02.mp4", "IMG_4413.PNG"],
+    "draft": {
+      "summary": "A vertical FPV reel for Falcon’s Instagram in the feel of the reel Yael attached. Its audio label says Original audio, so it names no song. Use both clips as footage.",
+      "goal": null,
+      "audience": null,
+      "platform": ["Instagram Reel"],
+      "canvas": "1080x1920",
+      "length": null,
+      "language": null,
+      "captions": null,
+      "tone": null,
+      "pacing": null,
+      "hook": null,
+      "mustInclude": [],
+      "mustAvoid": [],
+      "onScreenText": {
+        "title": null,
+        "lowerThirds": [],
+        "cta": null,
+        "endCard": null
+      },
+      "look": {
+        "logo": null,
+        "colors": [],
+        "fonts": []
+      },
+      "music": {
+        "file": null,
+        "note": null,
+        "wanted": false,
+        "song": null,
+        "original": {
+          "by": "reels.creator"
+        },
+        "wantsTrending": false
+      },
+      "references": [],
+      "files": [
+        {
+          "path": "clip-01.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "clip-02.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "IMG_4413.PNG",
+          "role": "instructions",
+          "note": "Reel screenshot; its audio label reads “Original audio · reels.creator”"
+        }
+      ],
+      "assumptions": ["A reel is 1080x1920."],
+      "assumed": ["canvas"]
+    },
+    "decisions": ["- Song: none to look up, the screenshot says “Original audio” by reels.creator"]
+  },
+  {
+    "name": "a link to the song, the sped up version",
+    "client": "Falcon FPV",
+    "job": "Demo 2",
+    "note": "The song is https://music.youtube.com/watch?v=Zq3Rk1pXo9A, the sped up version.",
+    "folder": ["clip-01.mp4", "clip-02.mp4"],
+    "draft": {
+      "summary": "A vertical FPV reel for Falcon’s Instagram, cut to the song in the owner’s link, the sped up version. Use both clips as footage.",
+      "goal": null,
+      "audience": null,
+      "platform": ["Instagram Reel"],
+      "canvas": "1080x1920",
+      "length": null,
+      "language": null,
+      "captions": null,
+      "tone": null,
+      "pacing": null,
+      "hook": null,
+      "mustInclude": [],
+      "mustAvoid": [],
+      "onScreenText": {
+        "title": null,
+        "lowerThirds": [],
+        "cta": null,
+        "endCard": null
+      },
+      "look": {
+        "logo": null,
+        "colors": [],
+        "fonts": []
+      },
+      "music": {
+        "file": null,
+        "note": null,
+        "wanted": false,
+        "song": {
+          "title": null,
+          "artist": null,
+          "version": "sped up",
+          "link": "https://music.youtube.com/watch?v=Zq3Rk1pXo9A",
+          "fromFile": null
+        },
+        "original": null,
+        "wantsTrending": false
+      },
+      "references": [],
+      "files": [
+        {
+          "path": "clip-01.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "clip-02.mp4",
+          "role": "footage",
+          "note": null
+        }
+      ],
+      "assumptions": ["A reel is 1080x1920."],
+      "assumed": ["canvas"]
+    },
+    "decisions": [
+      "- Song: the song in the link (sped up), link https://music.youtube.com/watch?v=Zq3Rk1pXo9A"
+    ]
+  },
+  {
+    "name": "a trending song, none named",
+    "client": "Falcon FPV",
+    "job": "Demo 2",
+    "note": "put a trending song",
+    "folder": ["clip-01.mp4", "clip-02.mp4"],
+    "draft": {
+      "summary": "A vertical FPV reel for Falcon’s Instagram with a trending song, which the editor picks. Use both clips as footage.",
+      "goal": null,
+      "audience": null,
+      "platform": ["Instagram Reel"],
+      "canvas": "1080x1920",
+      "length": null,
+      "language": null,
+      "captions": null,
+      "tone": null,
+      "pacing": null,
+      "hook": null,
+      "mustInclude": [],
+      "mustAvoid": [],
+      "onScreenText": {
+        "title": null,
+        "lowerThirds": [],
+        "cta": null,
+        "endCard": null
+      },
+      "look": {
+        "logo": null,
+        "colors": [],
+        "fonts": []
+      },
+      "music": {
+        "file": null,
+        "note": null,
+        "wanted": false,
+        "song": null,
+        "original": null,
+        "wantsTrending": true
+      },
+      "references": [],
+      "files": [
+        {
+          "path": "clip-01.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "clip-02.mp4",
+          "role": "footage",
+          "note": null
+        }
+      ],
+      "assumptions": ["A reel is 1080x1920."],
+      "assumed": ["canvas"]
+    },
+    "decisions": ["- Song: a trending one, picked by the editor"]
+  },
+  {
+    "name": "a music file in the folder beats a screenshot",
+    "client": "Falcon FPV",
+    "job": "Demo 2",
+    "note": null,
+    "folder": ["clip-01.mp4", "IMG_4412.PNG", "track.mp3"],
+    "draft": {
+      "summary": "A vertical FPV reel for Falcon’s Instagram, cut to the music file in the folder. Yael’s reel screenshot also names a song, but the file wins. Use clip-01.mp4 as footage.",
+      "goal": null,
+      "audience": null,
+      "platform": ["Instagram Reel"],
+      "canvas": "1080x1920",
+      "length": null,
+      "language": null,
+      "captions": null,
+      "tone": null,
+      "pacing": null,
+      "hook": null,
+      "mustInclude": [],
+      "mustAvoid": [],
+      "onScreenText": {
+        "title": null,
+        "lowerThirds": [],
+        "cta": null,
+        "endCard": null
+      },
+      "look": {
+        "logo": null,
+        "colors": [],
+        "fonts": []
+      },
+      "music": {
+        "file": "track.mp3",
+        "note": null,
+        "wanted": false,
+        "song": null,
+        "original": null,
+        "wantsTrending": false
+      },
+      "references": [],
+      "files": [
+        {
+          "path": "clip-01.mp4",
+          "role": "footage",
+          "note": null
+        },
+        {
+          "path": "IMG_4412.PNG",
+          "role": "instructions",
+          "note": "Reel screenshot; its audio label reads “Ofek Adanek · נתתי לך בית”"
+        },
+        {
+          "path": "track.mp3",
+          "role": "music",
+          "note": null
+        }
+      ],
+      "assumptions": [
+        "A reel is 1080x1920.",
+        "IMG_4412.PNG names the song נתתי לך בית by Ofek Adanek, but the folder has its own music file, track.mp3: the file wins, so no song is asked for."
+      ],
+      "assumed": ["canvas"]
+    },
+    "decisions": ["- Music: track.mp3"]
+  }
+]

@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Fonts are bundled (offline). Inter covers Latin/Cyrillic/Greek; Noto Sans Hebrew is the
+   Hebrew fallback, so only its Hebrew subset is needed. Weights: 400 / 500 / 600. */
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource/noto-sans-hebrew/hebrew-400.css";
+@import "@fontsource/noto-sans-hebrew/hebrew-500.css";
+@import "@fontsource/noto-sans-hebrew/hebrew-600.css";
+
+/* Dark is the only theme. <html class="dark"> is permanent (see index.html) so that
+   shadcn's `dark:` variants always apply; there is no light theme and no toggle. */
+@custom-variant dark (&:is(.dark, .dark *));
+
+/* shadcn "zinc" dark tokens (new-york), values from the approved design canvas. */
+:root {
+  color-scheme: dark;
+
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgb(255 255 255 / 10%);
+  --input: rgb(255 255 255 / 15%);
+  /* Focus ring: neutral zinc, not the canvas's blue. The owner's review: the blue ring that appeared on
+     a clicked status tab looked like a system highlight. Keyboard focus keeps a quiet grey cue. */
+  --ring: #71717a;
+  --radius: 0.625rem;
+
+  --chart-1: oklch(0.871 0.006 286.286);
+  --chart-2: oklch(0.552 0.016 285.938);
+  --chart-3: oklch(0.442 0.017 285.786);
+  --chart-4: oklch(0.37 0.013 285.805);
+  --chart-5: oklch(0.274 0.006 286.033);
+
+  --sidebar: #18181b;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #27272a;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: rgb(255 255 255 / 10%);
+  --sidebar-ring: #71717a;
+
+  /* Job status colours (badge dots, step progress, header counters). */
+  --status-neutral: #a1a1aa;
+  --status-held: #fbbf24;
+  --status-editing: #3b82f6;
+  /* Review: waiting for the owner to watch the live preview. */
+  --status-review: #a78bfa;
+  --status-ready: #34d399;
+  /* Delivered (sent to the client, not paid yet), Uploaded (a reel is linked to it) and Paid: the stages after Approved (= ready). */
+  --status-delivered: #38bdf8;
+  --status-uploaded: #a78bfa;
+  --status-paid: #52525b;
+  --status-failed: #f87171;
+  /* Text on the failed tint (destructive Badge: status-failed at 10% bg / 40% border). */
+  --status-failed-foreground: #fca5a5;
+  --status-cancelled: #71717a;
+  /* Step progress: pending segment. Done = status-editing, current = status-editing at 40%. */
+  --step-pending: #27272a;
+
+  /* Safe areas, for the phone layout: the notch or Dynamic Island on top, the home indicator at the
+     bottom, the rounded sides in landscape. They are 0 on the Mac and wherever the page doesn't
+     reach under them (index.html asks for that with viewport-fit=cover). */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-status-neutral: var(--status-neutral);
+  --color-status-held: var(--status-held);
+  --color-status-editing: var(--status-editing);
+  --color-status-review: var(--status-review);
+  --color-status-ready: var(--status-ready);
+  --color-status-delivered: var(--status-delivered);
+  --color-status-uploaded: var(--status-uploaded);
+  --color-status-paid: var(--status-paid);
+  --color-status-failed: var(--status-failed);
+  --color-status-failed-foreground: var(--status-failed-foreground);
+  --color-status-cancelled: var(--status-cancelled);
+  --color-step-pending: var(--step-pending);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Padding that keeps content clear of a safe area: pt-safe, pr-safe, pb-safe, pl-safe. For "at least
+   this much, and the inset where it is bigger", use the variable: pb-[max(1.5rem,var(--safe-bottom))]. */
+@utility pt-safe {
+  padding-top: var(--safe-top);
+}
+@utility pr-safe {
+  padding-right: var(--safe-right);
+}
+@utility pb-safe {
+  padding-bottom: var(--safe-bottom);
+}
+@utility pl-safe {
+  padding-left: var(--safe-left);
+}
+
+@theme {
+  /* Tailwind's preflight applies --font-sans to <html>, so this is the app-wide font. */
+  --font-sans: "Inter Variable", "Noto Sans Hebrew", sans-serif;
+
+  /* Dark-only app: Tailwind's default shadows (10% black) vanish on #09090b, so menus and
+     dialogs use the stronger shadows from the design canvas. */
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 30%), 0 2px 4px -2px rgb(0 0 0 / 30%);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 40%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* Tailwind v4's preflight dropped the pointer cursor from buttons. Everything that can be
+     clicked gets it back; a disabled control keeps the default arrow, and the greyed-out sidebar
+     items keep the not-allowed cursor their own class sets (utilities beat this base layer).
+     The dropdown menu items set their own cursor-pointer for the same reason. */
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"]:not([aria-disabled="true"]),
+  [role="menuitem"]:not([data-disabled]),
+  [role="menuitemcheckbox"]:not([data-disabled]),
+  [role="menuitemradio"]:not([data-disabled]),
+  a[href],
+  summary,
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+  body {
+    /* Base size is 14px (text-sm, line-height 1.43); the root stays 16px so rem utilities
+       and shadcn spacing keep their usual scale. No `antialiased`: the canvas boards use the
+       browser's default font smoothing, and forcing grayscale smoothing (shadcn's default) made
+       every light-on-dark string visibly thinner than the approved design on macOS. */
+    @apply bg-background text-foreground font-sans text-sm;
+  }
+  /* The phone layout (PhoneShell marks <html>): a long press on a row, a card or a sheet selects
+     no text and opens no iOS callout, as in a native app. Where you type keeps both. */
+  html[data-phone-layout],
+  html[data-phone-layout] body {
+    /* The phone is an app, not a page: the document never scrolls or bounces; PhoneShell's
+       scroller is the only thing that moves. */
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  html[data-phone-layout] body {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  html[data-phone-layout] :is(input, textarea, [contenteditable="true"]) {
+    -webkit-user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
+  }
+
+  /* A message on the phone (sonner reads --phone-toast-bottom) sits 8 px above the tab bar while
+     the bar shows (the shell marks <html> with data-phone-tab-bar), and 8 px above the home bar
+     when a sheet or Review covers it. 49 px is the bar without the home-bar inset. */
+  html[data-phone-tab-bar]:not(:has([role="dialog"][data-state="open"])) {
+    --phone-toast-bottom: calc(min(var(--safe-bottom) * 0.4, 12px) + 49px + 8px);
+  }
+}
+
+/* Numbers that must not jitter (counts, ETAs, sizes, durations): use Tailwind's built-in
+   `tabular-nums` utility. */
+
+@layer components {
+  /* User-authored text (job and client names) that may be Latin, Hebrew or mixed.
+     Pair with dir="auto" (the <Bidi> component in lib/bidi.tsx does): each string picks its
+     own direction from its first strong character, but always sits flush left so a column of
+     mixed names shares one left edge, and truncates with an ellipsis. */
+  .bidi {
+    display: block;
+    min-width: 0;
+    unicode-bidi: plaintext;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

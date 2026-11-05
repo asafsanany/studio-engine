@@ -1,0 +1,11 @@
+{
+  "name": "Big number that counts up",
+  "kind": "callout",
+  "lengthSec": 2.5,
+  "variables": [
+    { "id": "number", "label": "Number", "default": "40%" },
+    { "id": "label", "label": "Label", "default": "more bookings" }
+  ],
+  "when": "When the speaker says a number worth seeing.",
+  "reply": "Made v1. The number counts up from 0 in 1.2 s and settles, and the label fades in under it. It keeps what’s around the number, so 40%, ₪1,200 and 3× all work."
+}

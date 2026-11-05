@@ -1,0 +1,16 @@
+{
+  "inboxPath": "~/Studio Inbox",
+  "currencySymbol": "$",
+  "usdToHomeCurrency": 1,
+  "instagramDmFrom": [],
+  "apiCreditsMonthlyUsd": 200,
+  "planMonthlyUsd": 200,
+  "generateBudgetUsd": 5,
+  "generateVoiceId": "68RUZBDjLe2YBQvv8zFx",
+  "music": true,
+  "songs": true,
+  "generate": true,
+  "stock": false,
+  "instagram": true,
+  "twoJobsAtOnce": true
+}

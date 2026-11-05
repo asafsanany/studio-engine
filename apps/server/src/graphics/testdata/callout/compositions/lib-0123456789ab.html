@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" data-composition-variables='[{"id":"number","type":"string","label":"Number","default":"40%"},{"id":"label","type":"string","label":"Label","default":"more bookings"}]'>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Heebo";
+          src: url("lib/0123456789ab/fonts/Heebo-Bold.ttf") format("truetype");
+          font-weight: 700;
+          font-display: block;
+        }
+        @font-face {
+          font-family: "Heebo";
+          src: url("lib/0123456789ab/fonts/Heebo-ExtraBold.ttf") format("truetype");
+          font-weight: 800;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          container-type: size;
+          font-family: "Heebo", sans-serif;
+        }
+        #lib-0123456789ab-clip {
+          position: absolute;
+          inset: 0;
+        }
+        #lib-0123456789ab-box {
+          position: absolute;
+          left: 6%;
+          right: 6%;
+          top: 40%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.2cqmin;
+          text-align: center;
+        }
+        #lib-0123456789ab-number {
+          color: #ffffff;
+          font-size: 24cqmin;
+          font-weight: 800;
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+          text-shadow: 0 0.2cqmin 1.2cqmin rgba(0, 0, 0, 0.45);
+        }
+        #lib-0123456789ab-label {
+          color: #ffffff;
+          font-size: 6cqmin;
+          font-weight: 700;
+          line-height: 1.2;
+          unicode-bidi: plaintext;
+          text-shadow: 0 0.2cqmin 1.2cqmin rgba(0, 0, 0, 0.45);
+        }
+      </style>
+      <div id="root" data-composition-id="lib-0123456789ab">
+        <div id="lib-0123456789ab-clip" class="clip" data-start="0" data-duration="2.5">
+          <div id="lib-0123456789ab-box">
+            <div id="lib-0123456789ab-number" dir="ltr">40%</div>
+            <div id="lib-0123456789ab-label" dir="auto" data-var-text="label">more bookings</div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const vars = window.__hyperframes?.getVariables?.() ?? {};
+          const text = typeof vars.number === "string" ? vars.number : "40%";
+          const number = document.querySelector("#lib-0123456789ab-number");
+          number.textContent = text;
+          // A field with no words hides its own element, so the box closes up around the other one.
+          if (text.trim() === "") number.style.display = "none";
+          if (typeof vars.label === "string" && vars.label.trim() === "") {
+            document.querySelector("#lib-0123456789ab-label").style.display = "none";
+          }
+          const tl = gsap.timeline({ paused: true });
+          // Counts what is around the number too: 40%, ₪1,200 and 3× all work.
+          const parts = /^([^\d]*)(\d[\d,]*(?:\.\d+)?)(.*)$/.exec(text);
+          if (parts) {
+            const target = parseFloat(parts[2].replace(/,/g, ""));
+            const decimals = (parts[2].split(".")[1] || "").length;
+            const count = { value: 0 };
+            tl.fromTo(
+              count,
+              { value: 0 },
+              {
+                value: target,
+                duration: 1.2,
+                ease: "power3.out",
+                onUpdate: () => {
+                  const shown = count.value.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+                  number.textContent = parts[1] + shown + parts[3];
+                },
+              },
+              0,
+            );
+          }
+          tl.fromTo("#lib-0123456789ab-box", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 0);
+          tl.fromTo("#lib-0123456789ab-number", { scale: 0.9 }, { scale: 1, duration: 0.35, ease: "power3.out" }, 0);
+          tl.fromTo("#lib-0123456789ab-label", { opacity: 0, yPercent: 40 }, { opacity: 1, yPercent: 0, duration: 0.3, ease: "power2.out" }, 0.6);
+          tl.to("#lib-0123456789ab-box", { opacity: 0, duration: 0.3, ease: "power1.in" }, 2.2);
+          window.__timelines["lib-0123456789ab"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

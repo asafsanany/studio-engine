@@ -1,0 +1,2 @@
+- A graphic that fades or slides out must finish doing so inside its clip: a `class="clip"` element is hidden after data-start + data-duration, so that sum has to be at or after the end of the exit tween. Check a snapshot at the exit.
+- Look at the snapshots for what each caption and graphic sits on: over every shot it appears on, it must not cover text, a face or a key object in the picture. If it would, use the nearest clear position (or a stronger caption background) and say so in project.md.

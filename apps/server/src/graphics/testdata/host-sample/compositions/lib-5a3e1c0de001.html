@@ -1,0 +1,77 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[{"id":"name","type":"string","label":"Name","default":"דנה לוי"},{"id":"role","type":"string","label":"Role","default":"מייסדת, Kova Coffee"}]'
+>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <!-- A tiny lower third for GR3's tests and the dev gallery, written to the Graphics contract (GR2's
+         spike): the variables are declared on <html>, the root has no data-width/data-height and fills
+         whatever mounts it, sizes are in cqmin. A name on a white pill and a role under it; it slides in
+         from the right in 0.4 s, holds, slides out, and is gone at 3 s. -->
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          container-type: size;
+          font-family: "Arial Hebrew", "Noto Sans Hebrew", Arial, sans-serif;
+        }
+        #lower {
+          position: absolute;
+          left: 6%;
+          right: 6%;
+          top: 72%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 1.4cqmin;
+          overflow: hidden;
+          padding: 2cqmin 0;
+        }
+        #name,
+        #role {
+          max-width: 100%;
+          white-space: nowrap;
+          line-height: 1.2;
+          unicode-bidi: plaintext;
+          border-radius: 999px;
+        }
+        #name {
+          padding: 0.32em 0.85em;
+          background: #ffffff;
+          color: #0a0a0a;
+          font-size: 6.6cqmin;
+          font-weight: 700;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+        #role {
+          margin-right: 0.5em;
+          padding: 0.3em 0.8em;
+          background: rgba(10, 10, 10, 0.72);
+          color: #f4f4f5;
+          font-size: 4.6cqmin;
+          font-weight: 500;
+        }
+      </style>
+      <div id="root" data-composition-id="lib-5a3e1c0de001">
+        <div id="lower" class="clip" data-start="0" data-duration="3">
+          <div id="name" dir="auto" data-var-text="name">דנה לוי</div>
+          <div id="role" dir="auto" data-var-text="role">מייסדת, Kova Coffee</div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#name", { xPercent: 140 }, { xPercent: 0, duration: 0.4, ease: "power3.out" }, 0);
+          tl.fromTo("#role", { xPercent: 140 }, { xPercent: 0, duration: 0.4, ease: "power3.out" }, 0.12);
+          tl.to("#name", { xPercent: 140, duration: 0.35, ease: "power3.in" }, 2.65);
+          tl.to("#role", { xPercent: 140, duration: 0.35, ease: "power3.in" }, 2.65);
+          window.__timelines["lib-5a3e1c0de001"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

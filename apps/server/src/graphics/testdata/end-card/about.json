@@ -1,0 +1,11 @@
+{
+  "name": "Follow card",
+  "kind": "end-card",
+  "lengthSec": 3.5,
+  "variables": [
+    { "id": "handle", "label": "Handle", "default": "@rgm.israel" },
+    { "id": "button", "label": "Button", "default": "Follow" }
+  ],
+  "when": "At the end, when the video asks people to follow.",
+  "reply": "Made v1. A white card pops in with the logo, the handle and a blue Follow button, and holds to the end of the video."
+}

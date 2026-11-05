@@ -1,0 +1,426 @@
+{
+  "natati": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0LyricVd",
+        "title": "אופק אדנק - נתתי לך בית (מילים)",
+        "duration": 192.0,
+        "channel": "Lyrics IL",
+        "uploader": "Lyrics IL",
+        "view_count": 9000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0LiveXx1",
+        "title": "אופק אדנק - נתתי לך בית LIVE",
+        "duration": 205.0,
+        "channel": "אופק אדנק",
+        "uploader": "אופק אדנק",
+        "view_count": 4000000,
+        "channel_is_verified": true,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0Loop10h",
+        "title": "נתתי לך בית - 10 HOURS",
+        "duration": 36000.0,
+        "channel": "Loops",
+        "uploader": "Loops",
+        "view_count": 800000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0Topic01",
+        "title": "נתתי לך בית",
+        "duration": 192.0,
+        "channel": "אופק אדנק - Topic",
+        "uploader": "אופק אדנק - Topic",
+        "view_count": 3000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0Offic01",
+        "title": "אופק אדנק - נתתי לך בית (Official Music Video)",
+        "duration": 194.0,
+        "channel": "אופק אדנק",
+        "uploader": "אופק אדנק",
+        "view_count": 20000000,
+        "channel_is_verified": true,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0Cover01",
+        "title": "נתתי לך בית (cover) by Dana",
+        "duration": 190.0,
+        "channel": "Dana",
+        "uploader": "Dana",
+        "view_count": 120000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "natati-only-bad": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0LyricVd",
+        "title": "אופק אדנק - נתתי לך בית (מילים)",
+        "duration": 192.0,
+        "channel": "Lyrics IL",
+        "uploader": "Lyrics IL",
+        "view_count": 9000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0Loop10h",
+        "title": "נתתי לך בית - 10 HOURS",
+        "duration": 36000.0,
+        "channel": "Loops",
+        "uploader": "Loops",
+        "view_count": 800000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "natati-latin": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "nat0React01",
+        "title": "Ofek Adanek Natati Lach Bait REACTION",
+        "duration": 400.0,
+        "channel": "Reactors",
+        "uploader": "Reactors",
+        "view_count": 50000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "blinding": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Audio1",
+        "title": "The Weeknd - Blinding Lights (Official Audio)",
+        "duration": 202.0,
+        "channel": "TheWeekndVEVO",
+        "uploader": "TheWeekndVEVO",
+        "view_count": 1200000000,
+        "channel_is_verified": true,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Topic1",
+        "title": "Blinding Lights",
+        "duration": 200.0,
+        "channel": "The Weeknd - Topic",
+        "uploader": "The Weeknd - Topic",
+        "view_count": 800000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Lyrics",
+        "title": "The Weeknd - Blinding Lights (Lyrics)",
+        "duration": 200.0,
+        "channel": "Lyric Lab",
+        "uploader": "Lyric Lab",
+        "view_count": 300000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Kara01",
+        "title": "Blinding Lights - Karaoke Version",
+        "duration": 200.0,
+        "channel": "Sing King",
+        "uploader": "Sing King",
+        "view_count": 9000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Hour01",
+        "title": "Blinding Lights 1 hour loop",
+        "duration": 3600.0,
+        "channel": "Loops",
+        "uploader": "Loops",
+        "view_count": 5000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Night1",
+        "title": "Blinding Lights (Nightcore)",
+        "duration": 160.0,
+        "channel": "Nightcore X",
+        "uploader": "Nightcore X",
+        "view_count": 2000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Slow01",
+        "title": "Blinding Lights (Slowed + Reverb)",
+        "duration": 245.0,
+        "channel": "Slowed Co",
+        "uploader": "Slowed Co",
+        "view_count": 7000000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "blinding-sped": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0Topic1",
+        "title": "Blinding Lights",
+        "duration": 200.0,
+        "channel": "The Weeknd - Topic",
+        "uploader": "The Weeknd - Topic",
+        "view_count": 800000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0SpedUsr",
+        "title": "Blinding Lights sped up",
+        "duration": 175.0,
+        "channel": "fastsongs",
+        "uploader": "fastsongs",
+        "view_count": 90000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0SpedTop",
+        "title": "Blinding Lights (Sped Up)",
+        "duration": 168.0,
+        "channel": "The Weeknd - Topic",
+        "uploader": "The Weeknd - Topic",
+        "view_count": 4000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "blnd0SpedLng",
+        "title": "Blinding Lights sped up (extended)",
+        "duration": 250.0,
+        "channel": "fastsongs",
+        "uploader": "fastsongs",
+        "view_count": 8000000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "indie": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "ind0Fan0001",
+        "title": "Some Band - Quiet Rooms",
+        "duration": 180.0,
+        "channel": "Fan Uploads",
+        "uploader": "Fan Uploads",
+        "view_count": 900000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "ind0Topic01",
+        "title": "Quiet Rooms",
+        "duration": 185.0,
+        "channel": "Some Band - Topic",
+        "uploader": "Some Band - Topic",
+        "view_count": 400000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "ind0Long001",
+        "title": "Some Band - Quiet Rooms (full session)",
+        "duration": 240.0,
+        "channel": "Fan Uploads",
+        "uploader": "Fan Uploads",
+        "view_count": 100000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "ind0Live001",
+        "title": "Some Band - Quiet Rooms (live)",
+        "duration": 181.0,
+        "channel": "Some Band",
+        "uploader": "Some Band",
+        "view_count": 800000,
+        "channel_is_verified": true,
+        "live_status": null
+      }
+    ]
+  },
+  "car-music-37": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "carm0Music37",
+        "title": "Car Music 37",
+        "duration": 150.0,
+        "channel": "Fabrício Cesar",
+        "uploader": "Fabrício Cesar",
+        "view_count": 120000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "kruzhit": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "kruzh0Topic1",
+        "title": "КРУЖИТЬ",
+        "duration": 187.0,
+        "channel": "Dmytro Monatik - Topic",
+        "uploader": "Dmytro Monatik - Topic",
+        "view_count": 5000000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  },
+  "snowman": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "jzv-VC9kcXA",
+        "title": "Snowman",
+        "duration": 165.0,
+        "channel": "LatinHype",
+        "uploader": "LatinHype",
+        "view_count": 500000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "J_QGZspO4gg",
+        "title": "Sia - Snowman",
+        "duration": 168.0,
+        "channel": "Sia",
+        "uploader": "Sia",
+        "view_count": 200000000,
+        "channel_is_verified": true,
+        "live_status": null
+      }
+    ]
+  },
+  "keane": {
+    "entries": [
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "kean0Video1",
+        "title": "Keane - Somewhere Only We Know (Official Music Video)",
+        "duration": 237.0,
+        "channel": "Keane",
+        "uploader": "Keane",
+        "view_count": 1066985776,
+        "channel_is_verified": true,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "kean0Topic1",
+        "title": "Somewhere Only We Know",
+        "duration": 239.0,
+        "channel": "Keane - Topic",
+        "uploader": "Keane - Topic",
+        "view_count": 420000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "kean0Lyric1",
+        "title": "Keane - Somewhere Only We Know (Lyrics)",
+        "duration": 239.0,
+        "channel": "Lyric Lab",
+        "uploader": "Lyric Lab",
+        "view_count": 90000000,
+        "channel_is_verified": false,
+        "live_status": null
+      },
+      {
+        "_type": "url",
+        "ie_key": "Youtube",
+        "id": "kean0Cover1",
+        "title": "Somewhere Only We Know - Keane (cover)",
+        "duration": 210.0,
+        "channel": "sofia.peters",
+        "uploader": "sofia.peters",
+        "view_count": 12000,
+        "channel_is_verified": false,
+        "live_status": null
+      }
+    ]
+  }
+}

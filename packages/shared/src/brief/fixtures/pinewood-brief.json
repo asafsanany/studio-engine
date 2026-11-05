@@ -1,0 +1,212 @@
+{
+  "name": "a client script and references, no footage",
+  "client": "Pinewood",
+  "job": "97 Window Ad",
+  "note": null,
+  "folder": [
+    "PINEWOOD brief.txt",
+    "reference/reference-video-35s.mp4",
+    "pinewood-references.zip",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.21.jpeg",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.36.jpeg",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.43.jpeg",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.51.jpeg",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Video 2026-10-15 at 15.13.02.mp4",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.13.13.jpeg",
+    "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.13.18.jpeg"
+  ],
+  "draft": {
+    "summary": "A 30 to 35 second social ad for PINEWOOD Home Services, made without footage from the client’s script, scene directions and references. It opens on a dirty skylight with an DIRTY WINDOW ALERT, explains what can build up in skylights and the AC system, then reveals the limited-time $97 window cleaning special with a free AC inspection and the included dryer-window cleaning, and ends on a request-your-appointment card. Deliver 9:16 and 1:1. No phone number anywhere.",
+    "goal": "Get homeowners to request an appointment for the $97 window cleaning special",
+    "audience": "American homeowners",
+    "platform": ["Instagram Reels", "Instagram Stories", "Facebook feed", "Instagram feed"],
+    "canvas": "1080x1920",
+    "length": {
+      "targetSec": 32,
+      "maxSec": 35
+    },
+    "language": "en",
+    "captions": "on",
+    "tone": "Realistic, trustworthy and premium; educational and serious at first, then positive and energetic from the offer on",
+    "pacing": "Moderate narration, slightly faster during the offer; the final screen stays up at least 2.5 to 3 seconds",
+    "hook": {
+      "what": "A dirty skylight with green particles and the DIRTY WINDOW ALERT, two alert sounds",
+      "file": null,
+      "at": "0:00"
+    },
+    "mustInclude": [
+      {
+        "what": "The only text in the opening shot",
+        "file": null,
+        "at": null,
+        "quote": "DIRTY WINDOW ALERT"
+      },
+      {
+        "what": "The $97 price, the strongest visual element of the offer",
+        "file": null,
+        "at": null,
+        "quote": "$97 WINDOW CLEANING SPECIAL!"
+      },
+      {
+        "what": "The final headline",
+        "file": null,
+        "at": null,
+        "quote": "GET IT NOW & SAVE!"
+      },
+      {
+        "what": "The final offer line",
+        "file": null,
+        "at": null,
+        "quote": "WINDOWS + BASIC GUTTERS — ONLY $97"
+      },
+      {
+        "what": "The original transparent PINEWOOD logo on the final screen",
+        "file": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.21.jpeg",
+        "at": null,
+        "quote": null
+      }
+    ],
+    "mustAvoid": [
+      {
+        "what": "A phone number",
+        "file": null
+      },
+      {
+        "what": "Extra labels in the opening shot such as Dust, Pollen or Rain Spots",
+        "file": null
+      },
+      {
+        "what": "Saying that the glass is damaged",
+        "file": null
+      },
+      {
+        "what": "The old $79 price and “BOOK YOUR APPOINTMENT”",
+        "file": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.13.13.jpeg"
+      }
+    ],
+    "onScreenText": {
+      "title": "DIRTY WINDOW ALERT",
+      "lowerThirds": [],
+      "cta": "REQUEST YOUR APPOINTMENT",
+      "endCard": "GET IT NOW & SAVE!"
+    },
+    "look": {
+      "logo": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.21.jpeg",
+      "colors": ["#2F6FDE"],
+      "fonts": []
+    },
+    "music": {
+      "file": null,
+      "note": "Engaging background music after the second alert, under the voiceover to the end: serious at first, more positive at “That’s why”, strongest at the $97 reveal, “And that’s not all” and the final call to action",
+      "wanted": true,
+      "song": null,
+      "original": null,
+      "wantsTrending": false
+    },
+    "production": "generate",
+    "voiceover": {
+      "lines": [
+        {
+          "id": "L1",
+          "text": "You always think about the paint on your walls and the floors you walk on…",
+          "direction": "calm, educational, conversational; make “always” clear"
+        },
+        {
+          "id": "L2",
+          "text": "But what about the view you look at every day?",
+          "direction": "stress BUT, with a short pause after it, and give the whole question weight"
+        },
+        {
+          "id": "L3",
+          "text": "Even while you relax?",
+          "direction": "slightly quieter, thought-provoking, then a brief natural pause"
+        },
+        {
+          "id": "L4",
+          "text": "Dust, pollen, and rain spots can collect on your windows and screens.",
+          "direction": "educational and responsible, not frightening"
+        },
+        {
+          "id": "L5",
+          "text": "That’s why, for a limited time, PINEWOOD Home Services is offering window cleaning for only ninety-seven dollars, including a free screen inspection.",
+          "direction": "turn positive and solution-focused at “That’s why”; strong emphasis on “only ninety-seven dollars”"
+        },
+        {
+          "id": "L6",
+          "text": "And that’s not all—your basic gutter cleaning is included in the same ninety-seven-dollar special!",
+          "direction": "an exciting bonus reveal on “And that’s not all”"
+        },
+        {
+          "id": "L7",
+          "text": "Get it now and save. Tap below to request your appointment.",
+          "direction": "confident, energetic, inviting"
+        }
+      ]
+    },
+    "formats": ["1080x1920", "1080x1080"],
+    "budgetUsd": null,
+    "references": [
+      {
+        "file": "reference/reference-video-35s.mp4",
+        "takeaway": "Shot order, pacing, caption style (white bold caps on a dark-navy box with key words in brand blue) and offer graphics to match; the same kind of video, not a copy"
+      }
+    ],
+    "files": [
+      {
+        "path": "PINEWOOD brief.txt",
+        "role": "instructions",
+        "note": "The client’s master production brief"
+      },
+      {
+        "path": "reference/reference-video-35s.mp4",
+        "role": "reference",
+        "note": "The reference video: 35 s, 9:16. Style to match, never in the video"
+      },
+      {
+        "path": "pinewood-references.zip",
+        "role": "ignore",
+        "note": "Unpacked by the engine; its files are listed below"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.21.jpeg",
+        "role": "logo",
+        "note": "The PINEWOOD logo, on black"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.36.jpeg",
+        "role": "reference",
+        "note": "Photo of the client’s equipment"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.43.jpeg",
+        "role": "reference",
+        "note": "Photo of the client’s equipment"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.12.51.jpeg",
+        "role": "reference",
+        "note": "Photo of the client’s equipment"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Video 2026-10-15 at 15.13.02.mp4",
+        "role": "reference",
+        "note": "7.5 s clip of a dusty skylight"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.13.13.jpeg",
+        "role": "reference",
+        "note": "The old ad: still says $79 and “BOOK YOUR APPOINTMENT”; the offer is now $97 and “REQUEST YOUR APPOINTMENT”"
+      },
+      {
+        "path": "edit/brief/unzipped/pinewood-references/WhatsApp Image 2026-10-15 at 15.13.18.jpeg",
+        "role": "reference",
+        "note": "Photo of the client’s equipment"
+      }
+    ],
+    "assumptions": [
+      "The client’s text asks for 9:16 and 1:1, so both are delivered and 9:16 is the main format.",
+      "The brand blue #2F6FDE is sampled from the logo."
+    ],
+    "assumed": ["look.colors", "captions"]
+  }
+}

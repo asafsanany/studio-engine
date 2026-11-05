@@ -1,0 +1,599 @@
+Write the brief for this edit. Don’t edit any video: a separate run does that after you, and it reads your brief first.
+
+Job: client "מאפיית הצפון", job "פרומו לסוף השבוע". The job folder is the current working directory. Every file in it is read-only. Write only edit/brief.json, plus voice-note transcripts under edit/brief/.
+
+The owner runs the studio. Their note for this job beats everything else, the client included:
+<note>
+הטייק השני עדיף.
+Keep it under 30 seconds. {{client}}
+</note>
+
+1. The files are listed below (edit/ and dotfiles left out) with each file’s kind, size and modified time, and the duration of every video and audio file. You don’t need to list the folder or ffprobe anything yourself.
+- _chat.txt (text, 1.2 KB, modified 2026-10-19 08:03 UTC)
+- IMG_2201.mp4 (video, 12 MB, 0:08, modified 2026-10-18 21:08 UTC)
+- edit/brief/from-you/IMG_4412.PNG (image, 215 KB, modified 2026-10-19 08:05 UTC)
+
+Bash here runs only these commands, one per call, with no pipes, `;`, `&&`, redirects, `find` or `xargs`: `ls -la`, `ffprobe -v error -show_entries format=duration -of csv=p=0 "<file>"`, `textutil -convert txt -stdout "<file>"` and the transcribe command in step 2. Anything else is denied. A denial means the form was wrong, not that Bash is off: run it again in one of these forms.
+
+2. Read every file that can carry instructions:
+- Text: .txt .md .rtf as they are. .pdf with the Read tool. .docx .doc with textutil -convert txt -stdout "<file>". For .pages, read QuickLook/Preview.pdf inside the package.
+- WhatsApp exports (_chat.txt, "WhatsApp Chat - … .txt"): every message in order, with its date and sender. An <attached: …> line ties a voice note or photo to its message.
+- Voice notes and short audio (.opus .ogg .m4a .amr, or any audio under 5 minutes that isn’t music): transcribe with
+  ~/Developer/video-use/.venv/bin/python ~/Developer/video-use/helpers/transcribe.py "<file>" --edit-dir "./edit/brief"
+  adding --language they when the chat or the names are Hebrew. Never write to edit/transcripts/: the edit run owns it.
+- Images: look at each one. It is a logo, a reference, a screenshot of a message (read it as instructions) or footage (a photo meant for the video).
+- Video: don’t transcribe it; the edit run does. Tell footage from a reference clip by its name, its duration and the chat. Look at one frame only when that doesn’t settle it.
+- Songs. The client or the owner may ask for a song under the video. Fill music.song, music.original and music.wantsTrending from what the instructions say; when nobody asks for a song they are null, null and false. music.note keeps only what the instructions say about how the music is used (“start at the drop”), or null: never where a song came from.
+  - A screenshot of a reel or a TikTok whose audio label names a song is instructions, not a reference: it says which song to cut to. Read the label word for word. On Instagram it is the line with a music note under the account name, “Artist · Title”. On TikTok it is the scrolling line next to the spinning record, usually “Title - Artist”. Put the title in song.title and the artist in song.artist exactly as written, Hebrew included: never translate, shorten, correct or look up a name. Put the screenshot’s file name in song.fromFile.
+  - “sped up”, “slowed” or “remix” in the label or in the chat is song.version, and “original” only when it says so; otherwise song.version is null.
+  - “Original audio · [account]”, “original sound” or the same words in Hebrew name no song. Set music.original to { "by": "[account]" } with the account as written on the label, and song to null. Never guess a song from it, from the footage or from the account.
+  - A label that is cut off (it ends in “…”): write what is visible and say in assumptions that the label was cut off. Never complete it from memory.
+  - A link that the client or the owner ties to the music (YouTube, music.youtube.com, an Instagram reel, TikTok, Spotify, Apple Music) goes word for word in song.link. When the link is all there is, song.title and song.artist stay null: never invent a name for it. A song named in words goes in song.title and song.artist, with song.link null.
+  - A line of a form, a template or a document that gives the music as a name (“Music: [title] - [artist]”, “מוזיקה: [title] - [artist]”) names a song when no file in the folder has that name: put it in song.title and song.artist as written, and leave music.file null. music.file is only for a file that is in the folder (role music): a name with no file behind it never goes there.
+  - “A trending song”, “שיר טרנדי”, “something viral”, “a song that’s trending” with no song named: music.wantsTrending is true and song is null.
+  - A song someone asked for is not assumed. Conflicts between two songs follow step 4: The owner’s note first, and the screenshots they attached to it count as their note (they are in edit/brief/from-you/ and are listed in step 1 when there are any), then the newest message. A music file in the folder (role music) still wins over any song: then song stays null, music.wantsTrending is false, and the conflict goes in assumptions.
+- Music. Studio Engine makes music only when the job asks for it. music.wanted says whether the instructions ask for music to be made or added to this video: true or false, never left out.
+  - True only when the owner’s note, a voice note, a chat message or a document asks for music in so many words: “add music”, “with a soundtrack”, “something energetic under it”, “intense music with drops”, “תוסיפו מוזיקה”, “עם מוזיקה”. Then music is an object (file null) and music.note keeps only what the instructions say about how it should sound (“intense, with drops”), or null.
+  - False in every other case, and music stays null when the instructions say nothing about music. Never true because music would fit this video, its tone, its platform or the footage. A reference video that has music in it is a style to match, not an ask for music. A line that only says what music the client likes (“they like lo-fi”) is not an ask, and neither is a form or template whose music part is left empty (“מוזיקה:” with nothing written).
+  - False too when the instructions name a music file (music.file, role music: the editor uses that file) or a song (the song is the ask), and when they say no music (music.note “no music”). Conflicts follow step 4: The owner’s note first, then the newest message.
+
+3. Give each file a role: footage, instructions, music, logo, reference or ignore. A voice note with directions is instructions even though it’s audio; a testimonial recorded as audio is footage.
+
+4. Write edit/brief.json in the schema below.
+- Fill a field only from what the instructions say. Otherwise leave it null: null means the editor uses video-use’s defaults, which are good.
+- Infer only what is close to certain (a reel is 1080x1920; colours sampled from the logo). Write each inference in assumptions, and its field path in assumed (for example look.colors).
+- A value that the owner’s note or the client states is not assumed, even when you could also have inferred it: if the note says 1080x1920, canvas is not in assumed. assumed lists only values nobody said, and only fields of the schema. File roles are always your own call, so files is never in assumed.
+- Quotes, names and on-screen text go in word for word, in the client’s language and spelling. Don’t write copy the client didn’t give.
+- Conflicts: The owner’s note wins. After it, the newest message wins (chat order, then file dates), and the owner’s own messages in a chat beat the client’s. Write each conflict you resolved in assumptions.
+- Everything else in English. summary is 3–5 plain sentences an editor can act on.
+- To change edit/brief.json after you wrote it, write the whole file again with Write: Edit is not available.
+- No instructions and no note: summary "No instructions in the folder.", every other field null, files and assumptions filled.
+
+This run is unattended: never ask questions. If a voice note can’t be transcribed, write the brief from everything else, note "not transcribed" on that file and say so in assumptions. You are done when edit/brief.json parses and matches the schema.
+
+Schema:
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "3–5 plain sentences an editor can act on: what the video is and what matters most."
+    },
+    "goal": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "audience": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "platform": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Where it will be posted, such as \"Instagram Reel\"."
+    },
+    "canvas": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "1080x1920",
+            "1920x1080",
+            "1080x1080",
+            "1080x1350"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "length": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "targetSec": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Wanted length in seconds, or null."
+            },
+            "maxSec": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Hard limit in seconds, or null."
+            }
+          },
+          "required": [
+            "targetSec",
+            "maxSec"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "language": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z]{2}$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ISO 639-1 code of the spoken language, such as \"he\", or null."
+    },
+    "captions": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "on",
+            "off"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pacing": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hook": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "what": {
+              "type": "string",
+              "description": "The opening moment, in plain English."
+            },
+            "file": {
+              "description": "File name that has it, or null.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "at": {
+              "description": "Time in that file such as \"0:08\", or null.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "what",
+            "file",
+            "at"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "mustInclude": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "what": {
+            "type": "string",
+            "description": "What has to be in the video, in plain English."
+          },
+          "file": {
+            "description": "File name that has it, or null.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "at": {
+            "description": "Time in that file such as \"0:08\", or null.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "quote": {
+            "description": "Words said or shown, word for word in the client’s language, or null.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "what",
+          "file",
+          "at",
+          "quote"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "mustAvoid": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "what": {
+            "type": "string",
+            "description": "What must not appear on screen, in captions or in the cut."
+          },
+          "file": {
+            "description": "File name it comes from, or null.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "what",
+          "file"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "onScreenText": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Opening title, word for word, or null.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lowerThirds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Word for word, in the client’s language and spelling."
+              },
+              "role": {
+                "description": "Word for word, or null.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "role"
+            ],
+            "additionalProperties": false
+          },
+          "description": "One per person named on screen."
+        },
+        "cta": {
+          "description": "Call to action, word for word, or null.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "endCard": {
+          "description": "End card text, word for word, or null.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "lowerThirds",
+        "cta",
+        "endCard"
+      ],
+      "additionalProperties": false
+    },
+    "look": {
+      "type": "object",
+      "properties": {
+        "logo": {
+          "description": "Logo file name, or null.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "colors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$"
+          },
+          "description": "Brand colours as #RRGGBB."
+        },
+        "fonts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Font names, with weight if given, such as \"Heebo 800\"."
+        }
+      },
+      "required": [
+        "logo",
+        "colors",
+        "fonts"
+      ],
+      "additionalProperties": false
+    },
+    "music": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "file": {
+              "description": "Music file name, or null when the instructions give no music file.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "note": {
+              "description": "Anything the instructions say about it, or null.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "wanted": {
+              "default": false,
+              "description": "True only when the instructions (the note, a voice note, a chat, a document) ask for music to be made or added to this video and name no music file and no song. False in every other case: never true because music would fit.",
+              "type": "boolean"
+            },
+            "song": {
+              "default": null,
+              "description": "The song the client asked for (from a screenshot, a link or a name), or null. Never guess a song.",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "description": "The song’s title, word for word in its own language and spelling, or null when only a link is given.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "artist": {
+                      "description": "The artist, word for word, or null when only a link is given.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "version": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "original",
+                            "sped up",
+                            "slowed",
+                            "remix"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "\"sped up\", \"slowed\" or \"remix\" when the name says so, \"original\" if it says so, else null."
+                    },
+                    "link": {
+                      "description": "A link to the song or to the reel it is in, word for word, or null.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "fromFile": {
+                      "description": "Name of the screenshot or file the song was read from, or null.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "artist",
+                    "version",
+                    "link",
+                    "fromFile"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "original": {
+              "default": null,
+              "description": "Set when the screenshot says \"Original audio\" instead of a song name, or null. It means there is no song to look up.",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "by": {
+                      "type": "string",
+                      "description": "The account named under the \"Original audio\" label, such as \"@reels.creator\"."
+                    }
+                  },
+                  "required": [
+                    "by"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "wantsTrending": {
+              "default": false,
+              "description": "True when the instructions ask for a trending song and name none.",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "note",
+            "wanted",
+            "song",
+            "original",
+            "wantsTrending"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Reference file name. It is never cut into the video."
+          },
+          "takeaway": {
+            "type": "string",
+            "description": "The style to match, in plain English."
+          }
+        },
+        "required": [
+          "file",
+          "takeaway"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path relative to the job folder."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "footage",
+              "instructions",
+              "music",
+              "logo",
+              "reference",
+              "ignore"
+            ]
+          },
+          "note": {
+            "description": "Short note such as \"Voice note, 0:48\", or null.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "role",
+          "note"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Every file in the job folder, each with a role."
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Every inference and every conflict you resolved, one plain sentence each."
+    },
+    "assumed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Field paths of the values that are guesses, such as \"captions\" or \"look.colors\"."
+    }
+  },
+  "required": [
+    "summary",
+    "goal",
+    "audience",
+    "platform",
+    "canvas",
+    "length",
+    "language",
+    "captions",
+    "tone",
+    "pacing",
+    "hook",
+    "mustInclude",
+    "mustAvoid",
+    "onScreenText",
+    "look",
+    "music",
+    "references",
+    "files",
+    "assumptions",
+    "assumed"
+  ],
+  "additionalProperties": false
+}

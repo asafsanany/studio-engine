@@ -1,0 +1,199 @@
+{
+  "fields": {
+    "source": "Read on 25 Oct 2026 from the actors' public pages and their build README/input schema (api.apify.com/v2/acts/<id> and /builds/default, no key needed). NOT from a run: there is no Apify key on this Mac yet (SG15).",
+    "confirmed": {
+      "apify/instagram-hashtag-scraper input": "hashtags (array, with or without #, each one term), keywordSearch (bool), resultsType (posts | reels | stories, default posts), resultsLimit (integer, per hashtag; no maximum stated). No date filter, no sort: it returns recent posts or reels.",
+      "apify/instagram-hashtag-scraper output (a reel)": "inputUrl, id, type, shortCode, url, caption, hashtags, productType (clips), videoPlayCount, igPlayCount, likesCount, commentsCount, sharesCount, timestamp (ISO 8601), videoDuration, ownerUsername, musicInfo { artist_name, song_name, uses_original_audio, should_mute_audio, should_mute_audio_reason, audio_id }. An image post has a different musicInfo (audio_canonical_id, audio_type, music_info, original_sound_info) and no audio_id.",
+      "apify/instagram-reel-scraper input": "username (array: usernames, profile URLs, ids or reel URLs), resultsLimit (reels per profile), onlyPostsNewerThan (YYYY-MM-DD, ISO or '2 weeks'), skipPinnedPosts, skipTrialReels, includeSharesCount (paid), includeTranscript (add-on), includeDownloadedVideo (add-on)",
+      "apify/instagram-reel-scraper output": "the same reel fields as above plus videoViewCount; musicInfo as above",
+      "memo23/instagram-audio-scraper input": "trackIds (array of audio ids or instagram.com/reels/audio/<id>/ URLs), queries, postUrls, profileHandles, maxReelsPerProfile, datePosted, maxSoundsPerQuery, includeReelsUsingSound (paid plans only), maxReelsPerSound, saveAudio (paid)",
+      "memo23/instagram-audio-scraper output (rowType sound)": "rowType, source, trackId, audioClusterId, title, artist (the creator's handle when isOriginalAudio), durationMs, isExplicit, isOriginalAudio, hasLyrics, isTrending, trendRank, coverArtworkUrl, audioDownloadUrl, previewUrl, totalReelsUsingSound, scrapedAt. A track-id lookup always fills totalReelsUsingSound and isTrending (is_trending_in_clips); a catalogue search row does not send isTrending.",
+      "prices (free tier)": "hashtag scraper $0.0026 per result; reel scraper $0.006 per start + $0.0026 per reel; audio scraper $0.004 per sound (+ $0.0001 per GB of memory per start)"
+    },
+    "notConfirmed": [
+      "That resultsType 'reels' items carry videoPlayCount (the page's sample is a reel found in posts mode).",
+      "The order of the hashtag scraper's results and how many it returns per hashtag for a big hashtag.",
+      "Whether trendRank is lower-is-better (the page only says 'Instagram's clip trend rank when present').",
+      "What the audio scraper returns for a sound id that Instagram has retired (an error row {source, error, message, errorKind} is documented and is not billed).",
+      "The real cost of a run (the run-sync endpoint gives no run id or cost in its response headers, so the pick logs an estimate)."
+    ]
+  },
+  "actor-samples": {
+    "hashtagReel": {
+      "inputUrl": "https://www.instagram.com/explore/tags/birdsofinstagram",
+      "id": "3759894870669155149",
+      "type": "Video",
+      "shortCode": "DQt1HbPDFtN",
+      "caption": "BORB Invasion!",
+      "hashtags": ["invasion", "birds", "birdsofinstagram"],
+      "mentions": [],
+      "url": "https://www.instagram.com/p/DQt1HbPDFtN/",
+      "commentsCount": 40,
+      "likesCount": 289,
+      "videoPlayCount": 2133,
+      "igPlayCount": 2133,
+      "reshareCount": null,
+      "sharesCount": 17,
+      "timestamp": "2025-11-06T13:08:06.000Z",
+      "ownerFullName": "Buddy",
+      "ownerUsername": "buddy_thebirdy",
+      "ownerId": "41546774605",
+      "productType": "clips",
+      "videoDuration": 31.166000366210938,
+      "musicInfo": {
+        "artist_name": "Retrospectre",
+        "song_name": "The X-Files Theme",
+        "uses_original_audio": false,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "138853804759362"
+      }
+    },
+    "reelScraperOriginal": {
+      "inputUrl": "https://www.instagram.com/reel/DX7lzTOJ1p6/",
+      "id": "3889868956217334394",
+      "type": "Video",
+      "shortCode": "DX7lzTOJ1p6",
+      "hashtags": ["ad", "sephorasquad", "sephora"],
+      "url": "https://www.instagram.com/p/DX7lzTOJ1p6/",
+      "likesCount": 286,
+      "videoViewCount": 4073,
+      "videoPlayCount": 10977,
+      "timestamp": "2026-05-04T21:05:19.000Z",
+      "videoDuration": 51.151,
+      "productType": "clips",
+      "musicInfo": {
+        "artist_name": "lyssamariexo",
+        "song_name": "Original audio",
+        "uses_original_audio": true,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "27294574066813295"
+      }
+    },
+    "soundRow": {
+      "rowType": "sound",
+      "source": "lofi",
+      "trackId": "878420731732683",
+      "audioClusterId": "1447236620222768",
+      "title": "Bloom",
+      "artist": "LoFi Tokyo",
+      "durationMs": 156320,
+      "isExplicit": false,
+      "isOriginalAudio": false,
+      "hasLyrics": false,
+      "isTrending": null,
+      "trendRank": null,
+      "totalReelsUsingSound": 29677,
+      "scrapedAt": "2026-09-03T21:12:28.231Z"
+    }
+  },
+  "song-as-sound": {
+    "note": "Hashtag-scraper style reels (C76). The first two are hit songs uploaded as sounds by another account (SG13's real examples: the artist field is the uploader, the title reads 'Song - Artist' or 'Song • Artist', and the actor's flag says original); the third is a creator's own named sound.",
+    "keane": {
+      "inputUrl": "https://www.instagram.com/explore/tags/fpv",
+      "id": "3761736831",
+      "type": "Video",
+      "shortCode": "DKeaneHash1",
+      "url": "https://www.instagram.com/p/DKeaneHash1/",
+      "videoPlayCount": 90000,
+      "igPlayCount": 90000,
+      "timestamp": "2026-10-20T10:00:00.000Z",
+      "ownerUsername": "zianlutfiana",
+      "productType": "clips",
+      "videoDuration": 14.2,
+      "musicInfo": {
+        "artist_name": "sofia.peters",
+        "song_name": "Somewhere only we know - Keane",
+        "uses_original_audio": true,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "8800"
+      }
+    },
+    "keaneAgain": {
+      "inputUrl": "https://www.instagram.com/explore/tags/fpv",
+      "id": "3761736832",
+      "type": "Video",
+      "shortCode": "DKeaneHash2",
+      "url": "https://www.instagram.com/p/DKeaneHash2/",
+      "videoPlayCount": 80000,
+      "igPlayCount": 80000,
+      "timestamp": "2026-10-20T10:00:00.000Z",
+      "ownerUsername": "drone.pilot",
+      "productType": "clips",
+      "videoDuration": 14.2,
+      "musicInfo": {
+        "artist_name": "keanefan",
+        "song_name": "Somewhere only we know - Keane",
+        "uses_original_audio": true,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "8802"
+      }
+    },
+    "anyma": {
+      "inputUrl": "https://www.instagram.com/explore/tags/fpv",
+      "id": "3761736831",
+      "type": "Video",
+      "shortCode": "DAnymaHash1",
+      "url": "https://www.instagram.com/p/DAnymaHash1/",
+      "videoPlayCount": 70000,
+      "igPlayCount": 70000,
+      "timestamp": "2026-10-20T10:00:00.000Z",
+      "ownerUsername": "irvinepolice",
+      "productType": "clips",
+      "videoDuration": 14.2,
+      "musicInfo": {
+        "artist_name": "anyma.fans",
+        "song_name": "Atmosphere • Anyma, Chris Avantgarde",
+        "uses_original_audio": true,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "8803"
+      }
+    },
+    "ownNamed": {
+      "inputUrl": "https://www.instagram.com/explore/tags/fpv",
+      "id": "3765646831",
+      "type": "Video",
+      "shortCode": "DOwnNamedH1",
+      "url": "https://www.instagram.com/p/DOwnNamedH1/",
+      "videoPlayCount": 60000,
+      "igPlayCount": 60000,
+      "timestamp": "2026-10-20T10:00:00.000Z",
+      "ownerUsername": "mibellyuseche",
+      "productType": "clips",
+      "videoDuration": 14.2,
+      "musicInfo": {
+        "artist_name": "mibellyuseche",
+        "song_name": "Mibellyuseche💋",
+        "uses_original_audio": true,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "8801"
+      }
+    },
+    "remix": {
+      "inputUrl": "https://www.instagram.com/explore/tags/fpv",
+      "id": "3761736831",
+      "type": "Video",
+      "shortCode": "DRemixHash1",
+      "url": "https://www.instagram.com/p/DRemixHash1/",
+      "videoPlayCount": 50000,
+      "igPlayCount": 50000,
+      "timestamp": "2026-10-20T10:00:00.000Z",
+      "ownerUsername": "dj_remixer",
+      "productType": "clips",
+      "videoDuration": 14.2,
+      "musicInfo": {
+        "artist_name": "The Weeknd",
+        "song_name": "Blinding Lights - Remix",
+        "uses_original_audio": false,
+        "should_mute_audio": false,
+        "should_mute_audio_reason": "",
+        "audio_id": "8804"
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+- Self-eval only around what this round changed: npx hyperframes lint with 0 errors, snapshots at the cuts and graphics you changed (and a second either side), the caption gate (§3.4 step 5) on those snapshots, and the loudness of cut.mp4 with the music under it only if the audio changed.

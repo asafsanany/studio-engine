@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": [
+    "vite.config.ts",
+    "dev-proxy.ts",
+    "dev-proxy.test.ts",
+    "dev-graphic-sample.ts",
+    "dev-graphic-sample.test.ts",
+    "dev-preview-sample.ts",
+    "dev-preview-sample.test.ts"
+  ]
+}

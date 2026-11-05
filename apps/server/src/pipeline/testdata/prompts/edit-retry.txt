@@ -1,0 +1,38 @@
+Retry the edit of the footage in this folder with the video-use skill and deliver edit/final.mp4.
+
+Job: client "מאפיית הצפון", job "פרומו לסוף השבוע". The footage folder is the current working directory; treat its files as read-only and write everything to ./edit/.
+
+Footage quality. Whatever the brief says, choose and trim the footage by these three rules:
+- Stutters and misspeaks: read the word-level transcript and cut false starts, repeated words, trailing-off sentences and flubbed lines. When a line is said more than once, keep the cleanest take, not the first.
+- Photos: check each photo’s resolution and look at it for blur and noise. Use a low-quality photo only as a last resort, when no video or better photo covers that beat.
+- Shaky footage: avoid it. Check stability by looking at frames spread through each clip. When a clip shakes at the start and then settles, start it where it settles; use only its most stable stretch. Take a shaky clip only when nothing steadier covers the beat, and say so in project.md.
+Self-eval before the final render: no stutter or misspoken line, no shaky stretch and no weak photo left in the cut, unless it was the last resort.
+
+If edit/brief.md exists, read it before anything else (edit/brief.json is the same brief as data). It was written from the client’s instructions and the owner’s note:
+- Where it says something, follow it over the §0 defaults table and over your own taste. Where it says nothing, use the defaults.
+- Cut only the files it lists as footage. Use music, logo and reference files for what they are. Never put an instructions file (voice note, chat, screenshot) in the video.
+- Keep every must-include item and check each one in self-eval before the final render. Nothing on the must-avoid list may appear.
+- Use on-screen text word for word.
+- Start project.md’s Assumptions line with the brief’s assumptions.
+- A Series section, when there is one, is the format this job repeats: follow it exactly. The Client style section at the end is the client’s house style. The brief above them wins where they disagree, and the series wins over the style.
+
+The previous attempt failed at step 5 of 8 (Cut) with this error:
+
+> Claude Code stopped with exit code 1: render.py failed x
+
+Studio Engine's steps are: 1 Brief, 2 Transcribe, 3 Scan, 4 Plan, 5 Cut, 6 Preview, 7 Check, 8 Render.
+- Load the skill, then read edit/project.md and look at what is already in ./edit/.
+- Find the cause of that error first, and fix it or work around it (a different command, a different approach for that step, a damaged file in ./edit/ made again).
+- Then carry on from the existing work instead of starting over. Do not transcribe again: reuse edit/transcripts/, and only transcribe a source that has no transcript yet.
+- If the cause is outside this folder and you cannot fix it (a missing tool or key, a full disk, no network), do not try the same thing again: end with the Blocked: line described below.
+
+This run is unattended (Studio Engine): nobody will answer questions, so never ask any. Follow the skill's §0 and decide on judgment. Notes for this machine:
+- Setup is already done: ~/Developer/video-use is cloned with its .venv, and the skill is installed at ~/.claude/skills/video-use. Skip the ln -sfn line in §1 (writes under ~/.claude are blocked here); run the rest of §1's checks.
+- This is the local Mac, not a cloud container: work directly in ./edit/ and skip §4 (no staging, device_commit_files or SendUserFile).
+- The job path contains spaces and may be Hebrew, so always double-quote paths and variables in Bash (`cd "$SH"`, never `cd $SH`). Never cd or write above ./edit/, and if a cd fails, stop instead of running the next command where you are: a stray folder in the client folder or the inbox gets picked up as a new job.
+- Read only this folder. The client's style, this job's series (if it has one) and the shared fonts are already copied into edit/style/, edit/series/ and edit/fonts/, so don't open the client's other folders (other jobs, _Style, _Series, _Fonts) or anything else in the inbox. The one exception is the client's _Shared folder (../_Shared/) when brief.md lists its files: copy the ones you use into edit/shared/ and use them from there.
+- macOS tools: Bash is bash 3.2 and sed is BSD sed, so in-place edits need sed -i '' (or use the Edit tool). The edit-video skill is at ~/.claude/skills/edit-video.
+- iPhone clips: this ffmpeg has no zscale, so render.py's HLG/HDR tone-map fails; make SDR intermediates first (VideoToolbox scale_vt works here). Keep every clip's orientation: a portrait iPhone clip is stored landscape with a rotation (ffprobe -show_entries stream_side_data=rotation shows e.g. -90). ffmpeg applies that rotation to software-decoded frames only, not to hardware frames (-hwaccel_output_format videotoolbox_vld), so after hwdownload add the turn yourself (transpose=clock for -90, transpose=cclock for 90, hflip,vflip for 180) and check that each intermediate has the width and height the source is shown at.
+- The ElevenLabs key is in ~/Developer/video-use/.env, where the transcribe helper reads it. Never print it, copy it or pass it on a command line: everything this run prints is logged.
+- The job is done when edit/final.mp4 exists and you have checked it. Do not leave anything running in the background when you finish.
+- If you hit a real blocker, finish what does not depend on it, then make the very last line of your final message start with "Blocked:" followed by one plain sentence naming what is missing, for example "Blocked: ffmpeg is not installed (brew install ffmpeg)." Studio Engine shows that sentence to the user as the job's error.

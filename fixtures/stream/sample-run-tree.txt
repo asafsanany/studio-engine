@@ -1,0 +1,245 @@
+# E1 sample run: job folder "Acme Studio/Launch teaser" (one 1080p30 test-pattern clip with ~15 s of macOS say speech and one retake).
+# claude exit 0 after 470 s; edit/final.mp4 = 11.3 s, 1920x1080, H.264/AAC. Times are UTC. Stream: sample-run.jsonl.
+
+## 1. Order of appearance in edit/ (polled every 500 ms while the run was going)
+# + file appeared (size)   ~ size settled, again after every rewrite   - file removed
+# HyperFrames' per-render temp folders (work-*/, .render.hf-transaction-*/) are collapsed to one line each.
+
+2026-10-20T14:56:47.409Z  watching Acme Studio/Launch teaser/edit
+2026-10-20T14:57:16.025Z  + edit/takes_packed.md  427
+2026-10-20T14:57:16.026Z  + edit/transcripts/clip-01.json  13950
+2026-10-20T14:57:16.528Z  ~ edit/takes_packed.md  427
+2026-10-20T14:57:16.528Z  ~ edit/transcripts/clip-01.json  13950
+2026-10-20T14:57:23.549Z  + edit/verify/src_full.png  279282
+2026-10-20T14:57:24.052Z  ~ edit/verify/src_full.png  279282
+2026-10-20T14:57:59.667Z  + edit/project.md  1885
+2026-10-20T14:58:00.170Z  ~ edit/project.md  1885
+2026-10-20T14:58:07.697Z  + edit/animations/_shared/vendor/gsap.min.js  72927
+2026-10-20T14:58:08.199Z  ~ edit/animations/_shared/vendor/gsap.min.js  72927
+2026-10-20T14:58:08.199Z  + edit/animations/slot_1/vendor/gsap.min.js  72927
+2026-10-20T14:58:08.701Z  ~ edit/animations/slot_1/vendor/gsap.min.js  72927
+2026-10-20T14:58:23.769Z  + edit/animations/slot_1/index.html  2717
+2026-10-20T14:58:24.272Z  ~ edit/animations/slot_1/index.html  2717
+2026-10-20T14:58:34.823Z  + edit/animations/slot_1/.hyperframes/history-id  37
+2026-10-20T14:58:34.824Z  + edit/animations/slot_1/.hyperframes/render-outputs.json  37
+2026-10-20T14:58:34.824Z  + edit/animations/slot_1/.hyperframes/video-state.json  907
+2026-10-20T14:58:34.824Z  + edit/animations/slot_1/.hyperframes/video-state-lock/owner.pid  4
+2026-10-20T14:58:35.324Z  ~ edit/animations/slot_1/.hyperframes/history-id  37
+2026-10-20T14:58:35.324Z  ~ edit/animations/slot_1/.hyperframes/render-outputs.json  37
+2026-10-20T14:58:35.325Z  ~ edit/animations/slot_1/.hyperframes/video-state.json  907
+2026-10-20T14:58:35.325Z  + edit/animations/slot_1/.render.hf-transaction-nVHRZC/  (HyperFrames render temp: 1 files, collapsed by E1)
+2026-10-20T14:58:35.325Z  + edit/animations/slot_1/work-af46e63b-1474-4259-a59e-97ac61f3822f-EpYpvi/  (HyperFrames render temp: 598 files, collapsed by E1)
+2026-10-20T14:58:35.325Z  - edit/animations/slot_1/.hyperframes/video-state-lock/owner.pid
+2026-10-20T14:58:46.984Z  - edit/animations/slot_1/.render.hf-transaction-nVHRZC/  (removed)
+2026-10-20T14:58:46.984Z  + edit/animations/slot_1/render.mov  44416499
+2026-10-20T14:58:46.990Z  - edit/animations/slot_1/work-af46e63b-1474-4259-a59e-97ac61f3822f-EpYpvi/  (removed)
+2026-10-20T14:58:47.492Z  ~ edit/animations/slot_1/render.mov  44416499
+2026-10-20T14:58:47.492Z  ~ edit/animations/slot_1/.hyperframes/video-state.json  1388
+2026-10-20T14:58:54.527Z  + edit/edl.json  1346
+2026-10-20T14:58:54.527Z  + edit/clips_preview/seg_00_clip-01.mp4  48
+2026-10-20T14:58:55.029Z  ~ edit/edl.json  1346
+2026-10-20T14:58:55.029Z  + edit/clips_preview/seg_01_clip-01.mp4  48
+2026-10-20T14:58:55.531Z  ~ edit/clips_preview/seg_00_clip-01.mp4  1892254
+2026-10-20T14:58:56.536Z  + edit/base_preview.mp4  8333325
+2026-10-20T14:58:56.536Z  + edit/master.srt  699
+2026-10-20T14:58:57.039Z  ~ edit/base_preview.mp4  8333325
+2026-10-20T14:58:57.040Z  ~ edit/master.srt  699
+2026-10-20T14:58:57.040Z  ~ edit/clips_preview/seg_01_clip-01.mp4  6442342
+2026-10-20T14:59:16.653Z  + edit/animations/words_out.json  1675
+2026-10-20T14:59:16.653Z  + edit/animations/words_out.srt  564
+2026-10-20T14:59:16.653Z  + edit/animations/slot_captions/build-captions.mjs  6427
+2026-10-20T14:59:16.653Z  + edit/animations/slot_captions/vendor/gsap.min.js  72927
+2026-10-20T14:59:17.156Z  ~ edit/animations/words_out.json  1675
+2026-10-20T14:59:17.157Z  ~ edit/animations/words_out.srt  564
+2026-10-20T14:59:17.157Z  ~ edit/animations/slot_captions/build-captions.mjs  6427
+2026-10-20T14:59:17.157Z  ~ edit/animations/slot_captions/vendor/gsap.min.js  72927
+2026-10-20T14:59:27.222Z  + edit/animations/slot_captions/index.html  863
+2026-10-20T14:59:27.223Z  + edit/animations/slot_captions/compositions/captions.html  4395
+2026-10-20T14:59:27.724Z  ~ edit/animations/slot_captions/index.html  863
+2026-10-20T14:59:27.724Z  ~ edit/animations/slot_captions/compositions/captions.html  4395
+2026-10-20T14:59:28.729Z  + edit/animations/slot_captions/.hyperframes/render-outputs.json  37
+2026-10-20T14:59:29.231Z  + edit/animations/slot_captions/.hyperframes/history-id  37
+2026-10-20T14:59:29.231Z  ~ edit/animations/slot_captions/.hyperframes/render-outputs.json  37
+2026-10-20T14:59:29.232Z  + edit/animations/slot_captions/.hyperframes/video-state.json  1499
+2026-10-20T14:59:29.232Z  + edit/animations/slot_captions/.render.hf-transaction-kPZL6A/  (HyperFrames render temp: 1 files, collapsed by E1)
+2026-10-20T14:59:29.232Z  + edit/animations/slot_captions/work-6fd4505e-5e08-45cc-b1c3-f2b4af1fba9d-S7zr1i/  (HyperFrames render temp: 605 files, collapsed by E1)
+2026-10-20T14:59:29.734Z  ~ edit/animations/slot_captions/.hyperframes/history-id  37
+2026-10-20T14:59:29.734Z  ~ edit/animations/slot_captions/.hyperframes/video-state.json  1499
+2026-10-20T14:59:41.416Z  - edit/animations/slot_captions/.render.hf-transaction-kPZL6A/  (removed)
+2026-10-20T14:59:41.416Z  + edit/animations/slot_captions/render.mov  26754874
+2026-10-20T14:59:41.923Z  ~ edit/animations/slot_captions/render.mov  26754874
+2026-10-20T14:59:41.929Z  - edit/animations/slot_captions/work-6fd4505e-5e08-45cc-b1c3-f2b4af1fba9d-S7zr1i/  (removed)
+2026-10-20T14:59:42.431Z  ~ edit/animations/slot_captions/.hyperframes/video-state.json  1987
+2026-10-20T14:59:48.475Z  - edit/master.srt
+2026-10-20T14:59:48.977Z  ~ edit/edl.json  1550
+2026-10-20T14:59:49.982Z  ~ edit/clips_preview/seg_00_clip-01.mp4  1892254
+2026-10-20T14:59:50.485Z  + edit/preview.prenorm.mp4  48
+2026-10-20T14:59:50.987Z  ~ edit/preview.prenorm.mp4  48
+2026-10-20T14:59:50.988Z  ~ edit/clips_preview/seg_01_clip-01.mp4  6442342
+2026-10-20T14:59:54.504Z  + edit/preview.mp4  11462582
+2026-10-20T14:59:54.504Z  + edit/verify/p_0.9.jpg  28874
+2026-10-20T14:59:54.504Z  + edit/verify/p_3.6.jpg  31403
+2026-10-20T14:59:54.504Z  - edit/preview.prenorm.mp4
+2026-10-20T14:59:55.007Z  ~ edit/preview.mp4  11462582
+2026-10-20T14:59:55.007Z  ~ edit/verify/p_0.9.jpg  28874
+2026-10-20T14:59:55.008Z  ~ edit/verify/p_3.6.jpg  31403
+2026-10-20T14:59:55.008Z  + edit/verify/p_6.0.jpg  30440
+2026-10-20T14:59:55.008Z  + edit/verify/p_9.6.jpg  32129
+2026-10-20T14:59:55.509Z  ~ edit/verify/p_6.0.jpg  30440
+2026-10-20T14:59:55.509Z  ~ edit/verify/p_9.6.jpg  32129
+2026-10-20T14:59:56.012Z  + edit/verify/cut1.png  357165
+2026-10-20T14:59:56.516Z  ~ edit/verify/cut1.png  357165
+2026-10-20T15:00:01.046Z  + edit/verify/grid.jpg  100987
+2026-10-20T15:00:01.550Z  ~ edit/verify/grid.jpg  100987
+2026-10-20T15:00:12.125Z  ~ edit/animations/slot_captions/compositions/captions.html  4396
+2026-10-20T15:00:20.171Z  ~ edit/animations/slot_captions/compositions/captions.html  4436
+2026-10-20T15:00:21.677Z  + edit/animations/slot_captions/.render.hf-transaction-Nxt4Pn/  (HyperFrames render temp: 1 files, collapsed by E1)
+2026-10-20T15:00:21.677Z  + edit/animations/slot_captions/work-792c2e43-a5c4-40ad-b916-f13c978f4e1b-9T7Nb5/  (HyperFrames render temp: 603 files, collapsed by E1)
+2026-10-20T15:00:22.179Z  ~ edit/animations/slot_captions/.hyperframes/video-state.json  2694
+2026-10-20T15:00:34.350Z  - edit/animations/slot_captions/.render.hf-transaction-Nxt4Pn/  (removed)
+2026-10-20T15:00:34.350Z  + edit/clips_graded/seg_00_clip-01.mp4  48
+2026-10-20T15:00:34.361Z  - edit/animations/slot_captions/work-792c2e43-a5c4-40ad-b916-f13c978f4e1b-9T7Nb5/  (removed)
+2026-10-20T15:00:34.863Z  + edit/clips_graded/seg_01_clip-01.mp4  48
+2026-10-20T15:00:34.863Z  ~ edit/animations/slot_captions/render.mov  31787309
+2026-10-20T15:00:34.863Z  ~ edit/animations/slot_captions/.hyperframes/video-state.json  2778
+2026-10-20T15:00:35.365Z  ~ edit/clips_graded/seg_00_clip-01.mp4  2184548
+2026-10-20T15:00:36.369Z  + edit/base.mp4  9674437
+2026-10-20T15:00:36.369Z  + edit/final.prenorm.mp4  48
+2026-10-20T15:00:36.873Z  ~ edit/base.mp4  9674437
+2026-10-20T15:00:36.873Z  ~ edit/clips_graded/seg_01_clip-01.mp4  7491160
+2026-10-20T15:00:40.392Z  + edit/final.mp4  11407588
+2026-10-20T15:00:40.392Z  - edit/final.prenorm.mp4
+2026-10-20T15:00:40.896Z  ~ edit/final.mp4  11407588
+2026-10-20T15:00:40.897Z  + edit/final.srt  564
+2026-10-20T15:00:40.897Z  + edit/verify/f_0.9.jpg  29326
+2026-10-20T15:00:40.897Z  + edit/verify/f_9.6.jpg  32408
+2026-10-20T15:00:40.897Z  + edit/verify/final_grid.jpg  57915
+2026-10-20T15:00:41.401Z  ~ edit/final.srt  564
+2026-10-20T15:00:41.402Z  ~ edit/verify/f_0.9.jpg  29326
+2026-10-20T15:00:41.402Z  ~ edit/verify/f_9.6.jpg  32408
+2026-10-20T15:00:41.402Z  ~ edit/verify/final_grid.jpg  57915
+2026-10-20T15:02:42.320Z  ~ edit/edl.json  1553
+2026-10-20T15:02:42.320Z  ~ edit/animations/slot_1/index.html  2716
+2026-10-20T15:02:55.422Z  ~ edit/animations/words_out.json  1676
+2026-10-20T15:02:55.422Z  ~ edit/animations/words_out.srt  462
+2026-10-20T15:02:55.423Z  ~ edit/animations/slot_captions/compositions/captions.html  4246
+2026-10-20T15:02:56.428Z  + edit/animations/slot_1/.render.hf-transaction-XTSgFr/  (HyperFrames render temp: 2 files, collapsed by E1)
+2026-10-20T15:02:56.428Z  + edit/animations/slot_1/work-4869a86d-8846-476b-8744-1589308331b1-TnwQrv/  (HyperFrames render temp: 601 files, collapsed by E1)
+2026-10-20T15:02:56.428Z  + edit/animations/slot_captions/.render.hf-transaction-yxqR0i/  (HyperFrames render temp: 1 files, collapsed by E1)
+2026-10-20T15:02:56.428Z  + edit/animations/slot_captions/work-5665c995-8a44-4b8e-ac46-71feb7107034-nPpiE6/  (HyperFrames render temp: 599 files, collapsed by E1)
+2026-10-20T15:02:56.931Z  ~ edit/animations/slot_1/.hyperframes/video-state.json  2079
+2026-10-20T15:02:56.931Z  ~ edit/animations/slot_captions/.hyperframes/video-state.json  3840
+2026-10-20T15:03:09.831Z  - edit/animations/slot_1/.render.hf-transaction-XTSgFr/  (removed)
+2026-10-20T15:03:09.831Z  - edit/animations/slot_1/work-4869a86d-8846-476b-8744-1589308331b1-TnwQrv/  (removed)
+2026-10-20T15:03:10.338Z  ~ edit/animations/slot_1/render.mov  42507993
+2026-10-20T15:03:10.338Z  ~ edit/animations/slot_1/.hyperframes/video-state.json  2163
+2026-10-20T15:03:11.859Z  - edit/animations/slot_captions/.render.hf-transaction-yxqR0i/  (removed)
+2026-10-20T15:03:11.870Z  - edit/animations/slot_captions/work-5665c995-8a44-4b8e-ac46-71feb7107034-nPpiE6/  (removed)
+2026-10-20T15:03:12.374Z  ~ edit/animations/slot_captions/render.mov  34892673
+2026-10-20T15:03:12.375Z  ~ edit/animations/slot_captions/.hyperframes/video-state.json  3886
+2026-10-20T15:03:23.461Z  - edit/final.mp4
+2026-10-20T15:03:24.466Z  ~ edit/clips_graded/seg_00_clip-01.mp4  2184548
+2026-10-20T15:03:25.471Z  + edit/cut_nohold.prenorm.mp4  48
+2026-10-20T15:03:25.974Z  ~ edit/base.mp4  9731776
+2026-10-20T15:03:25.974Z  ~ edit/clips_graded/seg_01_clip-01.mp4  7548499
+2026-10-20T15:03:29.492Z  + edit/cut_nohold.mp4  11545148
+2026-10-20T15:03:29.492Z  + edit/final.mp4  48
+2026-10-20T15:03:29.493Z  - edit/cut_nohold.prenorm.mp4
+2026-10-20T15:03:29.994Z  ~ edit/cut_nohold.mp4  11545148
+2026-10-20T15:03:33.519Z  ~ edit/final.mp4  13353103
+2026-10-20T15:03:33.519Z  + edit/verify/g_2.2.jpg  20128
+2026-10-20T15:03:33.519Z  + edit/verify/g_2.45.jpg  18094
+2026-10-20T15:03:33.519Z  + edit/verify/g_3.5.jpg  21023
+2026-10-20T15:03:34.021Z  ~ edit/final.srt  462
+2026-10-20T15:03:34.021Z  + edit/verify/g_10.9.jpg  22910
+2026-10-20T15:03:34.021Z  ~ edit/verify/g_2.2.jpg  20128
+2026-10-20T15:03:34.021Z  ~ edit/verify/g_2.45.jpg  18094
+2026-10-20T15:03:34.021Z  ~ edit/verify/g_3.5.jpg  21023
+2026-10-20T15:03:34.022Z  + edit/verify/g_9.2.jpg  21518
+2026-10-20T15:03:34.022Z  + edit/verify/grid2.jpg  99767
+2026-10-20T15:03:34.524Z  ~ edit/verify/g_10.9.jpg  22910
+2026-10-20T15:03:34.524Z  ~ edit/verify/g_9.2.jpg  21518
+2026-10-20T15:03:34.524Z  ~ edit/verify/grid2.jpg  99767
+2026-10-20T15:03:35.026Z  + edit/verify/cut_final.png  262221
+2026-10-20T15:03:36.034Z  ~ edit/verify/cut_final.png  347449
+2026-10-20T15:03:48.126Z  ~ edit/final.mp4  13351068
+2026-10-20T15:03:49.132Z  ~ edit/verify/g_10.9.jpg  22923
+2026-10-20T15:03:49.132Z  ~ edit/verify/grid2.jpg  99758
+2026-10-20T15:04:05.759Z  ~ edit/final.mp4  13365618
+2026-10-20T15:04:25.420Z  ~ edit/project.md  2462
+2026-10-20T15:04:39.543Z  run exited
+
+## 2. Final tree of the job folder after the run, oldest first
+
+# created (birthtime, UTC)       modified (mtime, UTC)          bytes  path (relative to the job folder)
+2026-10-20T14:56:45.204Z  2026-10-20T14:56:47.363Z    11496074  clip-01.mp4
+2026-10-20T14:57:09.178Z  2026-10-20T15:03:29.341Z           -  edit/
+2026-10-20T14:57:09.178Z  2026-10-20T15:03:34.943Z           -  edit/verify/
+2026-10-20T14:57:14.529Z  2026-10-20T14:57:15.763Z           -  edit/transcripts/
+2026-10-20T14:57:15.763Z  2026-10-20T14:57:15.763Z       13950  edit/transcripts/clip-01.json
+2026-10-20T14:57:15.819Z  2026-10-20T14:57:15.819Z         427  edit/takes_packed.md
+2026-10-20T14:57:23.330Z  2026-10-20T14:57:23.403Z      279282  edit/verify/src_full.png
+2026-10-20T14:57:59.213Z  2026-10-20T15:04:24.559Z        2462  edit/project.md
+2026-10-20T14:58:06.576Z  2026-10-20T14:59:16.624Z           -  edit/animations/
+2026-10-20T14:58:06.576Z  2026-10-20T14:58:07.583Z           -  edit/animations/_shared/
+2026-10-20T14:58:06.576Z  2026-10-20T14:58:07.576Z           -  edit/animations/_shared/vendor/
+2026-10-20T14:58:06.576Z  2026-10-20T14:58:06.576Z           -  edit/animations/_shared/assets/
+2026-10-20T14:58:07.576Z  2026-10-20T14:58:07.576Z       72927  edit/animations/_shared/vendor/gsap.min.js
+2026-10-20T14:58:08.176Z  2026-10-20T15:03:09.357Z           -  edit/animations/slot_1/
+2026-10-20T14:58:08.178Z  2026-10-20T14:58:08.178Z           -  edit/animations/slot_1/vendor/
+2026-10-20T14:58:08.178Z  2026-10-20T14:58:08.178Z       72927  edit/animations/slot_1/vendor/gsap.min.js
+2026-10-20T14:58:08.178Z  2026-10-20T14:58:08.178Z           -  edit/animations/slot_1/assets/
+2026-10-20T14:58:34.641Z  2026-10-20T15:03:09.362Z           -  edit/animations/slot_1/.hyperframes/
+2026-10-20T14:58:34.641Z  2026-10-20T15:02:55.984Z           -  edit/animations/slot_1/.hyperframes/render-outputs-lock/
+2026-10-20T14:58:34.814Z  2026-10-20T14:58:34.814Z          37  edit/animations/slot_1/.hyperframes/history-id
+2026-10-20T14:58:34.820Z  2026-10-20T15:03:09.362Z           -  edit/animations/slot_1/.hyperframes/video-state-lock/
+2026-10-20T14:58:54.195Z  2026-10-20T15:02:41.523Z        1553  edit/edl.json
+2026-10-20T14:58:54.238Z  2026-10-20T14:58:54.792Z           -  edit/clips_preview/
+2026-10-20T14:58:54.327Z  2026-10-20T14:59:48.981Z     1892254  edit/clips_preview/seg_00_clip-01.mp4
+2026-10-20T14:58:54.792Z  2026-10-20T14:59:50.316Z     6442342  edit/clips_preview/seg_01_clip-01.mp4
+2026-10-20T14:58:56.081Z  2026-10-20T14:59:50.364Z     8333325  edit/base_preview.mp4
+2026-10-20T14:59:16.620Z  2026-10-20T15:02:54.796Z        1676  edit/animations/words_out.json
+2026-10-20T14:59:16.620Z  2026-10-20T15:02:54.796Z         462  edit/animations/words_out.srt
+2026-10-20T14:59:16.624Z  2026-10-20T15:03:11.465Z           -  edit/animations/slot_captions/
+2026-10-20T14:59:16.624Z  2026-10-20T15:02:54.826Z           -  edit/animations/slot_captions/compositions/
+2026-10-20T14:59:16.625Z  2026-10-20T14:59:16.625Z           -  edit/animations/slot_captions/vendor/
+2026-10-20T14:59:16.625Z  2026-10-20T14:59:16.626Z       72927  edit/animations/slot_captions/vendor/gsap.min.js
+2026-10-20T14:59:16.626Z  2026-10-20T14:59:16.626Z           -  edit/animations/slot_captions/assets/
+2026-10-20T14:59:16.626Z  2026-10-20T14:59:16.631Z        6427  edit/animations/slot_captions/build-captions.mjs
+2026-10-20T14:59:28.706Z  2026-10-20T15:03:11.470Z           -  edit/animations/slot_captions/.hyperframes/
+2026-10-20T14:59:28.706Z  2026-10-20T15:02:55.999Z           -  edit/animations/slot_captions/.hyperframes/render-outputs-lock/
+2026-10-20T14:59:28.750Z  2026-10-20T14:59:28.750Z          37  edit/animations/slot_captions/.hyperframes/history-id
+2026-10-20T14:59:28.757Z  2026-10-20T15:03:11.470Z           -  edit/animations/slot_captions/.hyperframes/video-state-lock/
+2026-10-20T14:59:54.072Z  2026-10-20T14:59:54.254Z    11462582  edit/preview.mp4
+2026-10-20T14:59:54.342Z  2026-10-20T14:59:54.342Z       28874  edit/verify/p_0.9.jpg
+2026-10-20T14:59:54.440Z  2026-10-20T14:59:54.440Z       31403  edit/verify/p_3.6.jpg
+2026-10-20T14:59:54.574Z  2026-10-20T14:59:54.575Z       30440  edit/verify/p_6.0.jpg
+2026-10-20T14:59:54.643Z  2026-10-20T14:59:54.643Z       32129  edit/verify/p_9.6.jpg
+2026-10-20T14:59:55.799Z  2026-10-20T14:59:55.881Z      357165  edit/verify/cut1.png
+2026-10-20T15:00:00.766Z  2026-10-20T15:00:00.766Z      100987  edit/verify/grid.jpg
+2026-10-20T15:00:34.136Z  2026-10-20T15:00:34.683Z           -  edit/clips_graded/
+2026-10-20T15:00:34.233Z  2026-10-20T15:03:23.734Z     2184548  edit/clips_graded/seg_00_clip-01.mp4
+2026-10-20T15:00:34.683Z  2026-10-20T15:03:25.097Z     7548499  edit/clips_graded/seg_01_clip-01.mp4
+2026-10-20T15:00:35.942Z  2026-10-20T15:03:25.149Z     9731776  edit/base.mp4
+2026-10-20T15:00:40.457Z  2026-10-20T15:00:40.457Z       29326  edit/verify/f_0.9.jpg
+2026-10-20T15:00:40.527Z  2026-10-20T15:00:40.527Z       32408  edit/verify/f_9.6.jpg
+2026-10-20T15:00:40.551Z  2026-10-20T15:00:40.551Z       57915  edit/verify/final_grid.jpg
+2026-10-20T15:00:40.554Z  2026-10-20T15:03:33.170Z         462  edit/final.srt
+2026-10-20T15:02:41.526Z  2026-10-20T15:02:41.527Z        2716  edit/animations/slot_1/index.html
+2026-10-20T15:02:54.826Z  2026-10-20T15:02:54.826Z        4246  edit/animations/slot_captions/compositions/captions.html
+2026-10-20T15:02:54.827Z  2026-10-20T15:02:54.828Z         863  edit/animations/slot_captions/index.html
+2026-10-20T15:02:55.984Z  2026-10-20T15:02:55.984Z          37  edit/animations/slot_1/.hyperframes/render-outputs.json
+2026-10-20T15:02:55.999Z  2026-10-20T15:02:55.999Z          37  edit/animations/slot_captions/.hyperframes/render-outputs.json
+2026-10-20T15:03:09.177Z  2026-10-20T15:03:09.258Z    42507993  edit/animations/slot_1/render.mov
+2026-10-20T15:03:09.362Z  2026-10-20T15:03:09.362Z        2163  edit/animations/slot_1/.hyperframes/video-state.json
+2026-10-20T15:03:11.386Z  2026-10-20T15:03:11.422Z    34892673  edit/animations/slot_captions/render.mov
+2026-10-20T15:03:11.470Z  2026-10-20T15:03:11.470Z        3886  edit/animations/slot_captions/.hyperframes/video-state.json
+2026-10-20T15:03:29.066Z  2026-10-20T15:03:29.257Z    11545148  edit/cut_nohold.mp4
+2026-10-20T15:03:29.341Z  2026-10-20T15:04:04.890Z    13365618  edit/final.mp4
+2026-10-20T15:03:33.259Z  2026-10-20T15:04:05.228Z       20128  edit/verify/g_2.2.jpg
+2026-10-20T15:03:33.351Z  2026-10-20T15:04:05.318Z       18094  edit/verify/g_2.45.jpg
+2026-10-20T15:03:33.467Z  2026-10-20T15:04:05.426Z       21023  edit/verify/g_3.5.jpg
+2026-10-20T15:03:33.541Z  2026-10-20T15:04:05.492Z       21518  edit/verify/g_9.2.jpg
+2026-10-20T15:03:33.626Z  2026-10-20T15:04:05.573Z       22923  edit/verify/g_10.9.jpg
+2026-10-20T15:03:33.652Z  2026-10-20T15:04:05.598Z       99758  edit/verify/grid2.jpg
+2026-10-20T15:03:34.943Z  2026-10-20T15:03:35.032Z      347449  edit/verify/cut_final.png
